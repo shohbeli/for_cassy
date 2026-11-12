@@ -1,4 +1,4 @@
-# cassy_book
+# for_cassy
 
 **1000 Things to Write About Cassy**: a private, installable web app (PWA) with 1000 questions.
 
@@ -14,4 +14,4 @@
 - `firestore.rules`: database security rules (paste into Firebase → Firestore → Rules)
 
 ## Live link
-https://shohbeli.github.io/cassy_book/
+https://shohbeli.github.io/for_cassy/
