@@ -1,6 +1,6 @@
 // Offline support: keeps the app itself on the phone so it opens without internet.
 // Your answers are kept offline by Firestore's own cache, not here.
-const VERSION = 'cassy-v3';
+const VERSION = 'cassy-v4';
 const SHELL = [
   './', './index.html', './live.js', './firebase-config.js', './manifest.webmanifest',
   './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png'
