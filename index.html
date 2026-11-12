@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-size="m">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFF5FA">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Cassy">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>1000 Things to Write About Cassy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#FFF5FA;--surface:#FFFFFF;--paper:#FFFFFF;--ink:#3D1A2E;--muted:#7D4E68;--accent:#C2307A;--accent-2:#9D1F63;--btn:#F9A8CC;--btn-ink:#5C0F37;--chip:#FDE2EF;--chip-ink:#9D1F63;--line:#F5D0E2;--border:#F4C6DC;--soft:#FBE8F1;--margin:#F7A8CB;--bar:#F06BA8;--track:#FCE1EE;--danger:#B42350;--shadow:0 1px 2px rgba(194,48,122,.08),0 8px 24px rgba(194,48,122,.07);--ans-size:26px;--ans-lh:42px;color-scheme:light}
+[data-theme=dark]{--bg:#1C1017;--surface:#28161F;--paper:#24131C;--ink:#FBE4EF;--muted:#D6AEC2;--accent:#F48FB8;--accent-2:#F9A8CC;--btn:#F48FB8;--btn-ink:#3A0D25;--chip:#46203A;--chip-ink:#FBC9DE;--line:#4E2B3E;--border:#4A2A3B;--soft:#331C28;--margin:#7A3557;--bar:#F06BA8;--track:#3A2230;--danger:#FF8FA8;--shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);color-scheme:dark}
+[data-size=s]{--ans-size:22px;--ans-lh:36px}
+[data-size=l]{--ans-size:31px;--ans-lh:50px}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,sans-serif;-webkit-tap-highlight-color:transparent}
+body{min-height:100vh}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+svg{flex-shrink:0}
+#app{max-width:480px;margin:0 auto;min-height:100vh;position:relative}
+.has-tabs{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+.has-pager{padding-bottom:calc(92px + env(safe-area-inset-bottom))}
+.screen{padding:24px 20px 28px;display:flex;flex-direction:column;gap:18px}
+.serif{font-family:Fraunces,Georgia,serif}
+.hand{font-family:Caveat,cursive}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+p{margin:0}
+h1,h2,h3{margin:0;font-weight:400}
+.kicker{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.cover{display:flex;flex-direction:column;gap:6px;padding-top:12px}
+.cover-name{font-family:Fraunces,Georgia,serif;font-style:italic;font-size:72px;line-height:.95}
+.tagline{font-size:25px;color:var(--accent)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;text-align:left}
+button.card{width:100%;font:inherit}
+.card-title{font-size:13px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px}
+.big{font-size:40px;font-weight:600;line-height:1}
+.prog-top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.bar{height:8px;background:var(--track);border-radius:99px;overflow:hidden}
+.bar>span{display:block;height:100%;background:var(--bar);border-radius:99px;transition:width .4s}
+.pill{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:99px;background:var(--chip);color:var(--chip-ink);font-size:12px;font-weight:600;margin-left:auto}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 18px;border-radius:16px;border:1px solid transparent;font-size:15px;font-weight:600;text-decoration:none}
+.btn-primary{background:var(--btn);color:var(--btn-ink)}
+.btn-wide{justify-content:space-between;min-height:58px}
+.btn-ghost{background:transparent;border-color:var(--border);color:var(--ink);font-weight:500}
+.btn-danger{background:transparent;border-color:var(--border);color:var(--danger)}
+.btn:disabled{opacity:.5;cursor:default}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.chips{display:flex;gap:8px;overflow-x:auto;margin:0 -20px;padding:2px 20px 4px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{display:inline-flex;align-items:center;flex-shrink:0;padding:4px 11px;border-radius:99px;background:var(--chip);color:var(--chip-ink);font-size:12px;font-weight:600;white-space:nowrap}
+.fchip{flex-shrink:0;min-height:40px;padding:0 15px;border-radius:99px;border:1px solid var(--border);background:var(--surface);color:var(--ink);font-size:14px;font-weight:500;white-space:nowrap}
+.fchip.on{background:var(--btn);border-color:var(--btn);color:var(--btn-ink);font-weight:600}
+.sec-title{font-size:13px;font-weight:600;color:var(--muted);margin-bottom:-6px}
+.qline{font-family:Fraunces,Georgia,serif;font-size:18px;line-height:1.35}
+.snip{font-family:Caveat,cursive;font-size:22px;line-height:1.2;color:var(--ink);opacity:.85;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.notice{background:var(--soft);border:1px dashed var(--border);border-radius:14px;padding:10px 14px;font-size:13px;color:var(--muted)}
+/* tab bar */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--border);padding-bottom:env(safe-area-inset-bottom)}
+.tabbar .in{max-width:480px;margin:0 auto;display:grid;grid-auto-flow:column;grid-auto-columns:1fr}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px 9px;min-height:60px;background:none;border:0;color:var(--muted);font-size:11px;font-weight:500}
+.tab.on{color:var(--accent);font-weight:600}
+/* top bar */
+.topbar{position:sticky;top:0;z-index:15;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;background:var(--bg)}
+.topbar .mid{font-size:13px;color:var(--muted);text-align:center}
+.icon-btn{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border:0;background:transparent;border-radius:12px;color:var(--ink)}
+.back-btn{display:inline-flex;align-items:center;gap:4px;min-height:44px;padding:0 8px;border:0;background:none;font-size:15px;font-weight:500;color:var(--ink)}
+/* paper */
+.paper{margin:4px 14px 0;background:var(--paper);border-radius:8px 20px 20px 8px;box-shadow:var(--shadow);position:relative;overflow:visible}
+.paper::before{content:"";position:absolute;top:0;bottom:0;left:38px;width:1px;background:var(--margin);pointer-events:none}
+.qhead{position:sticky;top:64px;z-index:5;background:var(--paper);border-radius:8px 20px 0 0;padding:20px 18px 10px 52px;display:flex;flex-direction:column;gap:10px}
+.qhead::before{content:"";position:absolute;top:0;bottom:0;left:38px;width:1px;background:var(--margin)}
+.qrow{display:flex;align-items:center;gap:8px}
+.pnum{font-family:Fraunces,Georgia,serif;font-size:21px;color:var(--accent)}
+.qtext{font-family:Fraunces,Georgia,serif;font-size:24px;line-height:1.3}
+.tools{display:flex;gap:6px;flex-wrap:wrap}
+.tool{display:inline-flex;align-items:center;gap:5px;min-height:36px;padding:0 11px;border-radius:99px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:12.5px;font-weight:500}
+.tool.on{background:var(--chip);border-color:var(--chip);color:var(--chip-ink);font-weight:600}
+.tool:disabled{opacity:.45;cursor:default}
+.ans{padding:6px 18px 4px 52px}
+.ruled{display:block;width:100%;margin:0;padding:0 2px;border:0;outline:none;resize:none;overflow:hidden;font-family:Caveat,cursive;font-size:var(--ans-size);line-height:var(--ans-lh);color:var(--ink);background-color:transparent;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(var(--ans-lh) - 2px),var(--line) calc(var(--ans-lh) - 2px),var(--line) calc(var(--ans-lh) - 1px),transparent calc(var(--ans-lh) - 1px),transparent var(--ans-lh));background-attachment:local;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left}
+textarea.ruled{min-height:calc(var(--ans-lh) * 7)}
+textarea.ruled::placeholder{color:var(--muted);opacity:.6}
+.ans-view{cursor:text;min-height:calc(var(--ans-lh) * 2)}
+.tap-hint{font-size:12px;color:var(--muted);margin-top:6px}
+.ans-foot{padding:6px 18px 18px 52px;display:flex;flex-direction:column;gap:10px}
+.dates{font-size:12px;color:var(--muted);line-height:1.5}
+.foot-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.status{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);margin-right:auto}
+.btn-sm{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:99px;border:1px solid var(--border);background:var(--surface);color:var(--ink);font-size:13px;font-weight:500}
+.btn-sm.primary{background:var(--btn);border-color:var(--btn);color:var(--btn-ink);font-weight:600}
+.btn-sm.danger{color:var(--danger)}
+.song{display:flex;align-items:center;gap:10px;margin:0 18px 4px 52px;padding:10px 12px;border-radius:14px;background:var(--soft);color:var(--ink);text-decoration:none;font-size:14px}
+.song b{font-weight:600;display:block}
+.song span{font-size:12px;color:var(--muted)}
+.pager{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--bg);padding:10px 14px calc(12px + env(safe-area-inset-bottom))}
+.pager .in{max-width:480px;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}
+.pager .count{font-size:13px;color:var(--muted);text-align:center;min-width:60px}
+/* lists */
+.search{display:flex;align-items:center;gap:8px;min-height:48px;padding:0 14px;background:var(--surface);border:1px solid var(--border);border-radius:14px}
+.search input{flex:1;min-width:0;border:0;outline:none;background:transparent;font-size:15px;min-height:44px}
+.rows{display:flex;flex-direction:column;margin:0 -20px;border-top:1px solid var(--border)}
+.row{display:flex;align-items:flex-start;gap:12px;width:100%;padding:14px 20px;border:0;border-bottom:1px solid var(--soft);background:transparent;text-align:left}
+.row-n{width:44px;flex-shrink:0;font-family:Fraunces,Georgia,serif;font-size:15px;color:var(--accent);padding-top:2px}
+.row-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.row-q{font-family:Fraunces,Georgia,serif;font-size:16px;line-height:1.35}
+.row-meta{display:flex;align-items:center;gap:6px;color:var(--accent)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--bar);display:inline-block;flex-shrink:0}
+.new{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--accent)}
+.empty{padding:40px 10px;text-align:center;color:var(--muted)}
+/* settings */
+.group{background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden}
+.item{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;padding:12px 16px;border:0;border-bottom:1px solid var(--soft);background:transparent;text-align:left;font-size:15px}
+.group>.item:last-child{border-bottom:0}
+.item .grow{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.item .sub{font-size:12.5px;color:var(--muted)}
+.item .ic{color:var(--accent);display:inline-flex}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:4px;padding:4px;background:var(--soft);border-radius:12px}
+.seg button{min-height:38px;border:0;border-radius:9px;background:transparent;color:var(--muted);font-size:13.5px;font-weight:500;display:flex;align-items:center;justify-content:center;gap:5px}
+.seg button.on{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.seg-wrap{padding:12px 16px;border-bottom:1px solid var(--soft);display:flex;flex-direction:column;gap:8px}
+.switch{position:relative;width:48px;height:28px;flex-shrink:0;border-radius:99px;border:0;background:var(--track);padding:0}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .2s}
+.switch[aria-checked=true]{background:var(--bar)}
+.switch[aria-checked=true]::after{left:23px}
+/* forms */
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:13px;font-weight:600;color:var(--muted)}
+.inp{display:flex;align-items:center;min-height:50px;border:1px solid var(--border);border-radius:14px;background:var(--surface);padding:0 6px 0 14px}
+.inp input{flex:1;min-width:0;border:0;outline:none;background:transparent;font-size:16px;min-height:46px}
+.inp:focus-within{border-color:var(--accent)}
+.err{color:var(--danger);font-size:13px;min-height:18px}
+.shake{animation:shake .35s}
+@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+/* sheet */
+#layer:empty{display:none}
+.backdrop{position:fixed;inset:0;z-index:50;background:rgba(40,10,25,.45);display:flex;align-items:flex-end;justify-content:center;animation:fade .2s}
+.sheet{width:100%;max-width:480px;max-height:88vh;overflow:auto;background:var(--bg);border-radius:24px 24px 0 0;padding:10px 20px calc(24px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:14px;animation:up .25s}
+.grab{width:40px;height:4px;border-radius:9px;background:var(--border);margin:0 auto 4px}
+.sheet h3{font-family:Fraunces,Georgia,serif;font-size:22px}
+@keyframes up{from{transform:translateY(40px);opacity:.6}}
+@keyframes fade{from{opacity:0}}
+#toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);z-index:60;background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:99px;font-size:14px;font-weight:500;opacity:0;pointer-events:none;transition:all .25s;max-width:90vw;text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* welcome / lock */
+.center{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:32px 24px;gap:22px}
+.gbtn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:54px;border-radius:16px;border:1px solid var(--border);background:var(--surface);color:var(--ink);font-size:16px;font-weight:600}
+.acct{display:flex;align-items:center;gap:12px;width:100%;padding:14px;border-radius:16px;border:1px solid var(--border);background:var(--surface);text-align:left}
+.avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;background:var(--chip);color:var(--chip-ink);flex-shrink:0}
+.lockicon{width:64px;height:64px;border-radius:50%;background:var(--chip);color:var(--chip-ink);display:flex;align-items:center;justify-content:center}
+/* book (reader) */
+.book-page{animation:none}
+.slide-next{animation:sn .28s ease-out}
+.slide-prev{animation:sp .28s ease-out}
+@keyframes sn{from{transform:translateX(40px);opacity:0}}
+@keyframes sp{from{transform:translateX(-40px);opacity:0}}
+.ans-read{padding:0 18px 6px 52px;background-clip:content-box;background-origin:content-box}
+/* stats */
+.stat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:4px}
+.stat .v{font-family:Fraunces,Georgia,serif;font-size:30px;font-weight:600;line-height:1.1}
+.stat .l{font-size:12.5px;color:var(--muted)}
+.fbar{display:grid;grid-template-columns:84px 1fr 52px;gap:10px;align-items:center;font-size:13px}
+.fbar .t{height:8px;background:var(--track);border-radius:99px;overflow:hidden}
+.fbar .t span{display:block;height:100%;background:var(--bar)}
+/* print preview */
+.pp{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:22px 20px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow)}
+.pp .ppq{font-family:Fraunces,Georgia,serif;font-size:17px}
+.pp .ppa{font-family:Caveat,cursive;font-size:21px;line-height:1.25;white-space:pre-wrap}
+.print-only{display:none}
+@media print{
+ @page{margin:18mm}
+ #app,#layer,#toast{display:none!important}
+ .print-only{display:block!important}
+ body{background:#fff;color:#2a1520}
+ .pb-cover{height:240mm;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;page-break-after:always}
+ .pb-cover h1{font-family:Fraunces,Georgia,serif;font-style:italic;font-size:64pt;margin:8mm 0}
+ .pb-item{page-break-inside:avoid;padding:6mm 0;border-bottom:0.3mm solid #f0c6d9}
+ .pb-q{font-family:Fraunces,Georgia,serif;font-size:14pt;margin:0 0 3mm}
+ .pb-n{color:#c2307a;font-size:10pt;letter-spacing:.1em;text-transform:uppercase}
+ .pb-a{font-family:Caveat,cursive;font-size:17pt;line-height:1.35;white-space:pre-wrap}
+ .pb-d{font-size:8.5pt;color:#7d4e68;margin-top:2mm}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="layer"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="printRoot" class="print-only"></div>
+<script>
+(function(){
+'use strict';
+var DATA = {"feelings":["Kilig","Happy","Nostalgic","Miss her","Grateful","Funny","Sad","Relapse","Unsaid","Regret","Hopeful","Healing"],"questions":[["What was the first thing you noticed about her?",0],["When did you miss her the most?",6],["What's your happiest memory with her?",1],["What would you do if she messaged you tonight?",7],["What did she teach you without even trying?",4],["What place still feels like hers?",2],["What's your funniest inside joke with her?",5],["What do you miss hearing from her?",3],["What do you wish you had said sorry for?",9],["What helped you on the hard days?",11],["What do you hope for her this year?",10],["What's something you wish you had told her?",8],["When did you first realize she was special to you?",0],["What's a day with her you'd relive in a heartbeat?",1],["What's the first conversation you remember having with her?",2],["What do you miss most about talking to her?",3],["What are you most thankful to her for?",4],["What's the silliest thing she ever made you do?",5],["What was the hardest day for you after things changed between you?",6],["What would you say if you saw her at the mall?",7],["What do you wish you had done differently?",9],["What do you hope she knows about herself?",10],["What's something you never got to say to her?",8],["What did she do that made your heart skip a beat?",0],["What song takes you right back to her?",2],["What have you learned about yourself since?",11],["What made you laugh the hardest when you were together?",1],["How did she change you for the better?",4],["What part of your day feels emptier without her?",3],["What would you do if she called you right now?",7],["What song makes you sad because of her?",6],["What's the funniest thing she ever said?",5],["What's the sweetest thing she ever said to you?",0],["What did you want to say in your last conversation?",8],["What smell reminds you of her?",2],["What moment do you wish you could redo?",9],["What's something she was really good at?",1],["What do you hope she remembers about you?",10],["What's something you wish you could still tell her first?",3],["What's a lesson you learned because of her?",4],["What's the sweetest thing she ever did for you?",0],["What are you proud of yourself for lately?",11],["What's an embarrassing moment you two laughed about?",5],["What's the first thing you'd say if you saw her again?",7],["What did you want to do together but never got to?",6],["What's something that made her really happy?",1],["What food reminds you of her?",2],["When do you miss her the most?",3],["What dream of hers do you hope comes true?",10],["What did you take for granted back then?",9],["What feeling did you keep to yourself?",8],["How did it feel the first time she called your name?",0],["What's something she helped you through?",4],["What's a moment you saw her at her happiest?",1],["What season reminds you of her?",2],["What made you almost message her?",7],["What plan did you two make that didn't happen?",6],["What's her funniest facial expression?",5],["What small step forward did you take this week?",11],["What did she look like on the day you couldn't stop staring?",0],["What do you miss about her laugh?",3],["What's a time she believed in you?",4],["What do you hope her life looks like in five years?",10],["What compliment did you never give her?",8],["What's a street or corner that holds a memory of her?",2],["What chance didn't you take?",9],["What's a trip or outing with her that you loved?",1],["What still makes your heart heavy?",6],["What's a kilig memory of her on a rainy day?",0],["What's a funny nickname from your time together?",5],["When did you last open your old conversations?",7],["What kindness of hers will you always remember?",4],["What do you miss about her voice?",3],["What do you remember about the first photo you two took together?",2],["What would you say to her if she fell asleep on your shoulder?",0],["What do you do now to take care of yourself?",11],["What's a happy memory of you two at a party?",1],["What kind of love do you hope she always has?",10],["What \"thank you\" did you never say out loud?",8],["What do you wish you had appreciated more?",9],["What's a funny misunderstanding you two had?",5],["What's a \"what if\" you keep thinking about?",7],["What did she teach you about friendship?",4],["What place do you avoid because it reminds you of her?",6],["What goes through your mind about her when you hear a love song?",3],["What memory comes back when you think of jeepney rides?",2],["Write about a time she was happy because of a funny video.",1],["What's a message from her that made you smile at your phone?",0],["What do you hope she never has to go through alone?",10],["What \"I'm sorry\" do you still carry?",8],["Who has been there for you through this?",11],["Be honest: do you still hope she's okay? Write about it.",7],["When should you have listened more?",9],["How does it feel when the house is quiet, now that things are different?",6],["If she were a season, what would she be and why?",5],["What's a kilig memory of her when she looked up at the stars?",0],["What food did you love sharing with her?",1],["If you could thank her for her time, what would you say?",4],["Do you still miss her questions about your day? Write about it.",3],["What did your days look like when she was around?",2],["What goes through your mind about her when you hear her favorite song?",3],["When did you first feel butterflies because of her?",0],["If you could thank her for the laughs, what would you say?",4],["What was her favorite holiday? Does it still remind you of her?",2],["Write about a time she was happy because of a good conversation.",1],["What would you want to say to her about the times you stayed strong for her?",6],["What would you do if she replied to your story?",7],["If she were a drink, what would she be and why?",5],["Write the message you never sent about the last time you saw her.",8],["What do you wish you had told her about your worries?",9],["What song helps you heal?",11],["Finish this wish for her: \"I hope you stay true to yourself, because...\"",10],["If you could take her on a date to a cozy coffee shop, what would you do there?",0],["What's a celebration you spent together?",1],["What memory comes back when you think of a movie theater?",2],["What do you miss about the way she cared for people?",3],["What good habit did you pick up from her?",4],["What would you want to say to her about the person you were with her?",6],["What's a funny memory of her being competitive?",5],["Write the message you never sent about her kindness.",8],["What would you do if she sent you a song?",7],["Finish this wish for her: \"I hope you are proud of yourself, because...\"",10],["What do you wish you had told her about what you were going through?",9],["What's something she did that she probably didn't know gave you kilig?",0],["Write about a day when you looked forward to tomorrow.",11],["What's an old message from her you still remember word for word?",2],["What did you love doing with her on summer vacation?",1],["Do you still miss her reminders to rest? Write about it.",3],["What did she teach you about being honest?",4],["If you could go back to one day with her, which would it be?",7],["What's the funniest photo of her you remember?",5],["What's a night you couldn't sleep because you were thinking about her?",6],["If you could take her on a date to a long drive, what would you do there?",0],["What did you hope she would notice, but never said?",8],["What's a happy memory of you two when you both couldn't stop laughing?",1],["What do you hope for her when it comes to her growth?",10],["When should you have been more patient?",9],["What was her favorite movie? Does it still remind you of her?",2],["What did she teach you about enjoying small things?",4],["What goes through your mind about her when you see her favorite color?",3],["What's the cutest habit she has?",0],["If she were a kind of candy, what would she be and why?",5],["Write about a day when you rested without guilt.",11],["Be honest: do you still smile when you remember her? Write about it.",7],["What would you want to say to her about the words you kept inside?",6],["What's a small win she was proud of?",1],["What's a memory with her that feels like it happened yesterday?",2],["Do you still miss her teasing? Write about it.",3],["What would you say to her if she asked about your day?",0],["Write the message you never sent about how you really felt.",8],["What did she make you appreciate more?",4],["What do you hope for yourself now?",10],["If you could go back to a moment you hesitated, what would you do differently?",9],["What's a happy memory of you two on a weekend?",1],["What do you remember about the first holiday you spent together?",2],["What would you want to say to her about the days you pretended to be okay?",6],["What's a funny memory of her talking to animals?",5],["Be honest: do you still dream about her? Write about it.",7],["What does peace look like for you now?",11],["What gives you kilig about her voice on a call?",0],["If you could thank her for the person you became, what would you say?",4],["What habit of hers do you miss seeing?",3],["What do you wish you had told her about your hopes for the two of you?",9],["What's a small hurt you kept to yourself because you didn't want to upset her?",8],["What do you remember about the first time you two laughed together?",2],["Finish this wish for her: \"I hope you get the rest you deserve, because...\"",10],["What made her eyes light up?",1],["What joke did she always laugh at?",5],["What would you do differently if you had another chance?",7],["What goodbye do you remember?",6],["How does she smile when she's really happy?",0],["What goes through your mind about her when you clean your phone gallery?",3],["What time of day makes you think of her?",2],["What did she teach you about giving without expecting anything back?",4],["What's a happy memory of you two late at night?",1],["Write about a day when you finished something important.",11],["What's a kilig memory of her when she waited for you?",0],["What do you hope for her when it comes to laughter?",10],["When did your pride get in the way?",9],["Write the message you never sent about the ordinary days you loved.",8],["What would you do if she remembered your favorite food?",7],["What goes through your mind about her when you hear someone laugh like her?",3],["If she were a flower, what would she be and why?",5],["How does it feel at the end of a long day, now that things are different?",6],["If you could thank her for the songs she shared, what would you say?",4],["What's a happy memory of you two taking photos?",1],["What do you remember about the first meal you shared with her?",2],["What did her eyes look like when she talked about something she loved?",0],["What have you started enjoying again?",11],["Write the message you never sent about your \"what ifs\".",8],["What do you wish you had told her about why you acted the way you did?",9],["What part of you grew because you knew her?",4],["What goes through your mind about her when you see the moon?",3],["Finish this wish for her: \"I hope you get every good thing you deserve, because...\"",10],["How does it feel on rainy nights, now that things are different?",6],["What would you do if she sent a simple \"hi\"?",7],["What's a funny memory of her telling a story?",5],["What's a time she cheered you up?",1],["What's a kilig memory of her when she dressed up?",0],["What memory comes back when you think of summer?",2],["What's the most thoughtful thing she ever remembered about you?",0],["What do you miss about your conversations?",3],["If you could thank her for her patience, what would you say?",4],["What movie or show reminds you of her?",2],["What message did you write to her but never send?",6],["What did you love doing with her on a slow Sunday?",1],["What would your message say if you sent one today?",7],["What do you hope you'll feel when you reread this book someday?",10],["What do you wish you had told her about how much you admired her?",9],["What's a corny line you said to her?",5],["What do you wish you had asked her?",8],["Write about a day when someone was kind to you.",11],["What gives you kilig about the way she texts?",0],["What's a time you made her smile?",1],["What do you remember about the first time she trusted you with a secret?",2],["What goes through your mind about her when a sad song plays?",3],["If you could thank her for her honesty, what would you say?",4],["What would you do if she needed someone to talk to?",7],["If she were a animal, what would she be and why?",5],["What would you want to say to her about the goodbye?",6],["Write the message you never sent about the person she helped you become.",8],["What do you hope for her when it comes to her faith?",10],["What do you wish you had made time for?",9],["What's a moment with her when you wished time would stop?",0],["What's a happy memory of you two trying something new?",1],["What memory can you now think of with a smile instead of tears?",11],["What's a color that will always be hers?",2],["What goes through your mind about her when someone asks how you are?",3],["What would you thank her for if you could say it face to face?",4],["What would you say to her if she smiled at you right now?",0],["What's a funny memory of her ordering food?",5],["What would you do if she asked for your advice?",7],["How does it feel celebrating holidays without her, now that things are different?",6],["What question were you too scared to ask?",8],["What did you love doing with her on rainy days?",1],["What memory comes back when you think of long walks?",2],["What do you wish you had told her about how proud you were of her?",9],["What do you hope for her when it comes to travel?",10],["What goes through your mind about her when you walk past a flower shop?",3],["What did she teach you about kindness?",4],["If you could take her on a date to a food trip, what would you do there?",0],["Write about a day when you slept well.",11],["What memory comes back when you think of New Year's Eve?",2],["What's the most random conversation you two had?",5],["What's a dream you had about her?",7],["What's the hardest part about not being with her?",6],["What's the best gift you ever gave her?",1],["What did it feel like to sit next to her?",0],["What do you miss about her messages?",3],["What would you want for her on her hardest day?",10],["What do you wish you had told her about the moments you treasured?",9],["Write the message you never sent about the time she helped you.",8],["If you could thank her for every \"take care\", what would you say?",4],["What's a happy memory of you two on a long ride?",1],["Be honest: do you still wear something she liked? Write about it.",7],["If she were a fruit, what would she be and why?",5],["What's something she used to say a lot?",2],["What would you want to say to her about the places that still feel like you two?",6],["What would you tell someone going through the same thing?",11],["What did she give you that money can't buy?",4],["What gives you kilig about the way she takes care of people?",0],["What goes through your mind about her when you eat her favorite food?",3],["Write the message you never sent about the times you missed her.",8],["What was her favorite time of day? Does it still remind you of her?",2],["What do you hope for her when it comes to her peace of mind?",10],["What's the best gift she ever gave you?",1],["What plan do you wish you had followed through on?",9],["What's a nickname she called you, or one you called her?",0],["What's a funny memory of her giving directions?",5],["What would you do if she liked your post?",7],["What would you want to say to her about the love you still have for her?",6],["If you could thank her for the times she stayed, what would you say?",4],["What goes through your mind about her when you're having a hard day?",3],["What was her favorite flower? Does it still remind you of her?",2],["What's a happy memory of you two early in the morning?",1],["Write about a day when going outside helped.",11],["What gives you kilig about her favorite expressions?",0],["What did you want her to know about your feelings?",8],["What do you wish you had told her about how much she mattered?",9],["What do you hope for her when it comes to happiness?",10],["What song always pulls you back to her?",7],["What's a funny habit of hers?",5],["What did she teach you about forgiveness?",4],["What do you wish had turned out differently?",6],["What goes through your mind about her when you achieve something?",3],["Write about a time she was happy because of something she achieved.",1],["When did she make you feel like the only person in the room?",0],["What did she usually order when you ate out?",2],["How does it feel seeing her happy from afar, now that things are different?",6],["What do you wish you had told her about your dreams?",9],["Write about a day when you felt hopeful again.",11],["What do you hope for her when it comes to being kind to herself?",10],["What would you do if you heard her laugh in a crowd?",7],["What's a simple moment with her that made you really happy?",1],["What's something you want to share with her but can't?",3],["If you could thank her for making you feel brave, what would you say?",4],["Write the message you never sent about what she means to you.",8],["What's a funny memory of her trying to cook?",5],["What memory comes back when you think of her birthday?",2],["What would you say to her if she laughed at your corny joke?",0],["What did her handwriting look like?",2],["What's a compliment from her you still remember?",0],["What's a funny memory of her copying your expressions?",5],["What's something she said that you still live by?",4],["Write about a time she was happy because of a simple win.",1],["What would you do if she wished you well?",7],["What goes through your mind about her when you look at old photos?",3],["What would you want to say to her about the last time you talked?",6],["What prayer or wish do you have for her?",10],["What were you afraid to admit to her?",8],["What words do you wish you could take back?",9],["What new habit has been good for you?",11],["What was her favorite drink? Does it still remind you of her?",2],["What's a kilig memory of her when she remembered a small detail about you?",0],["If you could thank her for the reminders to take care of yourself, what would you say?",4],["What's a picture of the two of you that you love?",1],["Do you still miss her good-morning messages? Write about it.",3],["What would you do if she said she missed you too?",7],["What feeling do you carry that you haven't told anyone?",6],["What was she weirdly passionate about?",5],["What would you say to her if she greeted you first on your birthday?",0],["What do you hope for her when it comes to her mornings?",10],["If you could go back to a time you stayed silent, what would you do differently?",9],["Write the message you never sent about how you're doing now.",8],["Write about a day when you tried something new.",11],["Write about a time she was happy because of good news.",1],["What memory comes back when you think of a full moon?",2],["What good news would you want to tell her first?",3],["What did she teach you about saying sorry?",4],["What's a small gesture of hers you still think about?",0],["What's a funny memory of her watching a horror movie?",5],["What would you want to say to her about the memories you keep?",6],["What would you do if she laughed at one of your old jokes again?",7],["What's something of hers that you still keep?",2],["What do you wish you had told her about the future you pictured?",9],["Write the message you never sent about her dreams.",8],["What's a happy memory of you two on a random ordinary day?",1],["How did she make you feel valued?",4],["Finish this wish for her: \"I hope you know your worth, because...\"",10],["What goes through your mind about her when it's late at night?",3],["If you could take her on a date to a bookstore, what would you do there?",0],["What goal are you working on for yourself?",11],["Be honest: do you still listen to your old playlist? Write about it.",7],["How does it feel remembering your plans, now that things are different?",6],["If she were a food, what would she be and why?",5],["What was her favorite game? Does it still remind you of her?",2],["What's something you two always agreed on?",1],["What do you hope people see in her?",10],["What outfit of hers do you remember the most?",0],["What do you want her to know if she ever reads this?",8],["If you could thank her for the times she listened, what would you say?",4],["What goes through your mind about her when you see the sunset?",3],["What do you wish you had noticed sooner?",9],["What do you remember about the first song you shared with her?",2],["What's a happy memory of you two at the beach?",1],["What memory is beautiful but hurts to remember?",6],["What funny story did she love telling?",5],["What would you say if she asked how you've been?",7],["What gives you kilig about her serious face?",0],["Write about a day when you laughed for real.",11],["What goes through your mind about her when you wake up?",3],["What did she teach you about music?",4],["What do you hope for her when it comes to rest?",10],["If you could go back to the last time you saw her, what would you do differently?",9],["What's something you both loved doing together?",1],["What's a photo of her you remember clearly?",2],["Write the message you never sent about your favorite memory with her.",8],["What's the most kilig late-night conversation you had with her?",0],["Be honest: do you still keep her messages? Write about it.",7],["What's a funny memory of her seeing a bug?",5],["How does it feel when you're about to message her, now that things are different?",6],["What did she teach you about gentleness?",4],["What place do you wish you could go back to with her?",3],["What memory comes back when you think of sunsets?",2],["Write about a time she was happy because of a pet.",1],["How have you grown since you met her?",11],["What's a kilig memory of her when she greeted you?",0],["If you could go back to a time you could have said \"I care\", what would you do differently?",9],["Finish this wish for her: \"I hope you keep being kind, because...\"",10],["How does it feel when you can't stop thinking about her, now that things are different?",6],["What did you want to say when you saw her happy?",8],["Be honest: do you still picture her reaction to your news? Write about it.",7],["What's a funny memory of her taking selfies?",5],["What's a hard time she stayed with you through?",4],["What goes through your mind about her when you go somewhere new?",3],["What was a typical conversation like between you two?",2],["What's the best conversation you ever had with her?",1],["What song would you dedicate to her on a kilig day?",0],["Write about a day when the weight felt lighter.",11],["Finish this wish for her: \"I hope you keep shining, because...\"",10],["When do you wish you had shown up for her?",9],["Write the message you never sent about the feelings you hid.",8],["What would you want her to know about you now?",7],["What's a time you cried because you missed her?",6],["What made her laugh uncontrollably?",5],["What was her favorite food? Does it still remind you of her?",2],["What did she teach you about letting go?",4],["What did you love doing with her on New Year's Day?",1],["What goes through your mind about her when you're in a crowd?",3],["What gives you kilig about the way she looks when she's focused?",0],["What memory comes back when you think of the first time you met?",2],["Be honest: do you still say her name in your head? Write about it.",7],["What's a happy memory of you two on your birthday?",1],["How did you feel when she laughed at your jokes?",0],["What do you hope she never stops doing?",10],["If she were a sound, what would she be and why?",5],["Do you still miss her random updates? Write about it.",3],["If you could thank her for the lessons, even the hard ones, what would you say?",4],["If you could go back to a day she needed you, what would you do differently?",9],["How does it feel when a sad song plays, now that things are different?",6],["Write the message you never sent about the way she made you feel safe.",8],["What does moving forward mean to you, while still caring about her?",11],["If you could take her on a date to a concert, what would you do there?",0],["How did you two first meet?",2],["What's a moment you felt completely at ease with her?",1],["What do you miss about being around her?",3],["What's a funny memory of her dancing?",5],["Be honest: do you still know her favorite order by heart? Write about it.",7],["What did she teach you about love?",4],["What would you want to say to her about the day things changed?",6],["What do you hope for her when it comes to her heart?",10],["What do you wish you had told her about the effort you saw in her?",9],["What did you want to tell her on her birthday?",8],["What gives you kilig about the way she dresses up?",0],["What did you love doing with her on Friday nights?",1],["What was her favorite color? Does it still remind you of her?",2],["Write about a day when you felt calm thinking of her.",11],["Do you still miss her encouragement? Write about it.",3],["If you could thank her for the times she checked on you, what would you say?",4],["What version of you do you think she'd be proud of?",7],["What can't you do yet without thinking of her?",6],["What's something about her voice you love?",0],["What meme or video reminds you of her?",5],["What memory comes back when you think of her laugh?",2],["What fear stopped you from telling her how you felt?",9],["What's a place where you were both happy?",1],["What do you hope for her when it comes to her health?",10],["Write the message you never sent about her laugh.",8],["What did she teach you about dreams?",4],["Do you still miss her stories about her day? Write about it.",3],["What's a kilig memory of her during a walk?",0],["Write about a day when you felt a little better.",11],["What's a funny memory of her being dramatic?",5],["What would you want to say to her about the songs you shared?",6],["What was your first impression of her?",2],["Be honest: do you still keep her photos? Write about it.",7],["Write about a time she was happy because of a song she loved.",1],["What would you say if you had just one minute with her?",8],["What goes through your mind about her when you see a couple holding hands?",3],["What did she teach you about yourself?",4],["When did she make you blush the most?",0],["What do you hope she's proud of?",10],["If you could go back to a trip you skipped, what would you do differently?",9],["Write about a time she was happy because of good food.",1],["If she were a movie genre, what would she be and why?",5],["What would you want to say to her about how much you still care?",6],["What memory comes back when you think of her favorite snack?",2],["What would you do if she greeted you on your birthday?",7],["What's a kind thing you can say to yourself today?",11],["What's a kilig memory of her when she was sleepy?",0],["What did she teach you about being humble?",4],["What would you do with one more ordinary day with her?",3],["What do you hope for her when it comes to her birthdays to come?",10],["What did you two talk about late at night?",2],["If you could go back to the day you met her, what would you do differently?",9],["Write the message you never sent about the little hurts you let go of.",8],["What's something she said that instantly lifted your mood?",1],["If you met her for the first time again, what would you do?",7],["What funny thing did she do when she was sleepy?",5],["What question will you probably never get answered?",6],["What did she do when she was being shy?",0],["If you could thank her for the little gifts, what would you say?",4],["Do you still miss her playlist? Write about it.",3],["Write about a day when you chose yourself.",11],["What was her favorite book? Does it still remind you of her?",2],["What did you love doing with her on a long weekend?",1],["What gives you kilig about her laugh?",0],["What do you hope for her when it comes to her studies or work?",10],["What would you tell your past self about her?",9],["Write the message you never sent about why she was special.",8],["Be honest: do you still wish things were different? Write about it.",7],["If she were a emoji, what would she be and why?",5],["How does it feel passing by her place, now that things are different?",6],["If you could thank her for her smile on your bad days, what would you say?",4],["What do you remember about the first time she showed you her favorite place?",2],["What goes through your mind about her when you're alone on your commute?",3],["What's something about her that made everyone around her happy?",1],["What's a photo of her you can't forget?",0],["What part of this made you stronger?",11],["What do you wish you had told her about your fears?",9],["What would you do if she asked you to stay a little longer?",7],["What would you want to say to her about the moments you replay?",6],["What did you want her to hear from you, not from others?",8],["What's a funny memory of her making up words?",5],["What do you hope for her when it comes to her hobbies?",10],["What goes through your mind about her when it's a holiday?",3],["What small thing did she do that meant a lot?",4],["What's the oldest memory you have of her?",2],["What's a kilig memory of her on a ride home?",0],["What did you love doing with her on payday?",1],["What did she teach you about loyalty?",4],["What was her favorite place? Does it still remind you of her?",2],["Write about a time she was happy because of a kind stranger.",1],["What funny thing did she do when she was hungry?",5],["If you could take her on a date to Tagaytay, what would you do there?",0],["Write the message you never sent about your gentle goodbye.",8],["What do you miss about her advice?",3],["If you could relive one conversation with her, which would it be?",7],["What do you wish you had told her about your gratitude?",9],["What future did you imagine with her?",6],["What do you hope for her family?",10],["Write about a day when you were proud of yourself.",11],["When did you feel proud to be beside her?",0],["What's a game or activity you enjoyed together?",1],["What memory comes back when you think of an empty road at night?",2],["If you could thank her for being kind to your family, what would you say?",4],["What would you want to say to her about the things you'll never forget?",6],["What goes through your mind about her when you smell her favorite scent?",3],["What's a funny memory of her on a sleepy call?",5],["What would you do if she visited the place you used to go?",7],["When did you stay quiet but really wanted to speak?",8],["What do you hope for her when it comes to love?",10],["What lesson did you learn the hard way?",9],["What's the last good memory you have with her?",2],["What gives you kilig about the way she listens?",0],["What's a happy memory of you two cooking or baking?",1],["What are you grateful for in your life right now?",11],["What goes through your mind about her when it rains?",3],["How did knowing her make your life fuller?",4],["What did she do that made you feel cared for?",0],["What would you do if she sat beside you?",7],["How does it feel when someone mentions her, now that things are different?",6],["What's a funny memory of her dressing up?",5],["What's a holiday memory with her that makes you smile?",1],["What do you remember about your first long walk with her?",2],["Write the message you never sent about how proud you are of her.",8],["What do you wish you had told her about your heart?",9],["What do you hope for her when it comes to her career?",10],["What did she teach you about time?",4],["What do you miss about the way she listened?",3],["What's a kilig memory of her on a late-night call?",0],["What's the funniest fail you two had together?",5],["What do you wish she knew about how you feel?",6],["Write about a day when you let yourself cry and it helped.",11],["What did you love doing with her on long breaks?",1],["What's the hardest thing to stop doing that reminds you of her?",7],["What's a routine or tradition you two shared?",2],["If you could thank her for her advice, what would you say?",4],["What did it feel like when she was close to you?",0],["Do you still miss her taste in music? Write about it.",3],["What do you wish you had done for her?",8],["What will you do better in your next chapter because of her?",9],["What would you want her to hear on her birthday?",10],["Write about a time she was happy because of a small gift.",1],["What's a funny memory of her pretending to be mad?",5],["What do you remember about the first rainy day you spent together?",2],["How does it feel on your birthday, now that things are different?",6],["What would you do if she shared a memory of you?",7],["How can you keep the memories without hurting yourself?",11],["What would you say to her if she asked you to dance?",0],["If you could thank her for the good days, what would you say?",4],["Do you still miss her honest opinions? Write about it.",3],["What do you hope for her when it comes to her goals this year?",10],["Write the message you never sent about the night you almost said it.",8],["If you could go back to a night you overthought everything, what would you do differently?",9],["What was her favorite kind of weather? Does it still remind you of her?",2],["What's a happy surprise she gave you?",1],["What's a funny memory of her trying to be serious?",5],["Be honest: do you still save things to tell her? Write about it.",7],["What's a moment she looked out for you without being asked?",0],["What would you want to say to her about your \"what ifs\"?",6],["Do you still miss her little \"ingat\"? Write about it.",3],["What memory are you thankful you got to have?",4],["Write about a day when you prayed or reflected.",11],["What's a place you passed by recently that reminded you of her?",2],["What did you love doing with her on the Christmas season?",1],["What's a kilig memory of her when she fixed something for you?",0],["If you could go back to a time you were stressed, what would you do differently?",9],["How does it feel when friends ask about her, now that things are different?",6],["Finish this wish for her: \"I hope you laugh every day, because...\"",10],["Write the message you never sent about how much she taught you.",8],["If she were a dessert, what would she be and why?",5],["Be honest: do you still celebrate her birthday quietly? Write about it.",7],["If you could thank her for the times she forgave you, what would you say?",4],["What do you miss about her energy?",3],["What memory comes back when you think of Christmas lights?",2],["If you could take her on a date to a night market, what would you do there?",0],["What did a perfect afternoon with her look like?",1],["Write about a day when you took care of your body.",11],["Finish this wish for her: \"I hope you find what makes you happy, because...\"",10],["What hurts the most when you think about how things ended?",6],["What word did she always say in her own way?",5],["What little thing did you wish she had asked you about?",8],["What do you think she'd say if she read this book?",7],["What moment do you wish you had held on to longer?",9],["What did she teach you about being yourself?",4],["Do you still miss walking beside her? Write about it.",3],["Write about a time she was happy because of a surprise.",1],["What's your favorite way she said goodbye?",0],["What memory comes back when you think of a bookstore?",2],["What goes through your mind about her when the first cold breeze of December comes?",3],["Write about a time she was happy because of her family.",1],["If you could take her on a date to a karaoke room, what would you do there?",0],["What's something you still do because of her?",2],["How does it feel on quiet Sundays, now that things are different?",6],["If she were a city, what would she be and why?",5],["What would you do if you bumped into her at a coffee shop?",7],["What did she show you about being a good person?",4],["What do you wish you had told her about your love for her?",9],["What good things do you believe are coming for her?",10],["What would make you feel lighter today?",11],["Write the message you never sent about the times you held back.",8],["What's the best \"good morning\" or \"good night\" you ever got from her?",0],["What's a memory with her that still makes you grin?",1],["Do you still miss her reactions to your jokes? Write about it.",3],["What did she teach you about staying positive?",4],["What do you remember about the first time you two talked until morning?",2],["If she were a color, what would she be and why?",5],["How does it feel on her birthday, now that things are different?",6],["What would you do if she said she's proud of you?",7],["When did you wish she could have stayed a little longer?",8],["Finish this wish for her: \"I hope you reach your dreams, because...\"",10],["If you could go back to a time you were too proud, what would you do differently?",9],["What's a word or phrase you picked up from her?",2],["What's a kilig memory of her when she trusted you with a secret?",0],["Write about a day when you felt like yourself again.",11],["Write about a time she was happy because of her friends.",1],["What did she teach you about food and cooking?",4],["What do you miss about her kindness?",3],["What did you have to accept, even if it was hard?",6],["What would be the title of a comedy movie about you two?",5],["Would you ever show her this book? Why or why not?",7],["What did she do that made you want to be a better person?",0],["Write the message you never sent about the little things you noticed.",8],["What was her favorite song? Does it still remind you of her?",2],["What's a moment you felt lucky to know her?",1],["What decision do you still think about?",9],["Finish this wish for her: \"I hope you grow into everything you want to be, because...\"",10],["What's something she encouraged you to try?",4],["What goes through your mind about her when you pass by a bakery?",3],["What would you say to her if she made you a little gift?",0],["How are you really doing today?",11],["If she were a song, what would she be and why?",5],["What would you want to say to her about the quiet days?",6],["What would you do if she asked if you still listen to your song?",7],["What's a happy memory of you two with friends around?",1],["What memory comes back when you think of fireworks?",2],["Write the message you never sent about your honest heart.",8],["What's a moment you caught her looking at you?",0],["If you could go back to her birthday, what would you do differently?",9],["What did she teach you about saying thank you?",4],["Finish this wish for her: \"I hope you remember the good days, because...\"",10],["Do you still miss her company on bad days? Write about it.",3],["What's a happy memory of you two during the holidays?",1],["What's a funny memory of her playing a game?",5],["Be honest: do you still wonder if she thinks of you? Write about it.",7],["What snack did you always share?",2],["Write about a day when writing in this book made you feel lighter.",11],["What would you want to say to her about the empty spaces in your days?",6],["If you could take her on a date to an arcade, what would you do there?",0],["Do you still miss her company in silence? Write about it.",3],["If you could thank her for believing in you, what would you say?",4],["What do you remember about the first gift you gave her?",2],["What's something she taught you to enjoy?",1],["What do you hope she finds peace in?",10],["When did you smile even though you were hurting inside?",8],["What do you wish you had told her about how beautiful she is?",9],["If she asked you out for coffee, what would you talk about?",7],["When did you realize things wouldn't go the way you hoped?",6],["What gives you kilig about the way she says your name?",0],["What song did you two sing badly together?",5],["What did she teach you about being brave when you're scared?",4],["What happened today that made you miss her?",3],["What do you forgive yourself for?",11],["What did you love doing with her on a cold night?",1],["What memory comes back when you think of Valentine's Day?",2],["What small thing do you wish you had done more often for her?",9],["Write the message you never sent about the words you practiced in your head.",8],["When did she make you feel truly seen?",0],["Finish this wish for her: \"I hope you travel to the places you love, because...\"",10],["Be honest: do you still wait for her to message? Write about it.",7],["How does it feel seeing couples together, now that things are different?",6],["What's a funny memory of her laughing at the wrong time?",5],["What did she help you see differently?",4],["What memory of her comes back when it rains?",2],["Do you still miss the way she cheered you on? Write about it.",3],["What's the best advice she ever gave you?",1],["What gives you kilig about the way she says thank you?",0],["Write about a day when you realized you're okay.",11],["If you could go back to the holidays you spent together, what would you do differently?",9],["What did you need back then but didn't know how to ask for?",8],["What do you hope for her when it comes to her finances?",10],["What's a funny memory of her being clumsy?",5],["What did she teach you about family?",4],["What would you want to say to her about the hope you held?",6],["What would you do if she remembered something only you two know?",7],["What was her favorite show? Does it still remind you of her?",2],["What's a happy memory of you two walking somewhere?",1],["What goes through your mind about her when you're stuck in traffic?",3],["What would you write on a little note for her if you could?",0],["What's a funny debate you two had over something small?",5],["What's a moment you were proud of her?",1],["What did her laugh sound like back then?",2],["What's a kilig memory of her when she checked if you got home safe?",0],["What goes through your mind about her when you open your old chats?",3],["What would you cook for her if she visited?",7],["What do you hope she laughs about today?",10],["What did she teach you about asking for help?",4],["Write the message you never sent about the thing you most wish she knew.",8],["If you could go back to your last message, what would you do differently?",9],["What special day feels different now?",6],["What do you still want to give to the world?",11],["What's the most beautiful you've ever seen her?",0],["What did you love doing with her on ordinary weekdays?",1],["What was her favorite comfort food? Does it still remind you of her?",2],["What about her do you hope other people appreciate too?",4],["What happened recently that she would love?",3],["How does it feel seeing her photos, now that things are different?",6],["What's a funny memory of her trying a new trend?",5],["What would you do if she asked if you're happy?",7],["When were you too busy for her?",9],["Write the message you never sent about the first time you saw her.",8],["What gives you kilig about her shy side?",0],["Finish this wish for her: \"I hope you are never alone, because...\"",10],["Write about a day when you felt thankful instead of sad.",11],["What's a happy memory of you two playing games?",1],["What was her favorite fruit? Does it still remind you of her?",2],["If you could thank her for the effort she gave, what would you say?",4],["What goes through your mind about her when you see a cute dog?",3],["What's something she said that you replayed in your head all day?",0],["Be honest: do you still check her profile? Write about it.",7],["What would you want to say to her about what she still means to you?",6],["If she were a snack, what would she be and why?",5],["If you could go back to the start of everything, what would you do differently?",9],["What do you hope for her when it comes to her hard days?",10],["What do you want to tell her about who you are now?",8],["What memory of her do you replay the most?",2],["What's a little thing about her that made your day better?",1],["If you could thank her for cheering for you, what would you say?",4],["What's a kilig memory of her when she shared her food with you?",0],["Do you still miss her favorite stickers and emojis? Write about it.",3],["Write about a day when you felt at peace.",11],["What small thing suddenly makes you sad?",6],["What's a funny thing she said about you?",5],["What's a happy memory of you two in the rain?",1],["What do you imagine her life looks like now?",7],["What was her favorite dessert? Does it still remind you of her?",2],["What's a time she surprised you?",0],["Do you still miss her company on good days? Write about it.",3],["Write the message you never sent about a day you'll never forget.",8],["What do you wish you had told her about the little things you loved about her?",9],["What did she teach you about hard work?",4],["Finish this wish for her: \"I hope you are surrounded by good people, because...\"",10],["What do you remember about your first long call with her?",2],["What's a happy message from her you'd love to read again?",1],["If she were a piece of furniture, what would she be and why?",5],["What would you do if you found an old note from her?",7],["How does it feel when you see her favorite color, now that things are different?",6],["What hobby helps you clear your mind?",11],["What made her such a good friend?",4],["What gives you kilig about her sleepy voice?",0],["What song would you want to send her right now?",3],["What do you hope your future self says about this time?",10],["What would your goodbye letter to her say?",8],["What gift did you want to give her but didn't?",9],["What was she like when you first got to know her?",2],["What did you love doing with her on special occasions?",1],["What would you say to her if she sent you a heart?",0],["How does it feel hearing her name, now that things are different?",6],["What's a funny memory of her taking forever to decide?",5],["Be honest: do you still pray for her? Write about it.",7],["If you could thank her for the days she made lighter, what would you say?",4],["What memory comes back when you think of school days?",2],["Do you still miss her laugh on calls? Write about it.",3],["Write about a day when you surprised yourself.",11],["Write about a time she was happy because of something you did.",1],["Finish this wish for her: \"I hope you find peace, because...\"",10],["If you could go back to a day you were distant, what would you do differently?",9],["What's something she shared with you that she doesn't share with everyone?",0],["Write the message you never sent about your favorite photo of her.",8],["What would you tell yourself on your saddest day?",6],["What's the funniest gift you gave or got?",5],["What do you still hope for, deep down?",7],["What were you like back when you first knew her?",2],["What did she teach you about courage?",4],["What goes through your mind about her when you're having a great day?",3],["If you could take her on a date to a picnic in the park, what would you do there?",0],["What's your favorite memory of her laughing?",1],["How do you want to love next time?",11],["Finish this wish for her: \"I hope you are treated gently, because...\"",10],["What do you wish you had told her about how she made you feel?",9],["How does it feel eating her favorite food alone, now that things are different?",6],["Write the message you never sent about the day you met.",8],["What would you do if she wanted to catch up?",7],["What do you miss about her silly side?",3],["How did she take care of the people she loved?",4],["What's a funny memory of her doing an impression?",5],["What did you love doing with her on her day off?",1],["What memory comes back when you think of late-night talks?",2],["What's a moment you felt really close to her?",0],["What memory comes back when you think of coffee?",2],["If you could thank her for the late-night talks, what would you say?",4],["What goes through your mind about her when you smell coffee in the morning?",3],["What gives you kilig about the way she walks?",0],["What would you do if she asked about your family?",7],["What made being around her feel so light?",1],["What would your thank-you letter to her say?",8],["What do you hope you'll be able to say to her someday?",10],["How does it feel at the places you used to go, now that things are different?",6],["Write about a day when you let go a little.",11],["What date did you want to plan but never did?",9],["If she were a holiday, what would she be and why?",5],["What part of her personality did you fall for first?",0],["What ordinary moment with her do you now treasure?",2],["What's a happy memory of you two doing something silly?",1],["What do you still do the way she liked it?",7],["What did she teach you about resting when you need to?",4],["Do you still miss her excitement over small things? Write about it.",3],["What do you do when the sadness hits?",6],["What funny moment happened when you were out in public?",5],["What do you hope for her when it comes to her confidence?",10],["Write the message you never sent about the moment you knew.",8],["If you could take her on a date to a stargazing spot, what would you do there?",0],["If you could go back to a moment you let pass, what would you do differently?",9],["What was her favorite season? Does it still remind you of her?",2],["What would you tell yourself a year from now?",11],["What's a happy memory of you two listening to music?",1],["What's a sacrifice of hers that you noticed?",4],["What goes through your mind about her when you finish a long day?",3],["What would you do if you were invited to the same event?",7],["What's a funny memory of her laughing at her own jokes?",5],["How did she make ordinary days feel special?",0],["How does it feel having good news and not telling her, now that things are different?",6],["What's a moment you both felt free?",1],["What do you remember about the first time you said goodbye to her?",2],["If you could go back to your first long conversation, what would you do differently?",9],["What do you hope for her when it comes to her future home?",10],["What would a letter to her on a random Tuesday say?",8],["What did she teach you about trust?",4],["What question would you love to ask her today?",3],["What would you say to her if she wore your favorite color?",0],["Write about a day when you smiled at a memory of her.",11],["What's a funny memory of her singing?",5],["What would you want to say to her about the plans you made?",6],["What would you do if she called you by your old nickname?",7],["What did you love doing with her on lazy weekends?",1],["What's a picture of her in your head that you never took?",2],["What did she teach you about faith?",4],["Write the message you never sent about why you stayed quiet.",8],["Do you still miss eating with her? Write about it.",3],["What's a kilig memory of her when she cooked or bought you food?",0],["When do you wish you had been braver?",9],["Finish this wish for her: \"I hope you always feel safe, because...\"",10],["What's something good that happened because you met her?",1],["What sign do you sometimes look for from her?",7],["What was her favorite scent? Does it still remind you of her?",2],["What does a good day look like for you now?",11],["What's her funniest reaction to something scary?",5],["What did you lose when things changed?",6],["What's one word for how she makes you feel?",0],["If you could thank her for simply being herself, what would you say?",4],["What goes through your mind about her when you can't sleep?",3],["Write the message you never sent about what you'd tell her now.",8],["If you could go back to a promise you made, what would you do differently?",9],["What place would you revisit just to remember her?",2],["What do you hope stays the same about her?",10],["What's a happy memory of you two stuck in traffic?",1],["What would you do if you saw her on your commute?",7],["What would you want to say to her about how you've been since?",6],["What's a funny memory of her bumping into something?",5],["What's a kilig memory of her when she said \"ingat\"?",0],["What goes through your mind about her when you see something she'd find funny?",3],["What would your life be missing if you'd never met her?",4],["What do you remember about your first chat with her?",2],["What did you love doing with her on a busy week?",1],["Write about a day when the sky looked really beautiful.",11],["What's a small moment with her that felt like a movie scene?",0],["What do you wish you had told her about her worth?",9],["Finish this wish for her: \"I hope you feel at home wherever you are, because...\"",10],["What secret did you keep about how much you cared?",8],["What would you want to say to her about how hard it's been?",6],["If she were a board game, what would she be and why?",5],["Be honest: do you still imagine a future with her? Write about it.",7],["What do you still save to show her, out of habit?",3],["What did she teach you about taking care of yourself?",4],["What memory comes back when you think of street food?",2],["What's a time she turned a bad day into a good one?",1],["If you could take her on a date to a sunset spot, what would you do there?",0],["Finish this wish for her: \"I hope you never lose your smile, because...\"",10],["Write about a day when you opened up to a friend about how you feel.",11],["Write the message you never sent about her smile.",8],["When did you want to reach out but didn't?",6],["What do you wish you had celebrated with her?",9],["What dance move of hers can't you forget?",5],["Do you still miss her voice notes? Write about it.",3],["If you could thank her for her encouragement, what would you say?",4],["When did you last think, \"Maybe it's not over\"?",7],["What memory of her do you hope you never forget?",2],["What's a happy memory of you two after a long day?",1],["What's one thing she did that you'll never forget?",0],["What's something she did for your family or friends that you're thankful for?",4],["What gives you kilig about her handwriting?",0],["What do you remember about the first time she made you laugh?",2],["If she were a pastry, what would she be and why?",5],["What's a happy song you connect with her?",1],["What would you want to say to her about the future you imagined?",6],["If you could go back to a time you were too scared, what would you do differently?",9],["What did you only realize after things changed?",8],["What do you hope she always has enough of?",10],["What goes through your mind about her when it's her birthday?",3],["What would you do if she said she thinks of you sometimes?",7],["What place helps you breathe?",11],["What memory comes back when you think of rainy afternoons?",2],["How would you describe her smile to someone who's never seen it?",0],["Do you still miss her reminders to eat? Write about it.",3],["Write about a time she was happy because of a trip.",1],["What did she teach you about listening?",4],["What's a funny memory of her eating something spicy?",5],["What would you do if she sent a photo from your old place?",7],["How does it feel waking up and remembering, now that things are different?",6],["What would you say to her if she called you just to talk?",0],["What do you wish you had told her about what you couldn't put into words?",9],["Write the message you never sent about the songs you shared.",8],["What do you hope for her when it comes to her friends?",10],["Write about a day when you were kind to someone else.",11],["What would you put in a time capsule about her?",2],["What's a happy memory of you two watching a movie?",1],["What did she teach you about patience?",4],["What do you miss about the way she said your name?",3],["What running joke never got old?",5],["What would make you smile if you heard it from her today?",7],["What's a kilig memory of her when she laughed at nothing?",0],["What do you think she's doing right now, and how does that make you feel?",6],["Write the message you never sent about your hopes for her.",8],["What do you hope for her when it comes to her dreams?",10],["What was her favorite artist or band? Does it still remind you of her?",2],["What's something she loved that you started loving too?",1],["When do you wish you had been more honest?",9],["What goes through your mind about her when you see a name like hers somewhere?",3],["If you could thank her for making you feel at home, what would you say?",4],["What would your perfect day with her look like?",0],["What's a reason to smile today?",11],["What's a funny memory of her making a typo?",5],["What did you love doing with her on a hot afternoon?",1],["What would you want to say to her about the nights you missed her?",6],["Be honest: do you still pass by her place on purpose? Write about it.",7],["What's a moment you didn't know would become a memory?",2],["What do you hope for her when it comes to her family?",10],["If you could go back to your first misunderstanding, what would you do differently?",9],["What do you still carry with you that came from her?",4],["What did you never say because the timing never felt right?",8],["What's a kilig memory of her when she sang along to a song?",0],["What goes through your mind about her when it's a Sunday afternoon?",3],["What's a funny memory of her getting lost?",5],["What memory comes back when you think of your old chats?",2],["What's a time you two felt like a team?",1],["How does it feel rereading your old messages, now that things are different?",6],["What would you do if she asked you to walk with her?",7],["What's a song that feels like her?",0],["Write about a day when you didn't check your phone for her.",11],["Do you still miss her good-night messages? Write about it.",3],["What did she teach you about respect?",4],["What do you hope you both learned from each other?",10],["Write about a time she was happy because of a celebration.",1],["What memory comes back when you think of a quiet Sunday?",2],["Write the message you never sent about your biggest thank-you.",8],["If you could go back to a day you were too busy, what would you do differently?",9],["What's the funniest message she ever sent you?",5],["If you could take her on a date to the beach, what would you do there?",0],["What do you wish you could hear from her?",6],["What's the one thing you'd want to hear her say?",7],["What do you miss about your inside jokes?",3],["If you could thank her for the memories, what would you say?",4],["What's a happy memory of you two on her birthday?",1],["What month or year reminds you most of her?",2],["What do you think she would want for you right now?",11],["What made her different from everyone else?",0],["Finish this wish for her: \"I hope you always feel loved, because...\"",10],["How has your regret helped you grow?",9],["What would you tell her about the nights you thought of her?",8],["If she were a type of weather, what would she be and why?",5],["How does it feel listening to your old songs, now that things are different?",6],["What goes through your mind about her when you pass by her favorite place?",3],["Be honest: do you still reread her old notes? Write about it.",7],["What's a fun plan you two made together?",1],["What's a moment she made you feel like enough?",4],["What memory comes back when you think of milk tea?",2],["What gives you kilig about the way she gets excited over little things?",0],["What would you want to say to her about the dreams you shared?",6],["Write about a day when you made a new memory.",11],["What would you do if she thanked you for everything?",7],["What do you hope for her when it comes to her next chapter?",10],["Write the message you never sent about the courage you didn't have then.",8],["What do you wish you had told her about how much you'd miss her?",9],["If you could thank her for teaching you something new, what would you say?",4],["What's a funny memory of her being stubborn about something silly?",5],["Do you still miss her photos? Write about it.",3],["What's a happy memory of you two eating together?",1],["What do you remember about your first inside joke with her?",2],["When did you first think, \"It's her\"?",0]]};
+var LIVE = true, LV = null;
+var FEEL = DATA.feelings, QS = DATA.questions, TOTAL = QS.length;
+var MS = [100,250,500,1000];
+var MS_TEXT = {
+  100: "100 pages of her. That's a lot of love written down.",
+  250: "250 answers. A quarter of the book, written with your whole heart.",
+  500: "Halfway there. 500 pieces of your heart, safely kept.",
+  1000: "1000 things about Cassy. You did it. Every single page."
+};
+var DAY = 864e5;
+var app = document.getElementById('app'), layer = document.getElementById('layer');
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function words(t){t=(t||'').trim();return t?t.split(/\s+/).length:0;}
+function fmtD(ts){return new Date(ts).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
+function fmtDT(ts){var d=new Date(ts);return fmtD(ts)+', '+d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});}
+function dayKey(ts){var d=new Date(ts);return d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate();}
+function startOfDay(ts){var d=new Date(ts);d.setHours(0,0,0,0);return d.getTime();}
+
+/* ---------- icons ---------- */
+function svg(p,s){s=s||20;return '<svg aria-hidden="true" width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';}
+var I = {
+ home:svg('<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/>'),
+ list:svg('<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>'),
+ book:svg('<path d="M2 5.5C4.5 4 8 4 12 6c4-2 7.5-2 10-.5V19c-2.5-1.5-6-1.5-10 .5-4-2-7.5-2-10-.5Z"/><path d="M12 6v13.5"/>'),
+ pages:svg('<path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h4"/>'),
+ stats:svg('<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>'),
+ gear:svg('<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.6 1.6 0 0 0 1.5-1 1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/>'),
+ back:svg('<path d="M15 18l-6-6 6-6"/>'),
+ next:svg('<path d="M9 18l6-6-6-6"/>'),
+ shuffle:svg('<path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/>'),
+ heart:svg('<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/>',16),
+ heartF:'<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>',
+ eyeOff:svg('<path d="M17.9 17.9A10.4 10.4 0 0 1 12 20c-7 0-11-8-11-8a18.5 18.5 0 0 1 5.1-5.9M9.9 4.2A9.1 9.1 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.2 3.2"/><path d="M14.1 14.1a3 3 0 1 1-4.2-4.2"/><path d="M1 1l22 22"/>',16),
+ eye:svg('<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>',18),
+ music:svg('<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',16),
+ skip:svg('<path d="M5 4l10 8-10 8z"/><path d="M19 5v14"/>',16),
+ check:svg('<path d="M20 6 9 17l-5-5"/>',16),
+ edit:svg('<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',16),
+ trash:svg('<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>',16),
+ plus:svg('<path d="M12 5v14M5 12h14"/>'),
+ search:svg('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',18),
+ lock:svg('<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',28),
+ lockS:svg('<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>'),
+ flame:svg('<path d="M12 2c1 4 6 6 6 12a6 6 0 0 1-12 0c0-3 2-5 3-6 0 2 1 3 2 3 0-4-1-6 1-9z"/>',13),
+ sparkle:svg('<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/>',16),
+ cal:svg('<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',16),
+ print:svg('<path d="M6 9V2h12v7"/><rect x="6" y="14" width="12" height="8"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>'),
+ download:svg('<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/>'),
+ cloud:svg('<path d="M18 10h-1.3A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>'),
+ cloudOff:svg('<path d="M22.6 17.6A5 5 0 0 0 18 10h-1.3A8 8 0 0 0 6 4.5M5 5A8 8 0 0 0 9 20h9a5 5 0 0 0 1.7-.3"/><path d="M1 1l22 22"/>',16),
+ phone:svg('<rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/>'),
+ user:svg('<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>'),
+ out:svg('<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/>'),
+ chev:svg('<path d="M9 18l6-6-6-6"/>',18),
+ sun:svg('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',16),
+ moon:svg('<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/>',16),
+ auto:svg('<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>',16),
+ text:svg('<path d="M4 7V5h16v2M9 19h6M12 5v14"/>'),
+ palette:svg('<circle cx="12" cy="12" r="9"/><circle cx="8" cy="10" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16" cy="10" r="1"/><path d="M12 21a3 3 0 0 1 0-6h1.5"/>'),
+ key:svg('<circle cx="8" cy="15" r="4"/><path d="M10.8 12.2 20 3M17 6l3 3M14 9l2 2"/>'),
+ copy:svg('<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>'),
+ cover:svg('<path d="M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4z"/><path d="M8 9h8"/>'),
+ g:'<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.5 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h5.9a5 5 0 0 1-2.2 3.3v2.7h3.5c2.1-1.9 3.3-4.7 3.3-8z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.2-2.7l-3.5-2.7c-1 .7-2.2 1-3.7 1-2.9 0-5.3-1.9-6.2-4.5H2.2v2.8A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.8 14.1a6.6 6.6 0 0 1 0-4.2V7.1H2.2a11 11 0 0 0 0 9.8z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.1-3.1A11 11 0 0 0 2.2 7.1l3.6 2.8C6.7 7.3 9.1 5.4 12 5.4z"/></svg>'
+};
+
+/* ---------- storage (mockup: this device only) ---------- */
+var DBKEY='cassy-mock-db-v1', DEVKEY=LIVE?'cassy-dev-v1':'cassy-mock-dev-v1', mem={};
+function lsGet(k){try{var v=localStorage.getItem(k);if(v)return JSON.parse(v);}catch(e){}return mem[k]?JSON.parse(mem[k]):null;}
+function lsSet(k,v){var s=JSON.stringify(v);mem[k]=s;try{localStorage.setItem(k,s);}catch(e){}}
+function qi(text){for(var i=0;i<QS.length;i++){if(QS[i][0]===text)return i+1;}return null;}
+function freshDb(samples){
+  var d={v:1,owner:null,ownerHash:null,readerHash:null,readerPlain:null,readerOn:true,
+    cover:{kicker:'1000 things to write about',name:'Cassy',tagline:'for everything I never got to say'},
+    answers:{},skipped:{},free:[],celebrated:[],samples:!!samples};
+  if(samples)seed(d);
+  return d;
+}
+function seed(d){
+  var now=Date.now();
+  function at(days,h,m){var t=new Date(now-days*DAY);t.setHours(h,m||0,0,0);return Math.min(t.getTime(),now-60000);}
+  function monthAgo(){var t=new Date(now);t.setMonth(t.getMonth()-1);t.setHours(21,14,0,0);return t.getTime();}
+  var S=[
+   ["What was the first thing you noticed about her?","Her laugh. It was loud and honest, and the whole room turned to look. I remember thinking, I hope I get to be the reason she laughs like that.",at(41,22,10),null,{fav:true}],
+   ["What's your happiest memory with her?","That afternoon we got caught in the rain and just gave up running. We were soaked and laughing, sharing one umbrella that didn't even work.",at(3,21,30),null,{fav:true}],
+   ["What did she teach you without even trying?","To be patient with people. She always gave everyone a second chance, even strangers who were having a bad day.",at(2,22,5),null,{}],
+   ["What place still feels like hers?","The little coffee shop near the corner. I still order what she used to get, just to see if it tastes the same.",at(9,20,40),at(7,23,2),{}],
+   ["What's your funniest inside joke with her?","The \"one more episode\" thing. It was never just one more.",at(1,21,50),null,{}],
+   ["What do you miss hearing from her?","Her \"ingat ka\" every time I went home. Simple, but it always made me feel looked after.",monthAgo(),null,{}],
+   ["What helped you on the hard days?","Long walks, my friends, and writing here.",at(0,19,15),null,{}],
+   ["What do you hope for her this year?","I hope this is her year. That everything she's been working so hard for finally comes to her.",at(14,22,45),null,{}],
+   ["What's something you wish you had told her?","That I was proud of her, every single day. I should have said it more.",at(5,23,20),null,{hidden:true}],
+   ["When did you miss her the most?","On her birthday. I wanted to be the first one to greet her.",at(21,0,30),null,{}],
+   ["What song takes you right back to her?","The one she always played on the way home. I still can't skip it.",at(30,21,0),null,{song:{url:'https://www.youtube.com/results?search_query=love+song+acoustic',title:'Our song'}}]
+  ];
+  S.forEach(function(s){var n=qi(s[0]);if(!n)return;var a={text:s[1],answeredAt:s[2],editedAt:s[3]};
+    if(s[4].fav)a.fav=true;if(s[4].hidden)a.hidden=true;if(s[4].song)a.song=s[4].song;d.answers[n]=a;});
+  var sk=qi("What would you do if she messaged you tonight?");if(sk)d.skipped[sk]=true;
+  d.free.push({id:'f1',title:'A random Tuesday',text:'Nothing special happened today. I just thought of her and hoped she ate well.',answeredAt:at(6,22,0),editedAt:null});
+}
+var db=LIVE?freshDb(false):(lsGet(DBKEY)||freshDb(true));
+var dev=lsGet(DEVKEY)||{theme:'auto',size:'m',account:null,offline:false,pending:0,readerLastVisit:Date.now()-2.5*DAY,readerPos:null};
+function saveDb(){if(LIVE){if(LV)LV.sync();}else lsSet(DBKEY,db);}
+function saveDev(){lsSet(DEVKEY,dev);}
+if(!LIVE)saveDb();saveDev();
+
+/* ---------- password hashing ---------- */
+function hash(pw){
+  var salt='cassy-book|';
+  try{
+    if(window.crypto&&crypto.subtle&&window.TextEncoder){
+      return crypto.subtle.digest('SHA-256',new TextEncoder().encode(salt+pw)).then(function(b){
+        return Array.prototype.map.call(new Uint8Array(b),function(x){return ('0'+x.toString(16)).slice(-2);}).join('');});
+    }
+  }catch(e){}
+  var h=2166136261;for(var i=0;i<(salt+pw).length;i++){h^=(salt+pw).charCodeAt(i);h=Math.imul(h,16777619);}
+  return Promise.resolve('f'+(h>>>0).toString(16));
+}
+
+/* ---------- state ---------- */
+var S={unlocked:false,screen:null,params:{},stack:[],prevVisit:0,editing:false,fresh:{},filter:'All',query:'',bookIdx:0,bookDir:'',printHidden:true,saveT:null};
+function role(){return dev.account?dev.account.role:null;}
+function isOwner(){return role()==='owner';}
+
+/* ---------- theme ---------- */
+var mq=window.matchMedia?matchMedia('(prefers-color-scheme: dark)'):null;
+function applyPrefs(){
+  var t=dev.theme==='auto'?(mq&&mq.matches?'dark':'light'):dev.theme;
+  document.documentElement.setAttribute('data-theme',t);
+  document.documentElement.setAttribute('data-size',dev.size);
+  var m=document.querySelector('meta[name=theme-color]');if(m)m.setAttribute('content',t==='dark'?'#1C1017':'#FFF5FA');
+}
+if(mq&&mq.addEventListener)mq.addEventListener('change',function(){if(dev.theme==='auto')applyPrefs();});
+
+/* ---------- data helpers ---------- */
+function count(){return Object.keys(db.answers).length;}
+function nextUnanswered(){for(var n=1;n<=TOTAL;n++){if(!db.answers[n]&&!db.skipped[n])return n;}return null;}
+function strHash(s){var h=0;for(var i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))|0;}return Math.abs(h);}
+function qotd(){var c=[];for(var n=1;n<=TOTAL;n++){if(!db.answers[n]&&!db.skipped[n])c.push(n);}if(!c.length)return null;return c[strHash(dayKey(Date.now())+'cassy')%c.length];}
+function activityDays(){var s={};Object.keys(db.answers).forEach(function(k){var a=db.answers[k];s[dayKey(a.answeredAt)]=1;if(a.editedAt)s[dayKey(a.editedAt)]=1;});db.free.forEach(function(f){s[dayKey(f.answeredAt)]=1;if(f.editedAt)s[dayKey(f.editedAt)]=1;});return s;}
+function streak(){
+  var s=activityDays(),cur=0,t=startOfDay(Date.now());
+  if(!s[dayKey(t)])t-=DAY;
+  while(s[dayKey(t)]){cur++;t-=DAY;}
+  var keys=Object.keys(s).map(function(k){var p=k.split('-');return new Date(+p[0],+p[1],+p[2]).getTime();}).sort(function(a,b){return a-b;});
+  var best=0,run=0,prev=null;keys.forEach(function(k){run=(prev!==null&&Math.round((k-prev)/DAY)===1)?run+1:1;best=Math.max(best,run);prev=k;});
+  return {cur:cur,best:best};
+}
+function onThisDay(){
+  var now=new Date(),out=[],sod=startOfDay(Date.now());
+  Object.keys(db.answers).forEach(function(k){var a=db.answers[k],d=new Date(a.answeredAt);
+    if(a.answeredAt<sod&&d.getDate()===now.getDate()){var months=(now.getFullYear()-d.getFullYear())*12+now.getMonth()-d.getMonth();if(months>0)out.push({n:+k,months:months});}});
+  return out.sort(function(a,b){return b.months-a.months;});
+}
+function agoLabel(m){if(m%12===0){var y=m/12;return y===1?'1 year ago today':y+' years ago today';}return m===1?'1 month ago today':m+' months ago today';}
+function lastWritten(){var best=null;Object.keys(db.answers).forEach(function(k){var a=db.answers[k],t=Math.max(a.answeredAt,a.editedAt||0);if(!best||t>best.t)best={n:+k,t:t};});return best;}
+function readerItems(){
+  var out=[];Object.keys(db.answers).map(Number).sort(function(a,b){return a-b;}).forEach(function(n){var a=db.answers[n];if(!a.hidden)out.push({key:'q'+n,n:n,q:QS[n-1][0],f:FEEL[QS[n-1][1]],a:a});});
+  db.free.forEach(function(p){if(!p.hidden)out.push({key:'f'+p.id,free:true,id:p.id,q:p.title||'Untitled page',f:'Free page',a:p});});
+  return out;
+}
+function isNew(a){return Math.max(a.answeredAt,a.editedAt||0)>S.prevVisit;}
+
+/* ---------- ui helpers ---------- */
+var toastT;
+function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('show');},2400);}
+function sheet(html,onMount){
+  layer.innerHTML='<div class="backdrop" data-act="closeSheet" data-self="1"><div class="sheet" role="dialog" aria-modal="true"><div class="grab"></div>'+html+'</div></div>';
+  var f=layer.querySelector('input,textarea');if(f)setTimeout(function(){try{f.focus();}catch(e){}},80);
+  if(onMount)onMount(layer.querySelector('.sheet'));
+}
+function closeSheet(){layer.innerHTML='';}
+function confirmBox(title,msg,ok,danger){
+  return new Promise(function(res){
+    sheet('<h3>'+esc(title)+'</h3><p class="muted">'+esc(msg)+'</p><div class="grid2"><button class="btn btn-ghost" data-act="cfNo">Cancel</button><button class="btn '+(danger?'btn-danger':'btn-primary')+'" data-act="cfYes">'+esc(ok)+'</button></div>');
+    S.cf=res;
+  });
+}
+function statusHtml(){
+  if(LIVE){if(!navigator.onLine)return I.cloudOff+' Saved on this phone \u00b7 will sync';if(LV&&LV.pending())return I.cloud+' Syncing\u2026';return I.check+' Saved & synced';}
+  if(dev.offline)return I.cloudOff+' Saved on this phone · will sync';
+  return I.check+' Saved & synced';
+}
+function markPending(){if(dev.offline){dev.pending++;saveDev();}}
+function pwField(id,label,ph,auto){
+  return '<div class="field"><label for="'+id+'">'+label+'</label><div class="inp"><input id="'+id+'" type="password" autocomplete="'+(auto||'off')+'" placeholder="'+(ph||'')+'"><button type="button" class="icon-btn" data-act="peek" data-for="'+id+'" aria-label="Show password">'+I.eye+'</button></div></div>';
+}
+function txtField(id,label,val,ph){return '<div class="field"><label for="'+id+'">'+label+'</label><div class="inp"><input id="'+id+'" type="text" value="'+esc(val||'')+'" placeholder="'+esc(ph||'')+'"></div></div>';}
+
+/* ---------- navigation ---------- */
+function go(screen,params,push){
+  flushSave();
+  if(push!==false&&S.screen&&S.screen!==screen)S.stack.push({s:S.screen,p:S.params});
+  S.fresh={};S.screen=screen;S.params=params||{};S.editing=false;
+  render();window.scrollTo(0,0);
+}
+function tab(screen){S.stack=[];go(screen,{},false);}
+function back(){var p=S.stack.pop();if(p)go(p.s,p.p,false);else tab(isOwner()?'home':'rhome');}
+function start(){
+  closeSheet();S.stack=[];
+  if(LIVE&&(!LV||LV.busy()))return go('loading',{},false);
+  if(!dev.account)return go('welcome',{},false);
+  if(!S.unlocked){
+    if(isOwner()&&!db.ownerHash)return go('setup',{},false);
+    return go('lock',{},false);
+  }
+  go(isOwner()?'home':'rhome',{},false);
+}
+
+/* ---------- render ---------- */
+function tabbar(){
+  var t=isOwner()?[['home','Home',I.home],['contents','Questions',I.list],['free','Free pages',I.pages],['stats','Stats',I.stats],['settings','Settings',I.gear]]
+                 :[['rhome','Home',I.home],['book','Read',I.book],['rlist','Pages',I.list],['settings','Settings',I.gear]];
+  var cur=S.screen==='freeEdit'?'free':S.screen==='print'?'settings':S.screen;
+  return '<nav class="tabbar" aria-label="Main"><div class="in">'+t.map(function(x){return '<button class="tab'+(cur===x[0]?' on':'')+'" data-act="tab" data-to="'+x[0]+'"'+(cur===x[0]?' aria-current="page"':'')+'>'+x[2]+'<span>'+x[1]+'</span></button>';}).join('')+'</div></nav>';
+}
+function render(){
+  var v={loading:vLoading,welcome:vWelcome,setup:vSetup,lock:vLock,home:vHome,contents:vContents,page:vPage,free:vFree,freeEdit:vFreeEdit,stats:vStats,settings:vSettings,print:vPrint,rhome:vRHome,book:vBook,rlist:vContents}[S.screen];
+  var html=v();
+  var tabs=['home','contents','free','stats','settings','rhome','rlist'].indexOf(S.screen)>=0;
+  app.className=tabs?'has-tabs':(S.screen==='page'||S.screen==='book')?'has-pager':'';
+  app.innerHTML=html+(tabs?tabbar():'');
+  var ta=document.getElementById('ta');if(ta){grow(ta);}
+  if(S.screen==='book')bindSwipe();
+}
+function grow(el){
+  var lh=parseFloat(getComputedStyle(el).lineHeight)||42;
+  el.style.height='auto';
+  var lines=Math.ceil((el.scrollHeight-1)/lh);
+  el.style.height=Math.max(lh*7,(lines+1)*lh)+'px';
+}
+
+/* ---------- screens: auth ---------- */
+function vLoading(){return '<main class="center" style="align-items:center;text-align:center"><div class="lockicon">'+I.book+'</div><p class="muted">Opening your book\u2026</p></main>';}
+function vWelcome(){
+  return '<main class="center">'+
+   '<div class="cover"><p class="kicker">'+esc(db.cover.kicker)+'</p><h1 class="cover-name">'+esc(db.cover.name)+'</h1><p class="hand tagline">'+esc(db.cover.tagline)+'</p></div>'+
+   '<p class="muted">A private book of memories. Sign in to write, or to read with a password.</p>'+
+   '<button class="gbtn" data-act="google">'+I.g+' Continue with Google</button>'+
+   (LIVE?'<p class="muted small">Your answers are private. People can only read them with the reader password, and they can never edit.</p>':'<p class="notice">Working mockup: Google sign-in is simulated and everything is saved only in this browser. The real app saves to your Firebase.</p>')+
+  '</main>';
+}
+function vSetup(){
+  return '<main class="center"><div class="cover"><p class="kicker">Set up your book</p><h2 class="serif" style="font-size:30px">Welcome, '+esc(dev.account.name)+'</h2></div>'+
+   '<p class="muted">Choose two passwords. The app asks for one every time it opens.</p>'+
+   '<form data-form="setup" style="display:flex;flex-direction:column;gap:14px" novalidate>'+
+   '<div class="card"><p class="card-title">'+I.lockS+' Your password (to write)</p>'+pwField('p1','Password')+pwField('p2','Type it again')+'</div>'+
+   '<div class="card"><div style="display:flex;align-items:center;gap:10px"><p class="card-title" style="flex:1">'+I.book+' Reader password (read-only)</p><button type="button" class="switch" role="switch" aria-checked="true" aria-label="Let others read" data-act="setupReader" id="rsw"></button></div>'+
+   '<div id="rfields">'+pwField('r1','Reader password')+'<div style="height:10px"></div>'+pwField('r2','Type it again')+'</div>'+
+   '<p class="muted small">Readers sign in with Google, then type this password. They can read, never edit. Hidden answers stay hidden.</p></div>'+
+   '<p class="err" id="err"></p><button class="btn btn-primary" type="submit">Save and open my book</button></form></main>';
+}
+function vLock(){
+  var own=isOwner();
+  return '<main class="center" style="align-items:stretch">'+
+   '<div style="display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center"><div class="lockicon">'+I.lock+'</div>'+
+   '<h2 class="serif" style="font-size:28px">'+(own?'Welcome back':esc(db.cover.name)+'’s book')+'</h2>'+
+   '<p class="muted">'+(own?'Enter your password to open your book.':'Enter the reader password to read.')+'</p></div>'+
+   '<form data-form="lock" style="display:flex;flex-direction:column;gap:12px" novalidate>'+pwField('lp','Password','','current-password')+
+   '<p class="err" id="err"></p><button class="btn btn-primary" type="submit">Unlock</button></form>'+
+   '<button class="back-btn" style="justify-content:center" data-act="signout">Not '+esc(dev.account.name)+'? Sign out</button>'+
+  '</main>';
+}
+
+/* ---------- screens: owner ---------- */
+function vHome(){
+  var n=count(),m=null;for(var i=0;i<MS.length;i++){if(MS[i]>n){m=MS[i];break;}}
+  var next=nextUnanswered(),q=qotd(),st=streak(),otd=onThisDay(),last=lastWritten();
+  var h='<main class="screen">';
+  if(db.samples)h+='<p class="notice">These are sample answers so you can try everything. Clear them anytime in Settings.</p>';
+  h+='<header class="cover"><p class="kicker">'+esc(db.cover.kicker)+'</p><h1 class="cover-name">'+esc(db.cover.name)+'</h1><p class="hand tagline">'+esc(db.cover.tagline)+'</p></header>';
+  h+='<section class="card"><div class="prog-top"><span class="big serif">'+n+'</span><span class="muted">of '+TOTAL+' written</span>'+(st.cur>0?'<span class="pill">'+I.flame+' '+st.cur+'-day streak</span>':'')+'</div>'+
+     '<div class="bar"><span style="width:'+Math.max(n?1:0,n/TOTAL*100)+'%"></span></div><p class="muted small">'+(m?(m-n)+' more to your next milestone ('+m+')':'Every page is written.')+'</p></section>';
+  if(next)h+='<button class="btn btn-primary btn-wide" data-act="open" data-n="'+next+'"><span>Continue writing</span><span class="serif" style="font-weight:400;font-size:18px">#'+next+' →</span></button>';
+  h+='<div class="grid2"><button class="btn btn-ghost" data-act="randomQ">'+I.shuffle+' Random page</button><button class="btn btn-ghost" data-act="tab" data-to="contents">'+I.list+' All questions</button></div>';
+  if(q)h+='<button class="card" data-act="open" data-n="'+q+'"><span class="card-title">'+I.sparkle+' Question of the day · #'+q+'</span><span class="qline">'+esc(QS[q-1][0])+'</span><span style="display:flex;justify-content:space-between;align-items:center"><span class="chip">'+FEEL[QS[q-1][1]]+'</span><span class="new">Write '+I.chev+'</span></span></button>';
+  if(otd.length){var o=otd[0],a=db.answers[o.n];h+='<button class="card" data-act="open" data-n="'+o.n+'"><span class="card-title">'+I.cal+' On this day · '+agoLabel(o.months)+'</span><span class="qline">'+esc(QS[o.n-1][0])+'</span><span class="snip">'+esc(a.text)+'</span></button>';}
+  if(n)h+='<button class="btn btn-ghost" data-act="randomMemory">'+I.book+' Read a random memory</button>';
+  h+='<p class="sec-title">Write by feeling</p><div class="chips">'+FEEL.map(function(f){return '<button class="fchip" data-act="feel" data-f="'+esc(f)+'">'+esc(f)+'</button>';}).join('')+'</div>';
+  if(last){var la=db.answers[last.n];h+='<button class="card" data-act="open" data-n="'+last.n+'"><span class="card-title">Last thing you wrote · #'+last.n+'</span><span class="qline">'+esc(QS[last.n-1][0])+'</span><span class="snip">'+esc(la.text)+'</span></button>';}
+  return h+'</main>';
+}
+function ownerFilters(){return ['All','Not yet','Answered','Favorites','Skipped','Hidden'].concat(FEEL);}
+function readerFilters(){return ['All','New'].concat(FEEL,['Free page']);}
+function vContents(){
+  var own=isOwner();var fl=own?ownerFilters():readerFilters();if(fl.indexOf(S.filter)<0)S.filter='All';
+  return '<main class="screen"><div><h1 class="serif" style="font-size:32px">'+(own?'All questions':'All pages')+'</h1><p class="muted small" id="cnt"></p></div>'+
+   '<label class="search">'+I.search+'<span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Search</span><input id="q" type="search" data-input="search" placeholder="'+(own?'Search questions & answers, or #number':'Search')+'" value="'+esc(S.query)+'"></label>'+
+   '<div class="chips">'+fl.map(function(f){return '<button class="fchip'+(S.filter===f?' on':'')+'" data-act="filter" data-f="'+esc(f)+'">'+esc(f)+'</button>';}).join('')+'</div>'+
+   '<div class="rows" id="rows">'+rowsHtml()+'</div></main>';
+}
+function rowsHtml(){
+  var own=isOwner(),q=S.query.trim().toLowerCase(),f=S.filter,out=[],shown=0;
+  var num=q.replace(/^#/,'');
+  if(own&&/^\d+$/.test(num)&&+num>=1&&+num<=TOTAL){out.push('<button class="row" data-act="open" data-n="'+(+num)+'"><span class="row-n">'+I.next+'</span><span class="row-main"><span class="row-q">Go to page #'+(+num)+'</span></span></button>');}
+  if(own){
+    for(var n=1;n<=TOTAL;n++){
+      var Q=QS[n-1],a=db.answers[n],fe=FEEL[Q[1]];
+      if(f==='Not yet'&&a)continue;if(f==='Answered'&&!a)continue;if(f==='Favorites'&&!(a&&a.fav))continue;
+      if(f==='Skipped'&&!db.skipped[n])continue;if(f==='Hidden'&&!(a&&a.hidden))continue;
+      if(FEEL.indexOf(f)>=0&&fe!==f)continue;
+      var inQ=!q||Q[0].toLowerCase().indexOf(q)>=0,inA=q&&a&&a.text.toLowerCase().indexOf(q)>=0;
+      if(q&&!inQ&&!inA)continue;
+      shown++;
+      out.push('<button class="row" data-act="open" data-n="'+n+'"><span class="row-n">#'+n+'</span><span class="row-main"><span class="row-q">'+esc(Q[0])+'</span>'+(inA?'<span class="snip">'+esc(a.text)+'</span>':'')+
+        '<span class="row-meta"><span class="chip">'+esc(fe)+'</span>'+(a?I.check:'')+(a&&a.fav?I.heartF:'')+(a&&a.hidden?I.eyeOff:'')+(db.skipped[n]?I.skip:'')+'</span></span></button>');
+    }
+  }else{
+    readerItems().forEach(function(it,idx){
+      if(f==='New'&&!isNew(it.a))return;if(f!=='All'&&f!=='New'&&it.f!==f)return;
+      if(q&&it.q.toLowerCase().indexOf(q)<0&&it.a.text.toLowerCase().indexOf(q)<0)return;
+      shown++;
+      out.push('<button class="row" data-act="readAt" data-i="'+idx+'"><span class="row-n">'+(it.free?I.pages:'#'+it.n)+'</span><span class="row-main"><span class="row-q">'+esc(it.q)+'</span><span class="snip">'+esc(it.a.text)+'</span><span class="row-meta"><span class="chip">'+esc(it.f)+'</span>'+(isNew(it.a)?'<span class="new"><span class="dot"></span>New</span>':'')+'</span></span></button>');
+    });
+  }
+  setTimeout(function(){var c=document.getElementById('cnt');if(c)c.textContent=shown+(own?' of '+TOTAL+' shown · '+count()+' written':' pages');},0);
+  return out.join('')||'<p class="empty">Nothing here yet.</p>';
+}
+function toolsHtml(n){
+  var a=db.answers[n],d=a?'':' disabled title="Write an answer first"';
+  return '<button class="tool'+(a&&a.fav?' on':'')+'" data-act="fav" aria-pressed="'+!!(a&&a.fav)+'"'+d+'>'+(a&&a.fav?I.heartF:I.heart)+' Favorite</button>'+
+   '<button class="tool'+(a&&a.hidden?' on':'')+'" data-act="hide" aria-pressed="'+!!(a&&a.hidden)+'"'+d+'>'+I.eyeOff+' Hide from readers</button>'+
+   '<button class="tool'+(a&&a.song?' on':'')+'" data-act="song"'+d+'>'+I.music+' Song</button>';
+}
+function datesHtml(a){if(!a)return '';return 'Answered '+fmtDT(a.answeredAt)+(a.editedAt?'<br>Edited '+fmtDT(a.editedAt):'');}
+function footBtns(n){
+  var a=db.answers[n],ed=S.editing||!a,h='<span class="status" id="status">'+(a?statusHtml():'')+'</span>';
+  if(ed&&a)h+='<button class="btn-sm primary" data-act="done">'+I.check+' Done</button>';
+  if(!ed&&a)h+='<button class="btn-sm" data-act="edit">'+I.edit+' Edit</button><button class="btn-sm danger" data-act="del">'+I.trash+' Delete</button>';
+  if(!a)h+=db.skipped[n]?'<button class="btn-sm" data-act="unskip">Unskip</button>':'<button class="btn-sm" data-act="skip">'+I.skip+' Skip for now</button>';
+  return h;
+}
+function songHtml(s){var host='';try{host=new URL(s.url).hostname.replace(/^www\./,'');}catch(e){}
+  return '<a class="song" href="'+esc(s.url)+'" target="_blank" rel="noopener noreferrer">'+I.music+'<span style="flex:1;min-width:0"><b>'+esc(s.title||'Song for this page')+'</b><span>'+esc(host)+'</span></span>'+I.chev+'</a>';}
+function vPage(){
+  var n=S.params.n,Q=QS[n-1],a=db.answers[n],ed=S.editing||!a;
+  return '<div class="topbar"><button class="back-btn" data-act="back">'+I.back+' Back</button><span class="mid">Page '+n+' of '+TOTAL+'</span><button class="icon-btn" data-act="randomQ" aria-label="Random page">'+I.shuffle+'</button></div>'+
+  '<article class="paper"><div class="qhead"><div class="qrow"><span class="pnum">#'+n+'</span><span class="chip">'+esc(FEEL[Q[1]])+'</span></div><h2 class="qtext">'+esc(Q[0])+'</h2><div class="tools" id="tools">'+toolsHtml(n)+'</div></div>'+
+  '<div class="ans">'+(ed?'<textarea id="ta" class="ruled" data-input="answer" placeholder="Write here…" aria-label="Your answer">'+esc(a?a.text:'')+'</textarea>'
+     :'<button class="ruled ans-view" data-act="edit" aria-label="Your answer. Tap to edit">'+esc(a.text)+'</button><p class="tap-hint">Tap your answer to edit it</p>')+'</div>'+
+  '<div id="songbox">'+(a&&a.song?songHtml(a.song):'')+'</div>'+
+  '<footer class="ans-foot"><p class="dates" id="dates">'+datesHtml(a)+'</p><div class="foot-row" id="foot">'+footBtns(n)+'</div>'+(!a&&db.skipped[n]?'<p class="muted small">Skipped. It will wait for you in the Skipped list.</p>':'')+'</footer></article>'+
+  '<div class="pager"><div class="in"><button class="btn btn-ghost" data-act="prevQ"'+(n<=1?' disabled':'')+'>'+I.back+' Previous</button><span class="count"></span><button class="btn btn-primary" data-act="nextQ"'+(n>=TOTAL?' disabled':'')+'>Next '+I.next+'</button></div></div>';
+}
+function vFree(){
+  var h='<main class="screen"><div><h1 class="serif" style="font-size:32px">Free pages</h1><p class="muted small">For anything the 1000 questions didn’t cover.</p></div>'+
+   '<button class="btn btn-primary" data-act="newFree">'+I.plus+' New free page</button>';
+  if(!db.free.length)h+='<p class="empty">No free pages yet.</p>';
+  db.free.slice().sort(function(a,b){return Math.max(b.answeredAt,b.editedAt||0)-Math.max(a.answeredAt,a.editedAt||0);}).forEach(function(p){
+    h+='<button class="card" data-act="openFree" data-id="'+esc(p.id)+'"><span class="qline">'+esc(p.title||'Untitled page')+'</span><span class="snip">'+esc(p.text||'')+'</span><span class="row-meta" style="color:var(--muted);font-size:12px">'+fmtD(p.answeredAt)+(p.hidden?' · hidden':'')+(p.fav?' '+I.heartF:'')+'</span></button>';
+  });
+  return h+'</main>';
+}
+function findFree(id){for(var i=0;i<db.free.length;i++){if(db.free[i].id===id)return db.free[i];}return null;}
+function vFreeEdit(){
+  var p=findFree(S.params.id);if(!p){setTimeout(function(){tab('free');});return '';}
+  return '<div class="topbar"><button class="back-btn" data-act="back">'+I.back+' Free pages</button><span class="mid">Free page</span><button class="icon-btn" data-act="delFree" aria-label="Delete page">'+I.trash+'</button></div>'+
+  '<article class="paper"><div class="qhead"><div class="qrow"><span class="chip">Free page</span></div>'+
+  '<label style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)" for="ft">Title</label><input id="ft" data-input="ftitle" class="qtext" style="border:0;outline:none;background:transparent;width:100%;padding:0" placeholder="Give it a title" value="'+esc(p.title)+'">'+
+  '<div class="tools"><button class="tool'+(p.fav?' on':'')+'" data-act="ffav">'+(p.fav?I.heartF:I.heart)+' Favorite</button><button class="tool'+(p.hidden?' on':'')+'" data-act="fhide">'+I.eyeOff+' Hide from readers</button></div></div>'+
+  '<div class="ans"><textarea id="ta" class="ruled" data-input="free" placeholder="Write anything…" aria-label="Free page text">'+esc(p.text)+'</textarea></div>'+
+  '<footer class="ans-foot"><p class="dates" id="dates">'+datesHtml(p)+'</p><div class="foot-row"><span class="status" id="status">'+statusHtml()+'</span></div></footer></article>';
+}
+function vStats(){
+  var n=count(),w=0,longest=null,per=FEEL.map(function(){return 0;}),favs=0,hidden=0;
+  Object.keys(db.answers).forEach(function(k){var a=db.answers[k],c=words(a.text);w+=c;if(!longest||c>longest.c)longest={n:+k,c:c};per[QS[k-1][1]]++;if(a.fav)favs++;if(a.hidden)hidden++;});
+  db.free.forEach(function(p){w+=words(p.text);});
+  var mostI=-1;per.forEach(function(c,i){if(c>0&&(mostI<0||c>per[mostI]))mostI=i;});
+  var tot={};QS.forEach(function(q){tot[q[1]]=(tot[q[1]]||0)+1;});
+  var st=streak();
+  var h='<main class="screen"><h1 class="serif" style="font-size:32px">Your stats</h1><div class="stat-grid">'+
+   '<div class="stat"><span class="v">'+n+'</span><span class="l">answers of '+TOTAL+'</span></div>'+
+   '<div class="stat"><span class="v">'+w.toLocaleString()+'</span><span class="l">words written</span></div>'+
+   '<div class="stat"><span class="v">'+st.cur+'</span><span class="l">day streak · best '+st.best+'</span></div>'+
+   '<div class="stat"><span class="v">'+favs+'</span><span class="l">favorites · '+hidden+' hidden</span></div>'+
+   '<div class="stat"><span class="v" style="font-size:22px">'+(mostI>=0?esc(FEEL[mostI]):'—')+'</span><span class="l">most-written feeling</span></div>'+
+   '<div class="stat"><span class="v">'+db.free.length+'</span><span class="l">free pages</span></div></div>';
+  if(longest)h+='<button class="card" data-act="open" data-n="'+longest.n+'"><span class="card-title">Your longest answer · '+longest.c+' words</span><span class="qline">'+esc(QS[longest.n-1][0])+'</span></button>';
+  h+='<section class="card"><p class="card-title">By feeling</p>'+FEEL.map(function(f,i){var p=per[i]/tot[i]*100;return '<div class="fbar"><span>'+esc(f)+'</span><span class="t"><span style="width:'+p+'%"></span></span><span class="muted small" style="text-align:right">'+per[i]+'/'+tot[i]+'</span></div>';}).join('')+'</section>';
+  return h+'</main>';
+}
+function printItems(){var out=[];Object.keys(db.answers).map(Number).sort(function(a,b){return a-b;}).forEach(function(n){var a=db.answers[n];if(a.hidden&&!S.printHidden)return;out.push({label:'#'+n+' · '+FEEL[QS[n-1][1]],q:QS[n-1][0],a:a});});
+  db.free.forEach(function(p){if(p.hidden&&!S.printHidden)return;out.push({label:'Free page',q:p.title||'Untitled page',a:p});});return out;}
+function vPrint(){
+  var items=printItems();
+  return '<div class="topbar"><button class="back-btn" data-act="back">'+I.back+' Settings</button><span class="mid">Print as a book</span><span style="width:44px"></span></div><main class="screen" style="padding-top:8px">'+
+   '<p class="muted">Turns your answers into a printable book. In the print screen, choose <b>Save as PDF</b> to keep it as a file.</p>'+
+   '<div class="group"><div class="item"><span class="grow"><span>Include hidden answers</span><span class="sub">Turn off if you’ll give this to someone</span></span><button class="switch" role="switch" aria-checked="'+S.printHidden+'" aria-label="Include hidden answers" data-act="printHidden"></button></div></div>'+
+   '<button class="btn btn-primary" data-act="doPrint">'+I.print+' Print / Save as PDF ('+items.length+' pages)</button>'+
+   '<p class="sec-title">Preview</p><div class="pp" style="align-items:center;text-align:center;padding:36px 20px"><span class="kicker">'+esc(db.cover.kicker)+'</span><span class="cover-name" style="font-size:54px">'+esc(db.cover.name)+'</span><span class="hand tagline">'+esc(db.cover.tagline)+'</span></div>'+
+   items.slice(0,6).map(function(it){return '<div class="pp"><span class="kicker" style="color:var(--accent)">'+esc(it.label)+'</span><span class="ppq">'+esc(it.q)+'</span><span class="ppa">'+esc(it.a.text)+'</span><span class="muted small">'+fmtD(it.a.answeredAt)+'</span></div>';}).join('')+
+   (items.length>6?'<p class="muted small" style="text-align:center">+ '+(items.length-6)+' more pages</p>':'')+'</main>';
+}
+function seg(act,cur,opts){return '<div class="seg" role="radiogroup">'+opts.map(function(o){return '<button role="radio" aria-checked="'+(cur===o[0])+'" class="'+(cur===o[0]?'on':'')+'" data-act="'+act+'" data-v="'+o[0]+'">'+(o[2]||'')+o[1]+'</button>';}).join('')+'</div>';}
+function vSettings(){
+  var own=isOwner();
+  var h='<main class="screen"><h1 class="serif" style="font-size:32px">Settings</h1>';
+  h+='<p class="sec-title">Look & feel</p><div class="group"><div class="seg-wrap"><span class="small muted" style="font-weight:600">Appearance</span>'+seg('theme',dev.theme,[['light','Light',I.sun],['dark','Dark',I.moon],['auto','Auto',I.auto]])+'</div>'+
+     '<div class="seg-wrap" style="border-bottom:0"><span class="small muted" style="font-weight:600">Answer text size</span>'+seg('size',dev.size,[['s','Small'],['m','Medium'],['l','Large']])+'</div></div>';
+  if(own){
+    h+='<p class="sec-title">Your book</p><div class="group">'+
+      '<button class="item" data-act="editCover"><span class="ic">'+I.cover+'</span><span class="grow"><span>Customize cover</span><span class="sub">'+esc(db.cover.name)+' · “'+esc(db.cover.tagline)+'”</span></span>'+I.chev+'</button>'+
+      '<button class="item" data-act="goPrint"><span class="ic">'+I.print+'</span><span class="grow"><span>Print as a book</span><span class="sub">Printable, book-style PDF</span></span>'+I.chev+'</button>'+
+      '<button class="item" data-act="backup"><span class="ic">'+I.download+'</span><span class="grow"><span>Backup</span><span class="sub">Download all your answers as a text file</span></span>'+I.chev+'</button></div>';
+    h+='<p class="sec-title">Passwords & readers</p><div class="group">'+
+      '<button class="item" data-act="chgOwner"><span class="ic">'+I.key+'</span><span class="grow"><span>Change your password</span><span class="sub">Used to open and write</span></span>'+I.chev+'</button>'+
+      '<div class="item"><span class="ic">'+I.book+'</span><span class="grow"><span>Let others read</span><span class="sub">'+(db.readerOn?'On · read-only with password':'Off · nobody can read')+'</span></span><button class="switch" role="switch" aria-checked="'+db.readerOn+'" aria-label="Let others read" data-act="readerOn"></button></div>'+
+      (db.readerOn?'<button class="item" data-act="showReader"><span class="ic">'+I.eye+'</span><span class="grow"><span>Reader password</span><span class="sub" id="rpw">•••••••• · tap to show</span></span></button>'+
+      '<button class="item" data-act="chgReader"><span class="ic">'+I.key+'</span><span class="grow"><span>Change reader password</span><span class="sub">Readers will need the new one</span></span>'+I.chev+'</button>':'')+
+      '</div>';
+    var off=LIVE?!navigator.onLine:dev.offline,pc=LIVE?(LV?LV.pending():0):dev.pending;
+    h+='<p class="sec-title">Sync</p><div class="group"><div class="item"><span class="ic">'+(off?I.cloudOff:I.cloud)+'</span><span class="grow"><span>'+(off?'Offline':pc?'Syncing\u2026':'All synced')+'</span><span class="sub">'+(off?(pc+' change'+(pc===1?'':'s')+' saved on this phone, waiting for internet'):pc?(pc+' change'+(pc===1?'':'s')+' uploading'):'Your answers are saved online')+'</span></span></div>'+
+      (LIVE?'':'<div class="item"><span class="grow"><span>Simulate no internet</span><span class="sub">Mockup only: try writing offline</span></span><button class="switch" role="switch" aria-checked="'+dev.offline+'" aria-label="Simulate no internet" data-act="offline"></button></div>')+'</div>';
+  }
+  h+='<p class="sec-title">App</p><div class="group">'+
+     '<button class="item" data-act="install"><span class="ic">'+I.phone+'</span><span class="grow"><span>Install app</span><span class="sub">Add to your home screen</span></span>'+I.chev+'</button>'+
+     '<button class="item" data-act="lockNow"><span class="ic">'+I.lockS+'</span><span class="grow"><span>Lock now</span><span class="sub">Asks for the password again</span></span></button></div>';
+  h+='<p class="sec-title">Account</p><div class="group"><div class="item"><span class="avatar">'+esc(dev.account.name.charAt(0))+'</span><span class="grow"><span>'+esc(dev.account.name)+'</span><span class="sub">'+(own?'Owner · can write':'Reader · read-only')+' · '+esc(dev.account.email||'Google')+'</span></span></div>'+
+     '<button class="item" data-act="signout" style="color:var(--danger)"><span class="ic" style="color:var(--danger)">'+I.out+'</span><span class="grow"><span>Sign out</span></span></button></div>';
+  if(own&&!LIVE)h+='<p class="sec-title">Mockup</p><div class="group">'+(db.samples?'<button class="item" data-act="clearSamples"><span class="grow"><span>Clear sample answers</span><span class="sub">Keeps your passwords</span></span></button>':'')+
+     '<button class="item" data-act="resetAll" style="color:var(--danger)"><span class="grow"><span>Reset the whole mockup</span><span class="sub">Starts over from setup</span></span></button></div>';
+  return h+'</main>';
+}
+
+/* ---------- screens: reader ---------- */
+function vRHome(){
+  var items=readerItems(),nw=items.filter(function(it){return isNew(it.a);}),pos=-1;
+  items.forEach(function(it,i){if(it.key===dev.readerPos)pos=i;});
+  var h='<main class="screen"><header class="cover"><p class="kicker">'+esc(db.cover.kicker)+'</p><h1 class="cover-name">'+esc(db.cover.name)+'</h1><p class="hand tagline">'+esc(db.cover.tagline)+'</p></header>'+
+   '<section class="card"><div class="prog-top"><span class="big serif">'+items.length+'</span><span class="muted">pages to read</span>'+(nw.length?'<span class="pill"><span class="dot"></span> '+nw.length+' new</span>':'')+'</div><p class="muted small">Read-only. You can’t change anything here.</p></section>';
+  if(!items.length)return h+'<p class="empty">Nothing to read yet.</p></main>';
+  h+='<button class="btn btn-primary btn-wide" data-act="readAt" data-i="'+(pos>=0?pos:0)+'"><span>'+(pos>=0?'Continue reading':'Start reading')+'</span>'+I.book+'</button>'+
+     '<div class="grid2"><button class="btn btn-ghost" data-act="readRandom">'+I.shuffle+' Random memory</button><button class="btn btn-ghost" data-act="tab" data-to="rlist">'+I.list+' All pages</button></div>';
+  if(nw.length){h+='<p class="sec-title">New since your last visit</p>';nw.slice(0,5).forEach(function(it){var i=items.indexOf(it);
+    h+='<button class="card" data-act="readAt" data-i="'+i+'"><span class="card-title"><span class="dot"></span> '+(it.free?'Free page':'#'+it.n)+' · '+esc(it.f)+'</span><span class="qline">'+esc(it.q)+'</span><span class="snip">'+esc(it.a.text)+'</span></button>';});}
+  return h+'</main>';
+}
+function vBook(){
+  var items=readerItems();if(!items.length){setTimeout(function(){tab('rhome');});return '';}
+  if(S.bookIdx>=items.length)S.bookIdx=items.length-1;if(S.bookIdx<0)S.bookIdx=0;
+  var it=items[S.bookIdx],a=it.a;dev.readerPos=it.key;saveDev();
+  return '<div class="topbar"><button class="back-btn" data-act="tab" data-to="rhome">'+I.back+' Home</button><span class="mid">'+(S.bookIdx+1)+' of '+items.length+'</span><button class="icon-btn" data-act="readRandom" aria-label="Random memory">'+I.shuffle+'</button></div>'+
+  '<article class="paper book-page '+(S.bookDir?'slide-'+S.bookDir:'')+'" id="bookpage"><div class="qhead"><div class="qrow">'+(it.free?'':'<span class="pnum">#'+it.n+'</span>')+'<span class="chip">'+esc(it.f)+'</span>'+(isNew(a)?'<span class="new" style="margin-left:auto"><span class="dot"></span>New</span>':'')+'</div><h2 class="qtext">'+esc(it.q)+'</h2></div>'+
+  '<div class="ruled ans-read">'+esc(a.text)+'</div>'+(a.song?songHtml(a.song):'')+
+  '<footer class="ans-foot"><p class="dates">Written '+fmtD(a.answeredAt)+(a.editedAt?' · Edited '+fmtD(a.editedAt):'')+'</p><p class="muted small">Swipe to turn the page</p></footer></article>'+
+  '<div class="pager"><div class="in"><button class="btn btn-ghost" data-act="bookPrev"'+(S.bookIdx<=0?' disabled':'')+'>'+I.back+' Prev</button><span class="count">'+(S.bookIdx+1)+' / '+items.length+'</span><button class="btn btn-primary" data-act="bookNext"'+(S.bookIdx>=items.length-1?' disabled':'')+'>Next '+I.next+'</button></div></div>';
+}
+function bindSwipe(){
+  var el=document.getElementById('bookpage');if(!el)return;var x0=null,y0=null;
+  el.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY;},{passive:true});
+  el.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;x0=null;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){turn(dx<0?1:-1);}},{passive:true});
+}
+function turn(d){var items=readerItems(),i=S.bookIdx+d;if(i<0||i>=items.length)return;S.bookIdx=i;S.bookDir=d>0?'next':'prev';render();window.scrollTo(0,0);}
+
+/* ---------- saving ---------- */
+function scheduleSave(fn){clearTimeout(S.saveT);S.pendingSave=fn;S.saveT=setTimeout(flushSave,500);}
+function flushSave(){clearTimeout(S.saveT);var f=S.pendingSave;S.pendingSave=null;if(f)f();}
+function saveAnswer(n,text){
+  var a=db.answers[n],now=Date.now();
+  if(!text.trim())return;
+  if(!a){db.answers[n]={text:text,answeredAt:now,editedAt:null};S.fresh['q'+n]=1;delete db.skipped[n];if(S.screen==='page'&&S.params.n===n)S.editing=true;
+    saveDb();markPending();refreshPageBits(n);checkMilestone();return;}
+  if(a.text===text)return;
+  a.text=text;if(!S.fresh['q'+n])a.editedAt=now;
+  saveDb();markPending();refreshPageBits(n);
+}
+function refreshPageBits(n){
+  var a=db.answers[n],el;
+  if((el=document.getElementById('dates')))el.innerHTML=datesHtml(a);
+  if((el=document.getElementById('tools')))el.innerHTML=toolsHtml(n);
+  if((el=document.getElementById('foot')))el.innerHTML=footBtns(n);
+}
+function checkMilestone(){
+  var n=count();
+  if(MS.indexOf(n)>=0&&db.celebrated.indexOf(n)<0){db.celebrated.push(n);saveDb();
+    setTimeout(function(){sheet('<div style="text-align:center;display:flex;flex-direction:column;gap:12px;padding:10px 0"><span class="kicker">Milestone</span><span class="cover-name" style="font-size:64px;font-style:normal">'+n+'</span><p class="hand tagline">'+esc(MS_TEXT[n])+'</p></div><button class="btn btn-primary" data-act="closeSheet">Keep writing</button>');},300);}
+}
+function saveFree(id,field,val){
+  var p=findFree(id);if(!p||p[field]===val)return;p[field]=val;if(!S.fresh['f'+id])p.editedAt=Date.now();
+  saveDb();markPending();var el=document.getElementById('dates');if(el)el.innerHTML=datesHtml(p);
+}
+
+/* ---------- actions ---------- */
+var ACT={
+ closeSheet:function(el,e){if(el.dataset.self&&e.target!==el)return;closeSheet();},
+ cfYes:function(){closeSheet();if(S.cf)S.cf(true);S.cf=null;},
+ cfNo:function(){closeSheet();if(S.cf)S.cf(false);S.cf=null;},
+ peek:function(el){var i=document.getElementById(el.dataset.for);if(i){i.type=i.type==='password'?'text':'password';el.setAttribute('aria-label',i.type==='password'?'Show password':'Hide password');}},
+ google:function(){
+  if(LIVE){LV.signIn();return;}
+  sheet('<h3>Choose an account</h3><p class="muted small">Mockup: pick who you want to try as.</p>'+
+   '<button class="acct" data-act="pickAcct" data-r="owner"><span class="avatar">J</span><span class="grow" style="display:flex;flex-direction:column"><b>John Laurice</b><span class="muted small">You · the owner, can write</span></span></button>'+
+   '<button class="acct" data-act="pickAcct" data-r="reader"><span class="avatar">F</span><span class="grow" style="display:flex;flex-direction:column"><b>A friend</b><span class="muted small">Someone you share the password with · read-only</span></span></button>');
+ },
+ pickAcct:function(el){
+  var r=el.dataset.r;closeSheet();
+  if(r==='owner'){if(!db.owner)db.owner={name:'John Laurice'};saveDb();dev.account={role:'owner',name:'John Laurice'};}
+  else{
+    if(!db.ownerHash){toast('This book isn’t set up yet. Sign in as the owner first.');return;}
+    if(!db.readerOn||!db.readerHash){toast('The owner has turned reading off.');return;}
+    dev.account={role:'reader',name:'A friend'};
+  }
+  saveDev();S.unlocked=false;start();
+ },
+ setupReader:function(el){var on=el.getAttribute('aria-checked')!=='true';el.setAttribute('aria-checked',on);document.getElementById('rfields').style.display=on?'':'none';},
+ signout:function(){confirmBox('Sign out?','You’ll need to sign in with Google and enter the password again.','Sign out',true).then(function(ok){if(!ok)return;if(LIVE){S.unlocked=false;LV.signOut();return;}dev.account=null;saveDev();S.unlocked=false;start();});},
+ lockNow:function(){S.unlocked=false;start();},
+ tab:function(el){tab(el.dataset.to);},
+ back:function(){back();},
+ open:function(el){S.editing=false;go('page',{n:+el.dataset.n});},
+ randomQ:function(){var c=[];for(var n=1;n<=TOTAL;n++){if(!db.answers[n])c.push(n);}if(!c.length)c=[1];go('page',{n:c[Math.floor(Math.random()*c.length)]});},
+ randomMemory:function(){var k=Object.keys(db.answers);if(!k.length)return;go('page',{n:+k[Math.floor(Math.random()*k.length)]});},
+ feel:function(el){S.filter=el.dataset.f;S.query='';tab('contents');},
+ filter:function(el){S.filter=el.dataset.f;render();},
+ prevQ:function(){var n=S.params.n;if(n>1)go('page',{n:n-1});},
+ nextQ:function(){var n=S.params.n;if(n<TOTAL)go('page',{n:n+1});},
+ edit:function(){delete S.fresh['q'+S.params.n];S.editing=true;render();var ta=document.getElementById('ta');if(ta){ta.focus();try{ta.setSelectionRange(ta.value.length,ta.value.length);}catch(e){}}},
+ done:function(){
+  var n=S.params.n,ta=document.getElementById('ta');
+  if(ta&&!ta.value.trim()&&db.answers[n]){ACT.del();return;}
+  flushSave();S.editing=false;render();toast('Saved');
+ },
+ del:function(){var n=S.params.n;confirmBox('Delete this answer?','The question will be empty again. This can’t be undone.','Delete',true).then(function(ok){if(!ok)return;
+   S.pendingSave=null;delete db.answers[n];delete S.fresh['q'+n];saveDb();markPending();S.editing=false;render();toast('Answer deleted');});},
+ skip:function(){db.skipped[S.params.n]=true;saveDb();toast('Skipped for now');var n=S.params.n;if(n<TOTAL)go('page',{n:n+1},false);else render();},
+ unskip:function(){delete db.skipped[S.params.n];saveDb();render();},
+ fav:function(){var a=db.answers[S.params.n];if(!a)return;a.fav=!a.fav;saveDb();markPending();refreshPageBits(S.params.n);toast(a.fav?'Added to favorites':'Removed from favorites');},
+ hide:function(){var a=db.answers[S.params.n];if(!a)return;a.hidden=!a.hidden;saveDb();markPending();refreshPageBits(S.params.n);toast(a.hidden?'Hidden from readers':'Readers can see this');},
+ song:function(){var a=db.answers[S.params.n];if(!a)return;var s=a.song||{};
+  sheet('<h3>Song for this page</h3><p class="muted small">Paste a Spotify or YouTube link.</p><form data-form="song" style="display:flex;flex-direction:column;gap:12px" novalidate>'+txtField('su','Link',s.url,'https://')+txtField('st','Song name (optional)',s.title,'e.g. Our song')+'<p class="err" id="err"></p><button class="btn btn-primary" type="submit">Save song</button>'+(a.song?'<button class="btn btn-danger" type="button" data-act="rmSong">Remove song</button>':'')+'</form>');},
+ rmSong:function(){var a=db.answers[S.params.n];delete a.song;saveDb();closeSheet();document.getElementById('songbox').innerHTML='';refreshPageBits(S.params.n);},
+ newFree:function(){var id='f'+Date.now().toString(36);db.free.push({id:id,title:'',text:'',answeredAt:Date.now(),editedAt:null});saveDb();go('freeEdit',{id:id});S.fresh['f'+id]=1;setTimeout(function(){var t=document.getElementById('ft');if(t)t.focus();},50);},
+ openFree:function(el){go('freeEdit',{id:el.dataset.id});},
+ ffav:function(){var p=findFree(S.params.id);p.fav=!p.fav;saveDb();render();},
+ fhide:function(){var p=findFree(S.params.id);p.hidden=!p.hidden;saveDb();render();toast(p.hidden?'Hidden from readers':'Readers can see this');},
+ delFree:function(){confirmBox('Delete this page?','This can’t be undone.','Delete',true).then(function(ok){if(!ok)return;S.pendingSave=null;db.free=db.free.filter(function(p){return p.id!==S.params.id;});saveDb();S.stack=[];tab('free');toast('Page deleted');});},
+ theme:function(el){dev.theme=el.dataset.v;saveDev();applyPrefs();render();},
+ size:function(el){dev.size=el.dataset.v;saveDev();applyPrefs();render();},
+ offline:function(){dev.offline=!dev.offline;if(!dev.offline&&dev.pending){toast(dev.pending+' change'+(dev.pending===1?'':'s')+' synced');dev.pending=0;}else if(dev.offline)toast('Offline. Keep writing, it’ll sync later.');saveDev();render();},
+ readerOn:function(){
+  if(LIVE){
+   if(db.readerOn){confirmBox('Turn off reading?','Nobody will be able to read your book until you turn it back on.','Turn off',true).then(function(ok){if(!ok)return;toast('Turning off\u2026');LV.setReaderOn(false).then(function(){render();toast('Reading is off');},function(e){toast(e.message);});});}
+   else if(!db.readerPlain){ACT.chgReader();}
+   else{toast('Turning on\u2026');LV.setReaderOn(true).then(function(){render();toast('Reading is on');},function(e){toast(e.message);});}
+   return;
+  }
+  if(db.readerOn){confirmBox('Turn off reading?','Nobody will be able to read your book until you turn it back on.','Turn off',true).then(function(ok){if(!ok)return;db.readerOn=false;saveDb();render();});}
+  else if(!db.readerHash){ACT.chgReader();}
+  else{db.readerOn=true;saveDb();render();toast('Reading is on');}
+ },
+ showReader:function(){var el=document.getElementById('rpw');if(el)el.textContent=db.readerPlain||'(not set)';},
+ chgOwner:function(){sheet('<h3>Change your password</h3><form data-form="chgOwner" style="display:flex;flex-direction:column;gap:12px" novalidate>'+pwField('c0','Current password')+pwField('c1','New password')+pwField('c2','Type it again')+'<p class="err" id="err"></p><button class="btn btn-primary" type="submit">Save password</button></form>');},
+ chgReader:function(){sheet('<h3>Reader password</h3><p class="muted small">Readers use this after signing in. They can only read.</p><form data-form="chgReader" style="display:flex;flex-direction:column;gap:12px" novalidate>'+pwField('c1','New reader password')+pwField('c2','Type it again')+'<p class="err" id="err"></p><button class="btn btn-primary" type="submit">Save reader password</button></form>');},
+ editCover:function(){sheet('<h3>Customize cover</h3><form data-form="cover" style="display:flex;flex-direction:column;gap:12px" novalidate>'+txtField('k1','Small title',db.cover.kicker)+txtField('k2','Name',db.cover.name)+txtField('k3','Tagline',db.cover.tagline)+'<button class="btn btn-primary" type="submit">Save cover</button></form>');},
+ install:function(){if(window.__bip){var bp=window.__bip;window.__bip=null;bp.prompt();return;}sheet('<h3>Install the app</h3><div class="card"><p class="card-title">Android (Chrome)</p><p>Tap the <b>⋮ menu</b>, then <b>Add to Home screen</b> or <b>Install app</b>.</p></div><div class="card"><p class="card-title">iPhone (Safari)</p><p>Tap <b>Share</b>, then <b>Add to Home Screen</b>.</p></div><p class="muted small">Once installed it opens like a normal app, even offline.</p><button class="btn btn-primary" data-act="closeSheet">Got it</button>');},
+ backup:function(){sheet('<h3>Backup</h3><p class="muted">Saves every answer, its date, and your free pages in one text file.</p><button class="btn btn-primary" data-act="dlBackup">'+I.download+' Download .txt</button><button class="btn btn-ghost" data-act="cpBackup">'+I.copy+' Copy everything</button>');},
+ dlBackup:function(){var t=backupText();try{var b=new Blob([t],{type:'text/plain'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='cassy-book-backup.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u);},2000);}catch(e){}toast(LIVE?'Backup downloaded':'Download started (in this preview, use Copy if nothing happens)');},
+ cpBackup:function(){var t=backupText();try{navigator.clipboard.writeText(t).then(function(){toast('Copied all your answers');},function(){toast('Couldn’t copy here');});}catch(e){toast('Couldn’t copy here');}},
+ printHidden:function(){S.printHidden=!S.printHidden;render();},
+ doPrint:function(){buildPrint();try{window.print();}catch(e){}if(!LIVE)toast('If nothing opened, printing works once the app is live');},
+ clearSamples:function(){confirmBox('Clear sample answers?','Your passwords and settings stay. All answers and free pages are removed.','Clear',true).then(function(ok){if(!ok)return;db.answers={};db.skipped={};db.free=[];db.celebrated=[];db.samples=false;saveDb();tab('home');toast('Fresh start. Page 1 is waiting.');});},
+ resetAll:function(){confirmBox('Reset the mockup?','Everything goes back to the start, including passwords.','Reset',true).then(function(ok){if(!ok)return;db=freshDb(true);saveDb();dev.account=null;dev.pending=0;dev.offline=false;dev.readerPos=null;dev.readerLastVisit=Date.now()-2.5*DAY;saveDev();S.unlocked=false;start();});},
+ goPrint:function(){go('print');},
+ readAt:function(el){S.bookIdx=+el.dataset.i;S.bookDir='';S.stack=[];go('book',{},false);},
+ readRandom:function(){var n=readerItems().length;if(!n)return;S.bookIdx=Math.floor(Math.random()*n);S.bookDir='next';S.stack=[];go('book',{},false);},
+ bookPrev:function(){turn(-1);},
+ bookNext:function(){turn(1);}
+};
+function backupText(){
+  var L=[db.cover.kicker.toUpperCase()+' '+db.cover.name.toUpperCase(),db.cover.tagline,'Backup: '+fmtDT(Date.now()),''];
+  Object.keys(db.answers).map(Number).sort(function(a,b){return a-b;}).forEach(function(n){var a=db.answers[n];
+    L.push('#'+n+' ['+FEEL[QS[n-1][1]]+']'+(a.fav?' [favorite]':'')+(a.hidden?' [hidden]':''),QS[n-1][0],a.text,'Answered '+fmtDT(a.answeredAt)+(a.editedAt?' | Edited '+fmtDT(a.editedAt):'')+(a.song?' | Song: '+a.song.url:''),'');});
+  db.free.forEach(function(p){L.push('[Free page] '+(p.title||'Untitled'),p.text,'Written '+fmtDT(p.answeredAt)+(p.editedAt?' | Edited '+fmtDT(p.editedAt):''),'');});
+  return L.join('\n');
+}
+function buildPrint(){
+  var h='<section class="pb-cover"><div class="pb-n">'+esc(db.cover.kicker)+'</div><h1>'+esc(db.cover.name)+'</h1><div class="pb-a">'+esc(db.cover.tagline)+'</div></section>';
+  printItems().forEach(function(it){h+='<section class="pb-item"><div class="pb-n">'+esc(it.label)+'</div><p class="pb-q">'+esc(it.q)+'</p><div class="pb-a">'+esc(it.a.text)+'</div><div class="pb-d">'+fmtD(it.a.answeredAt)+(it.a.editedAt?' · edited '+fmtD(it.a.editedAt):'')+'</div></section>';});
+  document.getElementById('printRoot').innerHTML=h;
+}
+
+/* ---------- forms ---------- */
+function val(id){var e=document.getElementById(id);return e?e.value:'';}
+function err(m){var e=document.getElementById('err');if(e){e.textContent=m;var f=e.closest('form');if(f){f.classList.remove('shake');void f.offsetWidth;f.classList.add('shake');}}}
+var FORM={
+ setup:function(){
+  var p1=val('p1'),p2=val('p2'),ron=document.getElementById('rsw').getAttribute('aria-checked')==='true',r1=val('r1'),r2=val('r2');
+  if(p1.length<4)return err('Your password needs at least 4 characters.');
+  if(p1!==p2)return err('Your two passwords don’t match.');
+  if(ron){if(r1.length<4)return err('The reader password needs at least 4 characters.');if(r1!==r2)return err('The reader passwords don’t match.');if(r1===p1)return err('Use a different password for readers.');}
+  if(LIVE){var btn=document.querySelector('form [type=submit]');btn.disabled=true;btn.textContent='Setting up\u2026';hash(p1).then(function(h){db.ownerHash=h;db.readerOn=false;saveDb();return ron?LV.changeReader(r1):null;}).then(function(){S.unlocked=true;toast('Your book is ready');start();},function(e){btn.disabled=false;btn.textContent='Save and open my book';err(e.message);});return;}
+  Promise.all([hash(p1),ron?hash(r1):Promise.resolve(null)]).then(function(h){db.ownerHash=h[0];db.readerOn=ron;db.readerHash=h[1];db.readerPlain=ron?r1:null;saveDb();S.unlocked=true;toast('Your book is ready');start();});
+ },
+ lock:function(){
+  var p=val('lp');if(!p)return err('Type your password.');
+  hash(p).then(function(h){
+   if(isOwner()){if(h!==db.ownerHash)return err('Wrong password. Try again.');}
+   else if(LIVE){LV.readerUnlock(p).then(function(r){if(!r.ok)return err(r.msg);S.prevVisit=dev.readerLastVisit||0;dev.readerLastVisit=Date.now();saveDev();S.unlocked=true;start();});return;}
+   else{if(!db.readerOn||!db.readerHash)return err('The owner has turned reading off.');if(h!==db.readerHash)return err('Wrong password. Try again.');
+     S.prevVisit=dev.readerLastVisit||0;dev.readerLastVisit=Date.now();saveDev();}
+   S.unlocked=true;start();
+  });
+ },
+ chgOwner:function(){
+  var c0=val('c0'),c1=val('c1'),c2=val('c2');
+  hash(c0).then(function(h){if(h!==db.ownerHash)return err('Your current password is wrong.');if(c1.length<4)return err('Use at least 4 characters.');if(c1!==c2)return err('The new passwords don’t match.');if(c1===db.readerPlain)return err('Use something different from the reader password.');
+   hash(c1).then(function(n){db.ownerHash=n;saveDb();closeSheet();toast('Password changed');});});
+ },
+ chgReader:function(){
+  var c1=val('c1'),c2=val('c2');if(c1.length<4)return err('Use at least 4 characters.');if(c1!==c2)return err('The passwords don’t match.');
+  Promise.all([hash(c1)]).then(function(h){if(h[0]===db.ownerHash)return err('Use something different from your own password.');
+   if(LIVE){err('');var b=document.querySelector('.sheet [type=submit]');b.disabled=true;b.textContent='Saving\u2026';LV.changeReader(c1).then(function(){closeSheet();render();toast('Reader password saved');},function(e){b.disabled=false;b.textContent='Save reader password';err(e.message);});return;}db.readerHash=h[0];db.readerPlain=c1;db.readerOn=true;saveDb();closeSheet();render();toast('Reader password saved');});
+ },
+ song:function(){
+  var u=val('su').trim(),t=val('st').trim(),ok=false;try{var x=new URL(u);ok=x.protocol==='https:'||x.protocol==='http:';}catch(e){}
+  if(!ok)return err('Paste a full link that starts with https://');
+  var a=db.answers[S.params.n];a.song={url:u,title:t};saveDb();markPending();closeSheet();document.getElementById('songbox').innerHTML=songHtml(a.song);refreshPageBits(S.params.n);toast('Song added');
+ },
+ cover:function(){db.cover={kicker:val('k1').trim()||'1000 things to write about',name:val('k2').trim()||'Cassy',tagline:val('k3').trim()};saveDb();closeSheet();render();toast('Cover updated');}
+};
+
+/* ---------- events ---------- */
+document.addEventListener('click',function(e){var el=e.target.closest('[data-act]');if(!el||el.disabled)return;var f=ACT[el.dataset.act];if(f)f(el,e);});
+document.addEventListener('submit',function(e){var f=e.target.closest('form[data-form]');if(!f)return;e.preventDefault();var h=FORM[f.dataset.form];if(h)h();});
+document.addEventListener('input',function(e){
+  var k=e.target.dataset&&e.target.dataset.input;if(!k)return;
+  if(k==='search'){S.query=e.target.value;document.getElementById('rows').innerHTML=rowsHtml();}
+  else if(k==='answer'){grow(e.target);var n=S.params.n,v=e.target.value;var st=document.getElementById('status');if(st&&db.answers[n])st.innerHTML='Saving…';scheduleSave(function(){saveAnswer(n,v);var s2=document.getElementById('status');if(s2)s2.innerHTML=statusHtml();});}
+  else if(k==='free'){grow(e.target);var id=S.params.id,fv=e.target.value;scheduleSave(function(){saveFree(id,'text',fv);});}
+  else if(k==='ftitle'){var id2=S.params.id,tv=e.target.value;scheduleSave(function(){saveFree(id2,'title',tv);});}
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'&&layer.innerHTML){closeSheet();if(S.cf){S.cf(false);S.cf=null;}}
+  if(S.screen==='book'&&!layer.innerHTML){if(e.key==='ArrowRight')turn(1);if(e.key==='ArrowLeft')turn(-1);}
+});
+window.addEventListener('resize',function(){var ta=document.getElementById('ta');if(ta)grow(ta);});
+document.addEventListener('visibilitychange',function(){if(document.hidden)flushSave();});
+
+function softRender(){if(layer.innerHTML)return;var a=document.activeElement;if(a&&(a.tagName==='TEXTAREA'||a.tagName==='INPUT')&&app.contains(a))return;if(S.screen==='page'&&S.editing)return;render();}
+function statusRefresh(){var s=document.getElementById('status');if(s&&s.textContent.indexOf('Saving')<0&&(S.screen!=='page'||db.answers[S.params.n]))s.innerHTML=statusHtml();if(S.screen==='settings')softRender();}
+applyPrefs();
+if(LIVE){
+  window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();window.__bip=e;});
+  window.addEventListener('online',statusRefresh);window.addEventListener('offline',statusRefresh);
+  if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(function(){});
+  go('loading',{},false);
+  var API={getDb:function(){return db;},setDb:function(v){db=v;},dev:dev,S:S,start:start,render:render,softRender:softRender,statusRefresh:statusRefresh,toast:toast,hash:hash,saveDev:saveDev,freshDb:freshDb};
+  import('./live.js').then(function(m){LV=m;m.init(API);}).catch(function(){app.innerHTML='<main class="center"><p class="muted">Couldn\u2019t open the app. Check your internet, then close and reopen it.</p></main>';});
+}else start();
+})();
+</script>
+</body>
+</html>

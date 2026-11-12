@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function ownerDoc() { return /databases/$(database)/documents/app/owner; }
+    function isOwner() {
+      return signedIn() && exists(ownerDoc()) && get(ownerDoc()).data.uid == request.auth.uid;
+    }
+
+    // Who owns the book: claimed once, by the first person to sign in.
+    match /app/owner {
+      allow get: if signedIn();
+      allow create: if signedIn() && request.resource.data.uid == request.auth.uid;
+      allow update, delete: if false;
+    }
+
+    // The owner's private book (answers, free pages, settings). Only the owner.
+    match /users/{userId}/{document=**} {
+      allow read, write: if isOwner() && request.auth.uid == userId;
+    }
+
+    // Read-only copy for readers. Opened only with the reader password.
+    match /shared/{shareId} {
+      allow get: if signedIn();
+      allow create: if isOwner() && request.resource.data.owner == request.auth.uid;
+      allow update, delete: if isOwner() && resource.data.owner == request.auth.uid;
+    }
+    match /shared/{shareId}/pages/{pageId} {
+      allow read: if signedIn() && exists(/databases/$(database)/documents/shared/$(shareId));
+      allow write: if isOwner()
+        && get(/databases/$(database)/documents/shared/$(shareId)).data.owner == request.auth.uid;
+    }
+  }
+}

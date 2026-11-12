@@ -1,0 +1,16 @@
+{
+  "name": "1000 Things to Write About Cassy",
+  "short_name": "Cassy",
+  "description": "A private book of 1000 questions, offline-ready.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FFF5FA",
+  "theme_color": "#FFF5FA",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
