@@ -3,24 +3,20 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     function signedIn() { return request.auth != null; }
+
+    // ===== App 1: for_cassy (single owner) =====
     function ownerDoc() { return /databases/$(database)/documents/app/owner; }
     function isOwner() {
       return signedIn() && exists(ownerDoc()) && get(ownerDoc()).data.uid == request.auth.uid;
     }
-
-    // Who owns the book: claimed once, by the first person to sign in.
     match /app/owner {
       allow get: if signedIn();
       allow create: if signedIn() && request.resource.data.uid == request.auth.uid;
       allow update, delete: if false;
     }
-
-    // The owner's private book (answers, free pages, settings). Only the owner.
     match /users/{userId}/{document=**} {
       allow read, write: if isOwner() && request.auth.uid == userId;
     }
-
-    // Read-only copy for readers. Opened only with the reader password.
     match /shared/{shareId} {
       allow get: if signedIn();
       allow create: if isOwner() && request.resource.data.owner == request.auth.uid;
@@ -30,6 +26,43 @@ service cloud.firestore {
       allow read: if signedIn() && exists(/databases/$(database)/documents/shared/$(shareId));
       allow write: if isOwner()
         && get(/databases/$(database)/documents/shared/$(shareId)).data.owner == request.auth.uid;
+    }
+    match /shared/{shareId}/reactions/{readerId} {
+      allow read: if signedIn() && exists(/databases/$(database)/documents/shared/$(shareId));
+      allow write: if signedIn() && exists(/databases/$(database)/documents/shared/$(shareId))
+        && (request.auth.uid == readerId || isOwner());
+    }
+
+    // ===== App 2: about_me (anyone can be an author) =====
+    // Each author's private book.
+    match /authors/{uid}/{document=**} {
+      allow read, write: if signedIn() && request.auth.uid == uid;
+    }
+    // Unique usernames (nicknames).
+    match /usernames/{nick} {
+      allow get: if signedIn();
+      allow create: if signedIn() && nick.matches('^[a-z0-9_.]{3,20}$')
+        && request.resource.data.uid == request.auth.uid;
+      allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+      allow update: if false;
+    }
+    // Read-only copies, opened with username + reader password.
+    match /books/{shareId} {
+      allow get: if signedIn();
+      allow create: if signedIn() && request.resource.data.owner == request.auth.uid;
+      allow update, delete: if signedIn() && resource.data.owner == request.auth.uid;
+    }
+    match /books/{shareId}/pages/{pageId} {
+      allow read: if signedIn() && exists(/databases/$(database)/documents/books/$(shareId));
+      allow write: if signedIn()
+        && get(/databases/$(database)/documents/books/$(shareId)).data.owner == request.auth.uid;
+    }
+    // Emoji reactions: each reader writes only their own; the owner can move or clear them.
+    match /books/{shareId}/reactions/{readerId} {
+      allow read: if signedIn() && exists(/databases/$(database)/documents/books/$(shareId));
+      allow write: if signedIn() && exists(/databases/$(database)/documents/books/$(shareId))
+        && (request.auth.uid == readerId
+            || get(/databases/$(database)/documents/books/$(shareId)).data.owner == request.auth.uid);
     }
   }
 }

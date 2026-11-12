@@ -18,6 +18,7 @@ let ownerUnsubs = [];
 let readerUnsubs = [];
 let synced = null;            // what we believe the server already has (owner)
 let pend = { s: 0, a: 0, f: 0 };
+let rxUnsub = null, readingShare = null, readerRxSynced = null;
 
 const OWNER_KEY = 'cassy-owner-uid';
 const lsGetOwner = () => { try { return localStorage.getItem(OWNER_KEY); } catch (e) { return null; } };
@@ -60,8 +61,12 @@ function answerFromDoc(d) {
   if (d.fav) a.fav = true;
   if (d.hidden) a.hidden = true;
   if (d.song && d.song.url) a.song = { url: d.song.url, title: d.song.title || '' };
+  if (d.mood) a.mood = d.mood;
+  if (d.lockUntil) a.lockUntil = d.lockUntil;
+  if (Array.isArray(d.versions) && d.versions.length) a.versions = d.versions.map(v => ({ text: v.text || '', at: v.at || 0, mood: v.mood || null }));
   return a;
 }
+const isLocked = (a) => !!(a && a.lockUntil && a.lockUntil > Date.now());
 function freeFromDoc(id, d) {
   const p = { id, title: d.title || '', text: d.text || '', answeredAt: d.answeredAt || Date.now(), editedAt: d.editedAt || null };
   if (d.fav) p.fav = true;
@@ -72,15 +77,15 @@ function settingsOf(db) {
   return clean({
     ownerHash: db.ownerHash || null, readerOn: !!db.readerOn, readerPlain: db.readerPlain || null,
     readerHash: db.readerHash || null, shareId: db.shareId || null, cover: db.cover,
-    skipped: db.skipped || {}, celebrated: db.celebrated || []
+    skipped: db.skipped || {}, celebrated: db.celebrated || [], seen: db.seen || {}, shared: !!db.shared
   });
 }
 function buildMirror(db) {
   const m = {};
   Object.keys(db.answers).forEach(k => {
     const a = db.answers[k];
-    if (a.hidden || !a.text.trim()) return;
-    m['q' + k] = clean({ kind: 'q', n: +k, text: a.text, answeredAt: a.answeredAt, editedAt: a.editedAt || null, song: a.song });
+    if (a.hidden || isLocked(a) || !a.text.trim()) return;
+    m['q' + k] = clean({ kind: 'q', n: +k, text: a.text, answeredAt: a.answeredAt, editedAt: a.editedAt || null, mood: a.mood || null, song: a.song });
   });
   db.free.forEach(p => {
     if (p.hidden || !(p.text || '').trim()) return;
@@ -102,8 +107,21 @@ export function init(api) {
 export const busy = () => phase !== 'ready';
 export const pending = () => pend.s + pend.a + pend.f;
 
-function stopOwner() { ownerUnsubs.forEach(u => u()); ownerUnsubs = []; synced = null; pend = { s: 0, a: 0, f: 0 }; }
-function stopReader() { readerUnsubs.forEach(u => u()); readerUnsubs = []; }
+function stopOwner() { ownerUnsubs.forEach(u => u()); ownerUnsubs = []; if (rxUnsub) { rxUnsub(); rxUnsub = null; } synced = null; pend = { s: 0, a: 0, f: 0 }; }
+function stopReader() { readerUnsubs.forEach(u => u()); readerUnsubs = []; readingShare = null; readerRxSynced = null; }
+function aggregateRx(snap) {
+  const R = {};
+  snap.docs.forEach(d => { const v = d.data() || {}, r = v.r || {}; Object.keys(r).forEach(key => { (R[key] = R[key] || {})[d.id] = { e: r[key].e, at: r[key].at || 0, name: v.name || 'Someone' }; }); });
+  return R;
+}
+function listenOwnerRx(sid) {
+  if (rxUnsub) { rxUnsub(); rxUnsub = null; }
+  if (!sid) { A.getDb().reactions = {}; return; }
+  rxUnsub = onSnapshot(collection(fs, 'shared', sid, 'reactions'), (snap) => {
+    A.getDb().reactions = aggregateRx(snap);
+    if (phase === 'ready') { A.softRender(); if (A.checkStickers) A.checkStickers(); }
+  }, () => {});
+}
 
 async function onUser(u) {
   stopOwner(); stopReader();
@@ -146,8 +164,9 @@ function loadOwner() {
       if (resolved || !(got.s && got.a && got.f)) return;
       resolved = true;
       const db = A.getDb();
-      if (db.readerOn && db.shareId) { synced.mirror = canonMap(buildMirror(db)); synced.cover = canon(db.cover); }
+      if (db.readerOn && db.shareId) { synced.mirror = canonMap(buildMirror(db)); synced.cover = canon(db.cover); listenOwnerRx(db.shareId); }
       resolve();
+      setTimeout(() => sync(), 50); // shares any time capsule that opened since the last visit
     };
     const fail = (e) => { if (!resolved) { resolved = true; reject(e); } else A.toast('Sync problem: ' + (e.code || e.message)); };
 
@@ -158,7 +177,9 @@ function loadOwner() {
         db.ownerHash = d.ownerHash || null; db.readerOn = !!d.readerOn; db.readerPlain = d.readerPlain || null;
         db.readerHash = d.readerHash || null; db.shareId = d.shareId || null;
         if (d.cover) db.cover = d.cover;
-        db.skipped = d.skipped || {}; db.celebrated = d.celebrated || [];
+        const oldShare = db.shareId;
+        db.skipped = d.skipped || {}; db.celebrated = d.celebrated || []; db.seen = d.seen || db.seen || { stickers: null, rx: 0 }; db.shared = !!d.shared;
+        if (got.s && db.shareId !== oldShare) listenOwnerRx(db.readerOn ? db.shareId : null);
         const c = canon(settingsOf(db));
         const changed = got.s && synced.settings !== c;
         synced.settings = s.exists() ? c : null;
@@ -213,6 +234,7 @@ function loadOwner() {
 
 // Called by the UI after every change. Writes only what differs from the server copy.
 export function sync() {
+  if (user && readingShare && A.dev.account && A.dev.account.role === 'reader') { syncReaderRx(); return; }
   if (!user || !synced || !A.dev.account || A.dev.account.role !== 'owner') return;
   const db = A.getDb(), uid = user.uid, ops = [];
   const st = settingsOf(db), stc = canon(st);
@@ -249,9 +271,21 @@ export function sync() {
   if (ops.length) queueOps(ops);
 }
 
+function syncReaderRx() {
+  const db = A.getDb(), me = user.uid, R = db.reactions || {}, mine = {};
+  Object.keys(R).forEach(key => { if (R[key][me]) mine[key] = { e: R[key][me].e, at: R[key][me].at || Date.now() }; });
+  const c = canon(mine);
+  if (c === readerRxSynced) return;
+  readerRxSynced = c;
+  const name = ((A.dev.account && A.dev.account.name) || 'Someone').split(' ')[0];
+  setDoc(doc(fs, 'shared', readingShare, 'reactions', me), { name, r: mine, updatedAt: Date.now() }).catch(e => A.toast('Couldn\u2019t save your reaction: ' + (e.code || e.message)));
+}
+
 async function deleteShared(id) {
-  const snap = await getDocs(collection(fs, 'shared', id, 'pages'));
-  await commitOps(snap.docs.map(d => b => b.delete(d.ref)));
+  for (const sub of ['pages', 'reactions']) {
+    const snap = await getDocs(collection(fs, 'shared', id, sub));
+    await commitOps(snap.docs.map(d => b => b.delete(d.ref)));
+  }
   await deleteDoc(doc(fs, 'shared', id));
 }
 
@@ -265,9 +299,16 @@ export async function changeReader(pw) {
   }
   const m = buildMirror(db);
   await commitOps(Object.keys(m).map(k => b => b.set(doc(fs, 'shared', id, 'pages', k), m[k])));
-  if (old && old !== id) { try { await deleteShared(old); } catch (e) {} }
+  if (old && old !== id) {
+    try {
+      const rs = await getDocs(collection(fs, 'shared', old, 'reactions'));
+      await commitOps(rs.docs.map(d => b => b.set(doc(fs, 'shared', id, 'reactions', d.id), d.data())));
+    } catch (e) {}
+    try { await deleteShared(old); } catch (e) {}
+  }
   db.shareId = id; db.readerPlain = pw; db.readerHash = await A.hash(pw); db.readerOn = true;
   synced.mirror = canonMap(m); synced.cover = canon(db.cover);
+  listenOwnerRx(id);
   sync();
 }
 
@@ -276,7 +317,7 @@ export async function setReaderOn(on) {
   const db = A.getDb();
   if (!on) {
     if (db.shareId) await deleteShared(db.shareId);
-    db.readerOn = false; synced.mirror = {}; synced.cover = null; sync(); return;
+    db.readerOn = false; synced.mirror = {}; synced.cover = null; listenOwnerRx(null); sync(); return;
   }
   if (!db.readerPlain) throw new Error('Set a reader password first.');
   await changeReader(db.readerPlain);
@@ -290,6 +331,7 @@ export async function readerUnlock(pw) {
   catch (e) { return { ok: false, msg: navigator.onLine ? 'Couldn’t check the password. Try again.' : 'Connect to the internet to unlock.' }; }
   if (!s.exists()) return { ok: false, msg: 'Wrong password, or reading is turned off.' };
   await listenShared(id);
+  readingShare = id;
   return { ok: true };
 }
 function listenShared(id) {
@@ -313,6 +355,13 @@ function listenShared(id) {
       db.free.sort((x, y) => x.answeredAt - y.answeredAt);
       if (first) { first = false; resolve(); } else A.softRender();
     }, () => { if (first) { first = false; resolve(); } }));
+    readerUnsubs.push(onSnapshot(collection(fs, 'shared', id, 'reactions'), (snap) => {
+      const db = A.getDb(), me = user.uid;
+      db.reactions = aggregateRx(snap);
+      const mine = {}; Object.keys(db.reactions).forEach(k => { if (db.reactions[k][me]) mine[k] = { e: db.reactions[k][me].e, at: db.reactions[k][me].at }; });
+      readerRxSynced = canon(mine);
+      if (!first) A.softRender();
+    }, () => {}));
   });
 }
 

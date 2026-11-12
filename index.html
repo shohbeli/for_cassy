@@ -226,6 +226,70 @@ textarea.ruled::placeholder{color:var(--muted);opacity:.55}
  .pb-a{font-size:12pt;line-height:1.55;white-space:pre-wrap}
  .pb-d{font-size:8.5pt;color:#85566f;margin-top:2mm}
 }
+.card.dice-card{flex-direction:row;align-items:center;gap:14px}
+.dice{width:58px;height:58px;border-radius:16px;background:var(--surface);border:2px solid var(--border);display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);padding:9px;gap:2px;box-shadow:0 4px 0 var(--border);flex-shrink:0}
+.dice i{width:8px;height:8px;border-radius:50%;background:var(--accent);place-self:center;opacity:0}
+.dice i.on{opacity:1}
+.rolling .dice{animation:roll .9s cubic-bezier(.3,.7,.4,1.2)}
+@keyframes roll{0%{transform:rotate(0)}30%{transform:translateY(-26px) rotate(200deg)}60%{transform:translateY(0) rotate(360deg)}75%{transform:translateY(-8px) rotate(380deg)}100%{transform:rotate(360deg)}}
+.focus{position:fixed;inset:0;z-index:40;display:flex;flex-direction:column;background:var(--bg);animation:fade .4s}
+.focus .fx-bg{position:absolute;inset:0;overflow:hidden;z-index:0}
+.focus .fx-bg i{position:absolute;border-radius:50%;filter:blur(50px);opacity:.55;animation:drift 12s ease-in-out infinite alternate}
+.focus .fx-bg i:nth-child(1){width:300px;height:300px;background:var(--blob1);top:-60px;right:-60px}
+.focus .fx-bg i:nth-child(2){width:260px;height:260px;background:var(--blob3);bottom:-40px;left:-60px;animation-delay:-5s}
+.focus .inner{position:relative;z-index:1;max-width:520px;width:100%;margin:0 auto;flex:1;display:flex;flex-direction:column;padding:18px 22px calc(18px + env(safe-area-inset-bottom));gap:14px;overflow:auto}
+.focus .q{font-family:Fredoka,sans-serif;font-size:26px;font-weight:500;line-height:1.3;animation:rise .6s .1s both}
+.breath{width:10px;height:10px;border-radius:50%;background:var(--g1);animation:breathe 4s ease-in-out infinite}
+@keyframes breathe{50%{transform:scale(2.2);opacity:.4}}
+.moods{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.mood{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 4px;border-radius:18px;border:1.5px solid var(--border);background:var(--surface);font-size:12px;font-weight:700;color:var(--muted)}
+.mood span{font-size:30px;transition:transform .2s}
+.mood:hover span{transform:scale(1.15) rotate(-6deg)}
+.mood.on{border-color:var(--accent);background:var(--chip);color:var(--chip-ink)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.cal .dh{font-size:11px;font-weight:800;color:var(--muted);text-align:center}
+.cal .d{aspect-ratio:1;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--muted);background:var(--soft)}
+.cal .d.has{color:var(--ink)}
+.cal .d em{font-style:normal;font-size:18px;line-height:1}
+.cal .d.today{box-shadow:inset 0 0 0 2px var(--accent)}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.stk{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 6px;border-radius:20px;background:var(--surface);border:1.5px solid var(--border);text-align:center}
+.stk .e{font-size:36px;filter:drop-shadow(0 3px 0 rgba(0,0,0,.08))}
+.stk .t{font-size:12px;font-weight:800;line-height:1.2}
+.stk .s{font-size:11px;color:var(--muted);font-weight:600;line-height:1.25}
+.stk.lock .e{filter:grayscale(1);opacity:.3}
+.stk.lock .t{color:var(--muted)}
+.unlock .e{font-size:84px;animation:stamp .7s cubic-bezier(.3,.7,.4,1.6) both}
+@keyframes stamp{0%{transform:scale(0) rotate(-30deg)}100%{transform:scale(1) rotate(0)}}
+.wrap{position:fixed;inset:0;z-index:45;color:#fff;display:flex;flex-direction:column;overflow:hidden}
+.wrap .wbg{position:absolute;inset:-20%;background:conic-gradient(from 0deg,#FF7EB0,#FFAE94,#C9A7FF,#FF7EB0);animation:spin 14s linear infinite;filter:blur(30px)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.wrap .wshade{position:absolute;inset:0;background:rgba(70,20,50,.25)}
+.wrap .bars{position:relative;z-index:2;display:flex;gap:4px;padding:14px 14px 0}
+.wrap .bars i{flex:1;height:4px;border-radius:9px;background:rgba(255,255,255,.35);overflow:hidden}
+.wrap .bars i.done{background:#fff}
+.wrap .bars i.cur::after{content:"";display:block;height:100%;background:#fff;animation:fill 5s linear forwards}
+@keyframes fill{from{width:0}to{width:100%}}
+.wrap .slide{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:center;padding:24px 28px;gap:14px;text-align:center;animation:rise .6s cubic-bezier(.2,.8,.2,1) both}
+.wrap .wk{font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:13px;opacity:.9}
+.wrap .wbig{font-family:Fredoka,sans-serif;font-size:76px;font-weight:600;line-height:1;text-shadow:0 4px 20px rgba(120,20,70,.3)}
+.wrap .wmid{font-family:Fredoka,sans-serif;font-size:32px;font-weight:600;line-height:1.15}
+.wrap .wq{font-size:17px;font-weight:700;line-height:1.5;background:rgba(255,255,255,.18);border-radius:20px;padding:16px;text-align:left}
+.wrap .tap{position:absolute;top:0;bottom:0;width:35%;z-index:3;background:none;border:0}
+.wrap .close{position:absolute;top:22px;right:12px;z-index:4;color:#fff}
+.seg-tabs{display:inline-flex;gap:4px;padding:4px;background:var(--soft);border-radius:14px;margin:0 20px 8px}
+.seg-tabs button{min-height:34px;padding:0 12px;border:0;border-radius:10px;background:transparent;color:var(--muted);font-size:13px;font-weight:700}
+.seg-tabs button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.sealed{margin:6px 20px 10px;padding:26px 18px;border-radius:22px;background:linear-gradient(135deg,var(--chip),var(--soft));display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.env{font-size:54px;animation:wiggle 2.4s ease-in-out infinite}
+@keyframes wiggle{0%,100%{transform:rotate(0)}10%{transform:rotate(-8deg)}20%{transform:rotate(8deg)}30%{transform:rotate(0)}}
+.reacts{display:flex;gap:6px;flex-wrap:wrap;padding:0 20px 6px}
+.rx{display:inline-flex;align-items:center;gap:4px;min-height:36px;padding:0 11px;border-radius:99px;border:1.5px solid var(--border);background:var(--surface);font-size:15px;font-weight:800;color:var(--ink)}
+.rx.on{background:var(--chip);border-color:var(--accent)}
+.rx.pop{animation:pop .45s cubic-bezier(.3,.7,.4,1.8)}
+@keyframes pop{40%{transform:scale(1.35)}}
+.cardimg{width:100%;border-radius:20px;box-shadow:var(--shadow);display:block}
+.icon-btn.soft{background:var(--surface);border:1.5px solid var(--border)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -314,7 +378,7 @@ function qi(text){for(var i=0;i<QS.length;i++){if(QS[i][0]===text)return i+1;}re
 function freshDb(samples){
   var d={v:1,owner:null,ownerHash:null,readerHash:null,readerPlain:null,readerOn:true,
     cover:{kicker:'1000 things to write about',name:'Cassy',tagline:'for everything I never got to say'},
-    answers:{},skipped:{},free:[],celebrated:[],samples:!!samples};
+    answers:{},skipped:{},free:[],celebrated:[],seen:{stickers:null,rx:0},reactions:{},shared:false,samples:!!samples};
   if(samples)seed(d);
   return d;
 }
@@ -360,7 +424,7 @@ function hash(pw){
 }
 
 /* ---------- state ---------- */
-var S={unlocked:false,screen:null,params:{},stack:[],prevVisit:0,editing:false,fresh:{},filter:'All',query:'',bookIdx:0,bookDir:'',printHidden:true,saveT:null};
+var S={wrapIdx:0,calMonth:null,again:null,unlocked:false,screen:null,params:{},stack:[],prevVisit:0,editing:false,fresh:{},filter:'All',query:'',bookIdx:0,bookDir:'',printHidden:true,saveT:null};
 function role(){return dev.account?dev.account.role:null;}
 function isOwner(){return role()==='owner';}
 
@@ -397,7 +461,7 @@ function onThisDay(){
 function agoLabel(m){if(m%12===0){var y=m/12;return y===1?'1 year ago today':y+' years ago today';}return m===1?'1 month ago today':m+' months ago today';}
 function lastWritten(){var best=null;Object.keys(db.answers).forEach(function(k){var a=db.answers[k],t=Math.max(a.answeredAt,a.editedAt||0);if(!best||t>best.t)best={n:+k,t:t};});return best;}
 function readerItems(){
-  var out=[];Object.keys(db.answers).map(Number).sort(function(a,b){return a-b;}).forEach(function(n){var a=db.answers[n];if(!a.hidden)out.push({key:'q'+n,n:n,q:QS[n-1][0],f:FEEL[QS[n-1][1]],a:a});});
+  var out=[];Object.keys(db.answers).map(Number).sort(function(a,b){return a-b;}).forEach(function(n){var a=db.answers[n];if(a.hidden||locked(a)||!(a.text||'').trim())return;out.push({key:'q'+n,n:n,q:QS[n-1][0],f:FEEL[QS[n-1][1]],a:a});});
   db.free.forEach(function(p){if(!p.hidden)out.push({key:'f'+p.id,free:true,id:p.id,q:p.title||'Untitled page',f:'Free page',a:p});});
   return out;
 }
@@ -439,7 +503,7 @@ function txtField(id,label,val,ph){return '<div class="field"><label for="'+id+'
 function go(screen,params,push){
   flushSave();
   if(push!==false&&S.screen&&S.screen!==screen)S.stack.push({s:S.screen,p:S.params});
-  S.fresh={};S.screen=screen;S.params=params||{};S.editing=false;
+  S.fresh={};S.again=null;S.screen=screen;S.params=params||{};S.editing=false;
   render();window.scrollTo(0,0);
 }
 function tab(screen){S.stack=[];go(screen,{},false);}
@@ -453,23 +517,25 @@ function start(){
     return go('lock',{},false);
   }
   go(isOwner()?'home':'rhome',{},false);
+  if(isOwner())setTimeout(checkStickers,600);
 }
 
 /* ---------- render ---------- */
 function tabbar(){
   var t=isOwner()?[['home','Home',I.home],['contents','Questions',I.list],['free','Free pages',I.pages],['stats','Stats',I.stats],['settings','Settings',I.gear]]
                  :[['rhome','Home',I.home],['book','Read',I.book],['rlist','Pages',I.list],['settings','Settings',I.gear]];
-  var cur=S.screen==='freeEdit'?'free':S.screen==='print'?'settings':S.screen;
+  var cur=S.screen==='freeEdit'?'free':S.screen==='print'?'settings':S.screen==='stickers'?'stats':S.screen;
   return '<nav class="tabbar" aria-label="Main"><div class="in">'+t.map(function(x){return '<button class="tab'+(cur===x[0]?' on':'')+'" data-act="tab" data-to="'+x[0]+'"'+(cur===x[0]?' aria-current="page"':'')+'>'+x[2]+'<span>'+x[1]+'</span></button>';}).join('')+'</div></nav>';
 }
 function render(){
-  var v={loading:vLoading,welcome:vWelcome,setup:vSetup,lock:vLock,home:vHome,contents:vContents,page:vPage,free:vFree,freeEdit:vFreeEdit,stats:vStats,settings:vSettings,print:vPrint,rhome:vRHome,book:vBook,rlist:vContents}[S.screen];
+  var v={focus:vFocus,wrapped:vWrapped,stickers:vStickers,loading:vLoading,welcome:vWelcome,setup:vSetup,lock:vLock,home:vHome,contents:vContents,page:vPage,free:vFree,freeEdit:vFreeEdit,stats:vStats,settings:vSettings,print:vPrint,rhome:vRHome,book:vBook,rlist:vContents}[S.screen];
   var html=v();
   var tabs=['home','contents','free','stats','settings','rhome','rlist'].indexOf(S.screen)>=0;
   app.className=tabs?'has-tabs':(S.screen==='page'||S.screen==='book')?'has-pager':'';
   app.innerHTML=html+(tabs?tabbar():'');
   var ta=document.getElementById('ta');if(ta){grow(ta);}
   if(S.screen==='book')bindSwipe();
+  if(S.screen==='wrapped')startWrapTimer();else stopWrapTimer();
 }
 function grow(el){
   var lh=parseFloat(getComputedStyle(el).lineHeight)||42;
@@ -521,15 +587,17 @@ function vHome(){
      '<div class="bar"><span style="width:'+Math.max(n?1.5:0,n/TOTAL*100)+'%"></span></div><p class="sub">'+(m?(m-n)+' more to your next milestone ('+m+') \u2728':'Every page is written. \u{1F496}')+'</p></header>';
   h+=installCard();
   if(next)h+='<button class="btn btn-primary btn-wide" data-act="open" data-n="'+next+'"><span>Continue writing</span><span class="serif" style="font-weight:400;font-size:18px">#'+next+' →</span></button>';
-  h+='<div class="grid2"><button class="btn btn-ghost" data-act="randomQ">'+I.shuffle+' Random page</button><button class="btn btn-ghost" data-act="tab" data-to="contents">'+I.list+' All questions</button></div>';
+  h+='<button class="card dice-card" data-act="roll" id="dicecard"><span class="dice" id="dice">'+diceFace(5)+'</span><span style="display:flex;flex-direction:column;gap:2px"><span class="qline">Roll the dice</span><span class="muted small" style="font-weight:600">Let fate pick your next question \u{1F3B2}</span></span></button>';
+  var rxn=newRx();if(rxn.length)h+='<button class="card" data-act="seeRx"><span class="card-title">\u{1F48C} '+rxn.length+' new reaction'+(rxn.length>1?'s':'')+'</span><span style="font-weight:700">'+rxn.slice(0,3).map(function(r){return esc(r.name)+' '+r.e;}).join(' \u00b7 ')+'</span></button>';
+  h+='<div class="grid2"><button class="btn btn-ghost" data-act="tab" data-to="contents">'+I.list+' All questions</button><button class="btn btn-ghost" data-act="goTo" data-to="wrapped">\u2728 Year wrapped</button></div>';
   if(q)h+='<button class="card" data-act="open" data-n="'+q+'"><span class="card-title">'+I.sparkle+' Question of the day · #'+q+'</span><span class="qline">'+esc(QS[q-1][0])+'</span><span style="display:flex;justify-content:space-between;align-items:center"><span class="chip">'+FEEL[QS[q-1][1]]+'</span><span class="new">Write '+I.chev+'</span></span></button>';
   if(otd.length){var o=otd[0],a=db.answers[o.n];h+='<button class="card" data-act="open" data-n="'+o.n+'"><span class="card-title">'+I.cal+' On this day · '+agoLabel(o.months)+'</span><span class="qline">'+esc(QS[o.n-1][0])+'</span><span class="snip">'+esc(a.text)+'</span></button>';}
-  if(n)h+='<button class="btn btn-ghost" data-act="randomMemory">'+I.book+' Read a random memory</button>';
+  if(n)h+='<div class="grid2"><button class="btn btn-ghost" data-act="randomMemory">\u{1F4AD} Random memory</button><button class="btn btn-ghost" data-act="randomQ">'+I.shuffle+' Random page</button></div>';
   h+='<p class="sec-title">Write by feeling</p><div class="chips">'+FEEL.map(function(f){return '<button class="fchip" data-act="feel" data-f="'+esc(f)+'">'+esc(f)+'</button>';}).join('')+'</div>';
   if(last){var la=db.answers[last.n];h+='<button class="card" data-act="open" data-n="'+last.n+'"><span class="card-title">Last thing you wrote · #'+last.n+'</span><span class="qline">'+esc(QS[last.n-1][0])+'</span><span class="snip">'+esc(la.text)+'</span></button>';}
   return h+'</main>';
 }
-function ownerFilters(){return ['All','Not yet','Answered','Favorites','Skipped','Hidden'].concat(FEEL);}
+function ownerFilters(){return ['All','Not yet','Answered','Favorites','Skipped','Hidden','Time capsules'].concat(FEEL);}
 function readerFilters(){return ['All','New'].concat(FEEL,['Free page']);}
 function vContents(){
   var own=isOwner();var fl=own?ownerFilters():readerFilters();if(fl.indexOf(S.filter)<0)S.filter='All';
@@ -546,13 +614,13 @@ function rowsHtml(){
     for(var n=1;n<=TOTAL;n++){
       var Q=QS[n-1],a=db.answers[n],fe=FEEL[Q[1]];
       if(f==='Not yet'&&a)continue;if(f==='Answered'&&!a)continue;if(f==='Favorites'&&!(a&&a.fav))continue;
-      if(f==='Skipped'&&!db.skipped[n])continue;if(f==='Hidden'&&!(a&&a.hidden))continue;
+      if(f==='Skipped'&&!db.skipped[n])continue;if(f==='Hidden'&&!(a&&a.hidden))continue;if(f==='Time capsules'&&!(a&&a.lockUntil))continue;
       if(FEEL.indexOf(f)>=0&&fe!==f)continue;
-      var inQ=!q||Q[0].toLowerCase().indexOf(q)>=0,inA=q&&a&&a.text.toLowerCase().indexOf(q)>=0;
+      var inQ=!q||Q[0].toLowerCase().indexOf(q)>=0,inA=q&&a&&!locked(a)&&a.text.toLowerCase().indexOf(q)>=0;
       if(q&&!inQ&&!inA)continue;
       shown++;
       out.push('<button class="row" data-act="open" data-n="'+n+'"><span class="row-n">#'+n+'</span><span class="row-main"><span class="row-q">'+esc(Q[0])+'</span>'+(inA?'<span class="snip">'+esc(a.text)+'</span>':'')+
-        '<span class="row-meta"><span class="chip">'+esc(fe)+'</span>'+(a?I.check:'')+(a&&a.fav?I.heartF:'')+(a&&a.hidden?I.eyeOff:'')+(db.skipped[n]?I.skip:'')+'</span></span></button>');
+        '<span class="row-meta"><span class="chip">'+esc(fe)+'</span>'+(a&&locked(a)?'<span class="chip">\u23F3 sealed</span>':'')+(a&&a.mood?'<span>'+moodOf(a.mood)[1]+'</span>':'')+(a&&!locked(a)?I.check:'')+(a&&a.fav?I.heartF:'')+(a&&a.hidden?I.eyeOff:'')+(db.skipped[n]?I.skip:'')+'</span></span></button>');
     }
   }else{
     readerItems().forEach(function(it,idx){
@@ -567,13 +635,18 @@ function rowsHtml(){
 }
 function toolsHtml(n){
   var a=db.answers[n],d=a?'':' disabled title="Write an answer first"';
-  return '<button class="tool'+(a&&a.fav?' on':'')+'" data-act="fav" aria-pressed="'+!!(a&&a.fav)+'"'+d+'>'+(a&&a.fav?I.heartF:I.heart)+' Favorite</button>'+
+  return '<button class="tool" data-act="focus">'+I.focus+' Focus</button>'+
+   '<button class="tool'+(a&&a.fav?' on':'')+'" data-act="fav" aria-pressed="'+!!(a&&a.fav)+'"'+d+'>'+(a&&a.fav?I.heartF:I.heart)+' Favorite</button>'+
+   '<button class="tool'+(a&&a.mood?' on':'')+'" data-act="mood"'+d+'>'+(a&&a.mood?moodOf(a.mood)[1]:I.smile)+' Mood</button>'+
    '<button class="tool'+(a&&a.hidden?' on':'')+'" data-act="hide" aria-pressed="'+!!(a&&a.hidden)+'"'+d+'>'+I.eyeOff+' Hide from readers</button>'+
-   '<button class="tool'+(a&&a.song?' on':'')+'" data-act="song"'+d+'>'+I.music+' Song</button>';
+   '<button class="tool" data-act="capsule"'+d+'>'+I.clock+' Time capsule</button>'+
+   '<button class="tool" data-act="again"'+d+'>'+I.again+' Answer again</button>'+
+   '<button class="tool'+(a&&a.song?' on':'')+'" data-act="song"'+d+'>'+I.music+' Song</button>'+
+   '<button class="tool" data-act="shareCard"'+d+'>'+I.share+' Share card</button>';
 }
 function datesHtml(a){if(!a)return '';return 'Answered '+fmtDT(a.answeredAt)+(a.editedAt?'<br>Edited '+fmtDT(a.editedAt):'');}
 function footBtns(n){
-  var a=db.answers[n],ed=S.editing||!a,h='<span class="status" id="status">'+(a?statusHtml():'')+'</span>';
+  var a=db.answers[n],ed=S.editing||!a||S.again===n,h='<span class="status" id="status">'+(a?statusHtml():'')+'</span>';
   if(ed&&a)h+='<button class="btn-sm primary" data-act="done">'+I.check+' Done</button>';
   if(!ed&&a)h+='<button class="btn-sm" data-act="edit">'+I.edit+' Edit</button><button class="btn-sm danger" data-act="del">'+I.trash+' Delete</button>';
   if(!a)h+=db.skipped[n]?'<button class="btn-sm" data-act="unskip">Unskip</button>':'<button class="btn-sm" data-act="skip">'+I.skip+' Skip for now</button>';
@@ -582,14 +655,19 @@ function footBtns(n){
 function songHtml(s){var host='';try{host=new URL(s.url).hostname.replace(/^www\./,'');}catch(e){}
   return '<a class="song" href="'+esc(s.url)+'" target="_blank" rel="noopener noreferrer">'+I.music+'<span style="flex:1;min-width:0"><b>'+esc(s.title||'Song for this page')+'</b><span>'+esc(host)+'</span></span>'+I.chev+'</a>';}
 function vPage(){
-  var n=S.params.n,Q=QS[n-1],a=db.answers[n],ed=S.editing||!a;
-  return '<div class="topbar"><button class="back-btn" data-act="back">'+I.back+' Back</button><span class="mid">Page '+n+' of '+TOTAL+'</span><button class="icon-btn" data-act="randomQ" aria-label="Random page">'+I.shuffle+'</button></div>'+
-  '<article class="paper"><div class="qhead"><div class="qrow"><span class="pnum">#'+n+'</span><span class="chip">'+esc(FEEL[Q[1]])+'</span></div><h2 class="qtext">'+esc(Q[0])+'</h2><div class="tools" id="tools">'+toolsHtml(n)+'</div></div>'+
-  '<div class="ans">'+(ed?'<textarea id="ta" class="ruled" data-input="answer" placeholder="Write here…" aria-label="Your answer">'+esc(a?a.text:'')+'</textarea>'
-     :'<button class="ruled ans-view" data-act="edit" aria-label="Your answer. Tap to edit">'+esc(a.text)+'</button><p class="tap-hint">Tap your answer to edit it</p>')+'</div>'+
-  '<div id="songbox">'+(a&&a.song?songHtml(a.song):'')+'</div>'+
-  '<footer class="ans-foot"><p class="dates" id="dates">'+datesHtml(a)+'</p><div class="foot-row" id="foot">'+footBtns(n)+'</div>'+(!a&&db.skipped[n]?'<p class="muted small">Skipped. It will wait for you in the Skipped list.</p>':'')+'</footer></article>'+
-  '<div class="pager"><div class="in"><button class="btn btn-ghost" data-act="prevQ"'+(n<=1?' disabled':'')+'>'+I.back+' Previous</button><span class="count"></span><button class="btn btn-primary" data-act="nextQ"'+(n>=TOTAL?' disabled':'')+'>Next '+I.next+'</button></div></div>';
+  var n=S.params.n,Q=QS[n-1],a=db.answers[n],ag=S.again===n,ed=S.editing||!a||ag,lk=locked(a);
+  var h='<div class="topbar"><button class="back-btn" data-act="back">'+I.back+' Back</button><span class="mid">Page '+n+' of '+TOTAL+'</span><button class="icon-btn" data-act="randomQ" aria-label="Random page">'+I.shuffle+'</button></div>'+
+  '<article class="paper"><div class="qhead"><div class="qrow"><span class="pnum">#'+n+'</span><span class="chip">'+esc(FEEL[Q[1]])+'</span>'+(a&&a.mood&&!lk?'<span style="margin-left:auto;font-size:22px" title="'+moodOf(a.mood)[2]+'">'+moodOf(a.mood)[1]+'</span>':'')+'</div><h2 class="qtext">'+esc(Q[0])+'</h2>'+(lk?'':'<div class="tools" id="tools">'+toolsHtml(n)+'</div>')+'</div>';
+  if(lk){var days=Math.ceil((a.lockUntil-Date.now())/DAY);
+    return h+'<div class="sealed"><span class="env">\u{1F48C}</span><h3 class="serif" style="font-size:22px">Sealed time capsule</h3><p class="muted" style="font-weight:700">Opens on '+fmtD(a.lockUntil)+' \u00b7 in '+days+' day'+(days>1?'s':'')+'</p><p class="muted small" style="font-weight:600">Not even you can peek until then. Readers can\u2019t see it either.</p><button class="btn-sm" data-act="openEarly">Open early</button></div><div style="height:12px"></div></article>'+pagerHtml(n);}
+  if(a&&a.versions&&a.versions.length&&!ed){var tv=S.params.then?a.versions[a.versions.length-1]:null;
+    h+='<div class="seg-tabs" role="tablist"><button role="tab" class="'+(tv?'':'on')+'" data-act="thenNow" data-v="0">Now</button><button role="tab" class="'+(tv?'on':'')+'" data-act="thenNow" data-v="1">Then \u00b7 '+new Date(a.versions[a.versions.length-1].at).toLocaleDateString('en-US',{month:'short',year:'numeric'})+'</button></div>';
+    if(tv)return h+'<div class="ans"><div class="ruled" style="opacity:.8">'+esc(tv.text)+'</div><p class="tap-hint">How you answered back then'+(tv.mood&&moodOf(tv.mood)?' \u00b7 felt '+moodOf(tv.mood)[1]:'')+'</p></div><footer class="ans-foot"><p class="dates">Written '+fmtDT(tv.at)+'</p></footer></article>'+pagerHtml(n);}
+  h+='<div class="ans">'+(ed?'<textarea id="ta" class="ruled" data-input="answer" placeholder="'+(ag?'Answer it again, today\u2019s version\u2026':'Write here\u2026')+'" aria-label="Your answer">'+(ag?'':esc(a?a.text:''))+'</textarea>'
+     :'<button class="ruled ans-view" data-act="edit" aria-label="Your answer. Tap to edit">'+esc(a.text)+'</button><p class="tap-hint">Tap your answer to edit it</p>')+'</div>';
+  h+='<div id="songbox">'+(a&&a.song?songHtml(a.song):'')+'</div>'+(a?rxRow('q'+n,false):'');
+  h+='<footer class="ans-foot"><p class="dates" id="dates">'+datesHtml(a)+'</p><div class="foot-row" id="foot">'+footBtns(n)+'</div>'+(!a&&db.skipped[n]?'<p class="muted small">Skipped. It will wait for you in the Skipped list.</p>':'')+'</footer></article>';
+  return h+pagerHtml(n);
 }
 function vFree(){
   var h='<main class="screen"><div><h1 class="serif" style="font-size:32px">Free pages</h1><p class="muted small">For anything the 1000 questions didn’t cover.</p></div>'+
@@ -612,12 +690,24 @@ function vFreeEdit(){
 }
 function vStats(){
   var n=count(),w=0,longest=null,per=FEEL.map(function(){return 0;}),favs=0,hidden=0;
-  Object.keys(db.answers).forEach(function(k){var a=db.answers[k],c=words(a.text);w+=c;if(!longest||c>longest.c)longest={n:+k,c:c};per[QS[k-1][1]]++;if(a.fav)favs++;if(a.hidden)hidden++;});
+  Object.keys(db.answers).forEach(function(k){var a=db.answers[k],c=words(a.text);w+=c;if(!locked(a)&&(!longest||c>longest.c))longest={n:+k,c:c};per[QS[k-1][1]]++;if(a.fav)favs++;if(a.hidden)hidden++;});
   db.free.forEach(function(p){w+=words(p.text);});
   var mostI=-1;per.forEach(function(c,i){if(c>0&&(mostI<0||c>per[mostI]))mostI=i;});
   var tot={};QS.forEach(function(q){tot[q[1]]=(tot[q[1]]||0)+1;});
   var st=streak();
-  var h='<main class="screen"><h1 class="serif" style="font-size:32px">Your stats</h1><div class="stat-grid">'+
+  if(!S.calMonth){var t0=new Date();S.calMonth=[t0.getFullYear(),t0.getMonth()];}
+  var cy=S.calMonth[0],cm=S.calMonth[1],first=new Date(cy,cm,1),days=new Date(cy,cm+1,0).getDate(),byDay={},mcnt={};
+  Object.keys(db.answers).forEach(function(k){var a=db.answers[k];if(!a.mood)return;mcnt[a.mood]=(mcnt[a.mood]||0)+1;var d=new Date(a.answeredAt);if(d.getFullYear()===cy&&d.getMonth()===cm&&(!byDay[d.getDate()]||a.answeredAt>byDay[d.getDate()].t))byDay[d.getDate()]={t:a.answeredAt,m:a.mood};});
+  var cal='<div class="cal">'+['S','M','T','W','T','F','S'].map(function(d){return '<span class="dh">'+d+'</span>';}).join('');for(var bi=0;bi<first.getDay();bi++)cal+='<span></span>';
+  var td=new Date();for(var dd=1;dd<=days;dd++){var bx=byDay[dd],mm=bx?moodOf(bx.m):null,isT=td.getFullYear()===cy&&td.getMonth()===cm&&td.getDate()===dd;cal+='<span class="d'+(mm?' has':'')+(isT?' today':'')+'" style="'+(mm?'background:'+mm[3]+'55':'')+'" title="'+(mm?mm[2]:'')+'">'+(mm?'<em>'+mm[1]+'</em>':dd)+'</span>';}cal+='</div>';
+  var caps=Object.keys(db.answers).filter(function(k){return locked(db.answers[k]);}).length,stk=stickersList(),got=stk.filter(function(x){return x.ok;}).length;
+  var h='<main class="screen"><h1 class="serif" style="font-size:32px">Your stats</h1>'+
+   '<section class="card"><div class="foot-row" style="justify-content:space-between"><button class="icon-btn soft" data-act="calNav" data-d="-1" aria-label="Previous month">'+I.back+'</button><span class="qline">'+first.toLocaleDateString('en-US',{month:'long',year:'numeric'})+'</span><button class="icon-btn soft" data-act="calNav" data-d="1" aria-label="Next month">'+I.next+'</button></div>'+cal+
+   '<div class="foot-row" style="justify-content:center;gap:12px">'+MOODS.map(function(m){return '<span class="small" style="font-weight:700">'+m[1]+' '+(mcnt[m[0]]||0)+'</span>';}).join('')+'</div></section>'+
+   '<div class="group"><button class="item" data-act="goTo" data-to="stickers"><span class="ic">'+I.sticker+'</span><span class="grow"><span>Stickers</span><span class="sub">'+got+' of '+stk.length+' collected</span></span>'+I.chev+'</button>'+
+   '<button class="item" data-act="goTo" data-to="wrapped"><span class="ic">'+I.gift+'</span><span class="grow"><span>Year wrapped</span><span class="sub">Your '+new Date().getFullYear()+' in a story</span></span>'+I.chev+'</button>'+
+   '<button class="item" data-act="capsules"><span class="ic">'+I.clock+'</span><span class="grow"><span>Time capsules</span><span class="sub">'+caps+' sealed</span></span>'+I.chev+'</button></div>'+
+   '<div class="stat-grid">'+
    '<div class="stat"><span class="v">'+n+'</span><span class="l">answers of '+TOTAL+'</span></div>'+
    '<div class="stat"><span class="v">'+w.toLocaleString()+'</span><span class="l">words written</span></div>'+
    '<div class="stat"><span class="v">'+st.cur+'</span><span class="l">day streak · best '+st.best+'</span></div>'+
@@ -689,9 +779,9 @@ function vBook(){
   if(S.bookIdx>=items.length)S.bookIdx=items.length-1;if(S.bookIdx<0)S.bookIdx=0;
   var it=items[S.bookIdx],a=it.a;dev.readerPos=it.key;saveDev();
   return '<div class="topbar"><button class="back-btn" data-act="tab" data-to="rhome">'+I.back+' Home</button><span class="mid">'+(S.bookIdx+1)+' of '+items.length+'</span><button class="icon-btn" data-act="readRandom" aria-label="Random memory">'+I.shuffle+'</button></div>'+
-  '<article class="paper book-page '+(S.bookDir?'slide-'+S.bookDir:'')+'" id="bookpage"><div class="qhead"><div class="qrow">'+(it.free?'':'<span class="pnum">#'+it.n+'</span>')+'<span class="chip">'+esc(it.f)+'</span>'+(isNew(a)?'<span class="new" style="margin-left:auto"><span class="dot"></span>New</span>':'')+'</div><h2 class="qtext">'+esc(it.q)+'</h2></div>'+
-  '<div class="ruled ans-read">'+esc(a.text)+'</div>'+(a.song?songHtml(a.song):'')+
-  '<footer class="ans-foot"><p class="dates">Written '+fmtD(a.answeredAt)+(a.editedAt?' · Edited '+fmtD(a.editedAt):'')+'</p><p class="muted small">Swipe to turn the page</p></footer></article>'+
+  '<article class="paper book-page '+(S.bookDir?'slide-'+S.bookDir:'')+'" id="bookpage"><div class="qhead"><div class="qrow">'+(it.free?'':'<span class="pnum">#'+it.n+'</span>')+'<span class="chip">'+esc(it.f)+'</span>'+(a.mood&&moodOf(a.mood)?'<span style="font-size:22px">'+moodOf(a.mood)[1]+'</span>':'')+(isNew(a)?'<span class="new" style="margin-left:auto"><span class="dot"></span>New</span>':'')+'</div><h2 class="qtext">'+esc(it.q)+'</h2></div>'+
+  '<div class="ruled ans-read">'+esc(a.text)+'</div>'+(a.song?songHtml(a.song):'')+rxRow(it.key,true)+
+  '<footer class="ans-foot"><p class="dates">Written '+fmtD(a.answeredAt)+(a.editedAt?' · Edited '+fmtD(a.editedAt):'')+'</p><p class="muted small">Swipe to turn the page \u00b7 tap an emoji to react</p></footer></article>'+
   '<div class="pager"><div class="in"><button class="btn btn-ghost" data-act="bookPrev"'+(S.bookIdx<=0?' disabled':'')+'>'+I.back+' Prev</button><span class="count">'+(S.bookIdx+1)+' / '+items.length+'</span><button class="btn btn-primary" data-act="bookNext"'+(S.bookIdx>=items.length-1?' disabled':'')+'>Next '+I.next+'</button></div></div>';
 }
 function bindSwipe(){
@@ -702,14 +792,100 @@ function bindSwipe(){
 }
 function turn(d){var items=readerItems(),i=S.bookIdx+d;if(i<0||i>=items.length)return;S.bookIdx=i;S.bookDir=d>0?'next':'prev';render();window.scrollTo(0,0);}
 
+var MOODS=[['loved','\u{1F970}','Loved','#FF7EB0'],['good','\u{1F60A}','Good','#FFB3CF'],['meh','\u{1F610}','Meh','#F3D6E2'],['low','\u{1F614}','Low','#C9B6F2'],['heavy','\u{1F62D}','Heavy','#9F8BE0']];
+var REACTS=['\u2764\uFE0F','\u{1F979}','\u{1F602}','\u{1F917}','\u2728'];
+I.focus=svg('<path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/>',16);
+I.clock=svg('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',16);
+I.again=svg('<path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/>',16);
+I.share=svg('<path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4M12 2v14"/>',16);
+I.smile=svg('<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>',16);
+I.sticker=svg('<path d="M15.5 3H6a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h9l6-6V6a3 3 0 0 0-3-3"/><path d="M15 21v-3a3 3 0 0 1 3-3h3"/>',18);
+I.gift=svg('<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v9H5v-9M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/>',18);
+I.x=svg('<path d="M18 6 6 18M6 6l12 12"/>',22);
+function moodOf(id){for(var i=0;i<MOODS.length;i++)if(MOODS[i][0]===id)return MOODS[i];return null;}
+function locked(a){return !!(a&&a.lockUntil&&a.lockUntil>Date.now());}
+function myId(){return dev.account?(dev.account.uid||dev.account.role):'me';}
+function rxFor(key){return (db.reactions||{})[key]||{};}
+function rxSummary(key){var r=rxFor(key),c={};Object.keys(r).forEach(function(k){c[r[k].e]=(c[r[k].e]||0)+1;});return c;}
+function newRx(){var seen=(db.seen||{}).rx||0,out=[],R=db.reactions||{};Object.keys(R).forEach(function(key){Object.keys(R[key]).forEach(function(who){var x=R[key][who];if((x.at||0)>seen)out.push({key:key,who:who,e:x.e,at:x.at,name:x.name||'Someone'});});});return out.sort(function(a,b){return b.at-a.at;});}
+function diceFace(v){var P={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]}[v],h='';for(var i=0;i<9;i++)h+='<i class="'+(P.indexOf(i)>=0?'on':'')+'"></i>';return h;}
+function rxRow(key,mine){var c=rxSummary(key),keys=Object.keys(c);if(!mine&&!keys.length)return '';
+  if(mine)return '<div class="reacts">'+REACTS.map(function(e){var on=(rxFor(key)[myId()]||{}).e===e;return '<button class="rx'+(on?' on':'')+'" data-act="react" data-e="'+e+'" aria-pressed="'+on+'">'+e+(c[e]?' '+c[e]:'')+'</button>';}).join('')+'</div>';
+  return '<div class="reacts">'+keys.map(function(e){return '<span class="rx" title="Reactions from readers">'+e+' '+c[e]+'</span>';}).join('')+'</div>';}
+function stickersList(){
+  var A=Object.keys(db.answers).map(function(k){return db.answers[k];}),n=A.length,st=streak(),per={},tot={};
+  Object.keys(db.answers).forEach(function(k){var f=FEEL[QS[k-1][1]];per[f]=(per[f]||0)+1;});
+  QS.forEach(function(q){tot[FEEL[q[1]]]=(tot[FEEL[q[1]]]||0)+1;});
+  var hours=A.map(function(a){return new Date(a.answeredAt).getHours();}),moods=A.filter(function(a){return a.mood;}).length,rx=0,R=db.reactions||{};Object.keys(R).forEach(function(k){rx+=Object.keys(R[k]).length;});
+  return [
+   ['first','\u{1F331}','First page','Wrote your first answer',n>=1],['ten','\u{1F338}','Blooming','10 answers',n>=10],['fifty','\u{1F337}','Garden','50 answers',n>=50],
+   ['hundred','\u{1F490}','Bouquet','100 answers',n>=100],['q250','\u{1F3F5}\uFE0F','Quarter way','250 answers',n>=250],['half','\u{1F451}','Halfway','500 answers',n>=500],['all','\u{1F3C6}','The whole book','1000 answers',n>=1000],
+   ['s3','\u{1F525}','On a roll','3-day streak',st.best>=3],['s7','\u{1F31F}','Week of her','7-day streak',st.best>=7],
+   ['owl','\u{1F989}','Night owl','Wrote between 12 and 4 AM',hours.some(function(h){return h<4;})],['bird','\u{1F425}','Early bird','Wrote between 5 and 7 AM',hours.some(function(h){return h>=5&&h<7;})],
+   ['kilig','\u{1F497}','Kilig overload','10 Kilig answers',(per['Kilig']||0)>=10],['feels','\u{1F9ED}','All the feels','Wrote in all 12 feelings',Object.keys(per).length>=FEEL.length],
+   ['done','\u{1F393}','Feeling complete','Finished a whole feeling',FEEL.some(function(f){return per[f]&&per[f]===tot[f];})],
+   ['capsule','\u23F3','Time traveler','Sealed a time capsule',A.some(function(a){return a.lockUntil;})],['again','\u{1F501}','Then & now','Answered a question again',A.some(function(a){return a.versions&&a.versions.length;})],
+   ['mood','\u{1F308}','Feelings check','Logged 7 moods',moods>=7],['loved','\u{1F49E}','So loved','Got 5 reactions',rx>=5],['share','\u{1F48C}','Shared a page','Made a share card',!!db.shared],['free','\u{1F343}','Free spirit','Wrote a free page',db.free.length>0]
+  ].map(function(s){return {id:s[0],e:s[1],t:s[2],s:s[3],ok:!!s[4]};});
+}
+function checkStickers(){
+  if(!isOwner()||!S.unlocked)return;db.seen=db.seen||{};var list=stickersList();
+  if(!Array.isArray(db.seen.stickers)){db.seen.stickers=list.filter(function(s){return s.ok;}).map(function(s){return s.id;});saveDb();return;}
+  var fresh=list.filter(function(s){return s.ok&&db.seen.stickers.indexOf(s.id)<0;});if(!fresh.length)return;
+  fresh.forEach(function(s){db.seen.stickers.push(s.id);});saveDb();var s=fresh[0];
+  showWhenFree(function(){confetti();sheet('<div class="unlock" style="display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:6px 0 4px"><span class="kicker">New sticker unlocked</span><span class="e">'+s.e+'</span><h3>'+esc(s.t)+'</h3><p class="muted" style="font-weight:600">'+esc(s.s)+(fresh.length>1?' \u00b7 +'+(fresh.length-1)+' more':'')+'</p></div><div class="grid2"><button class="btn btn-ghost" data-act="goTo" data-to="stickers">See all</button><button class="btn btn-primary" data-act="closeSheet">Yay!</button></div>');});
+}
+function showWhenFree(fn,tries){tries=tries||0;setTimeout(function(){if((layer.innerHTML||S.screen==='focus'||S.screen==='wrapped')&&tries<80)return showWhenFree(fn,tries+1);fn();},tries?700:400);}
+function askMood(n){var a=db.answers[n];if(!a)return;sheet('<h3>How do you feel after writing this?</h3><div class="moods">'+MOODS.map(function(m){return '<button class="mood'+(a.mood===m[0]?' on':'')+'" data-act="setMood" data-m="'+m[0]+'"><span>'+m[1]+'</span>'+m[2]+'</button>';}).join('')+'</div><button class="btn btn-ghost" data-act="closeSheet">Skip</button>');}
+function wrapLines(x,text,maxW){var ws=text.split(/\s+/),lines=[],cur='';ws.forEach(function(w){var t=cur?cur+' '+w:w;if(x.measureText(t).width>maxW&&cur){lines.push(cur);cur=w;}else cur=t;});if(cur)lines.push(cur);return lines;}
+function drawCard(q,text){
+  var c=document.createElement('canvas');c.width=1080;c.height=1350;var x=c.getContext('2d');
+  var g=x.createLinearGradient(0,0,1080,1350);g.addColorStop(0,'#FF8CB8');g.addColorStop(1,'#FFAE94');x.fillStyle=g;x.fillRect(0,0,1080,1350);
+  x.globalAlpha=.25;x.fillStyle='#fff';x.beginPath();x.arc(960,140,220,0,7);x.fill();x.beginPath();x.arc(90,1240,180,0,7);x.fill();x.globalAlpha=1;
+  x.fillStyle='#FFFFFF';x.shadowColor='rgba(120,20,70,.18)';x.shadowBlur=40;x.shadowOffsetY=16;if(x.roundRect){x.beginPath();x.roundRect(80,170,920,1010,56);x.fill();}else x.fillRect(80,170,920,1010);x.shadowColor='transparent';
+  x.font='800 28px Nunito, sans-serif';x.fillStyle='#C42E68';x.fillText((db.cover.kicker+' '+db.cover.name).toUpperCase(),140,260);
+  x.font='500 54px Fredoka, Nunito, sans-serif';x.fillStyle='#43213A';var ql=wrapLines(x,q,800).slice(0,4),y=345;ql.forEach(function(l){x.fillText(l,140,y);y+=68;});
+  y+=30;x.font='600 40px Nunito, sans-serif';var al=wrapLines(x,text,800),max=Math.floor((1090-y)/58);if(al.length>max){al=al.slice(0,max);al[max-1]=al[max-1].replace(/\s*\S*$/,'')+'\u2026';}
+  al.forEach(function(l){x.fillStyle='#5A3048';x.fillText(l,140,y);x.fillStyle='#F7D3E2';x.fillRect(140,y+16,800,3);y+=58;});
+  x.font='700 40px Nunito, sans-serif';x.fillStyle='#FFFFFF';x.fillText('\u{1F48C} '+db.cover.tagline,140,1278);
+  return c.toDataURL('image/png');
+}
+function pagerHtml(n){return '<div class="pager"><div class="in"><button class="btn btn-ghost" data-act="prevQ"'+(n<=1?' disabled':'')+'>'+I.back+' Previous</button><span class="count"></span><button class="btn btn-primary" data-act="nextQ"'+(n>=TOTAL?' disabled':'')+'>Next '+I.next+'</button></div></div>';}
+function vFocus(){var n=S.params.n,a=db.answers[n],ag=S.again===n;
+  return '<div class="focus"><div class="fx-bg"><i></i><i></i></div><div class="inner"><div class="foot-row" style="justify-content:space-between"><span class="foot-row" style="gap:10px"><span class="breath"></span><span class="muted small" style="font-weight:800">Focus mode \u00b7 #'+n+'</span></span><button class="btn-sm primary" data-act="exitFocus">'+I.check+' Done</button></div>'+
+  '<p class="q">'+esc(QS[n-1][0])+'</p><textarea id="ta" class="ruled" data-input="answer" placeholder="Take your time. Just you and this question\u2026" aria-label="Your answer" style="flex:1">'+(ag?'':esc(a?a.text:''))+'</textarea><p class="status" id="status" style="margin:0">'+(a?statusHtml():'')+'</p></div></div>';}
+function vStickers(){var st=stickersList(),got=st.filter(function(s){return s.ok;}).length;
+  return '<div class="topbar"><button class="back-btn" data-act="back">'+I.back+' Back</button><span class="mid">Stickers</span><span style="width:44px"></span></div><main class="screen" style="padding-top:6px"><div><h1 class="serif" style="font-size:30px">Sticker book</h1><p class="muted small" style="font-weight:700">'+got+' of '+st.length+' collected</p></div><div class="bar"><span style="width:'+(got/st.length*100)+'%"></span></div>'+
+  '<div class="grid3">'+st.map(function(s){return '<div class="stk'+(s.ok?'':' lock')+'"><span class="e">'+s.e+'</span><span class="t">'+esc(s.t)+'</span><span class="s">'+esc(s.s)+'</span></div>';}).join('')+'</div></main>';}
+function wrapSlides(){
+  var y=new Date().getFullYear(),L=[];Object.keys(db.answers).forEach(function(k){var a=db.answers[k];if(new Date(a.answeredAt).getFullYear()===y)L.push({n:+k,a:a});});
+  var w=0,per={},mc={},mon={},longest=null;L.forEach(function(x){var c=words(x.a.text);w+=c;var f=FEEL[QS[x.n-1][1]];per[f]=(per[f]||0)+1;if(x.a.mood)mc[x.a.mood]=(mc[x.a.mood]||0)+1;var m=new Date(x.a.answeredAt).getMonth();mon[m]=(mon[m]||0)+1;if(!locked(x.a)&&!x.a.hidden&&(!longest||c>longest.c))longest={n:x.n,c:c,t:x.a.text};});
+  var top=Object.keys(per).sort(function(a,c){return per[c]-per[a];})[0],tm=Object.keys(mc).sort(function(a,c){return mc[c]-mc[a];})[0],bm=Object.keys(mon).sort(function(a,c){return mon[c]-mon[a];})[0],stk=stickersList().filter(function(s){return s.ok;});
+  var S2=[['Your '+y,'<div class="wbig">\u{1F48C}</div><p class="wmid">Your year of<br>writing about '+esc(db.cover.name)+'</p>'],['You wrote','<div class="wbig">'+L.length+'</div><p class="wmid">pages this year</p><p style="font-weight:700">'+w.toLocaleString()+' words about her.</p>']];
+  if(top)S2.push(['You felt it most as','<p class="wmid" style="font-size:44px">'+esc(top)+'</p><p style="font-weight:700">'+per[top]+' answers.</p>']);
+  if(tm){var M=moodOf(tm);S2.push(['After writing, you mostly felt','<div class="wbig">'+M[1]+'</div><p class="wmid">'+M[2]+'</p><p style="font-weight:700">'+mc[tm]+' times this year.</p>']);}
+  if(bm!==undefined)S2.push(['Your busiest month','<p class="wmid" style="font-size:46px">'+new Date(y,+bm,1).toLocaleDateString('en-US',{month:'long'})+'</p><p style="font-weight:700">'+mon[bm]+' pages written.</p>']);
+  if(longest)S2.push(['Your longest answer','<p class="wmid" style="font-size:22px">'+esc(QS[longest.n-1][0])+'</p><p class="wq">'+esc(longest.t.length>220?longest.t.slice(0,220)+'\u2026':longest.t)+'</p>']);
+  S2.push(['Stickers earned','<div style="font-size:44px;line-height:1.3">'+(stk.map(function(s){return s.e;}).join(' ')||'\u{1F331}')+'</div><p class="wmid">'+stk.length+' sticker'+(stk.length===1?'':'s')+'</p>']);
+  S2.push(['That\u2019s a wrap','<div class="wbig">\u{1F496}</div><p class="wmid">Every page is a little<br>piece of her.</p><button class="btn" style="background:#fff;color:#7a1747;margin:10px auto 0;min-width:200px" data-act="closeWrap">Back to the book</button>']);
+  return S2;
+}
+function vWrapped(){var sl=wrapSlides();if(S.wrapIdx>=sl.length)S.wrapIdx=sl.length-1;var x=sl[S.wrapIdx];
+  return '<div class="wrap"><div class="wbg"></div><div class="wshade"></div><div class="bars">'+sl.map(function(_,i){return '<i class="'+(i<S.wrapIdx?'done':i===S.wrapIdx?'cur':'')+'"></i>';}).join('')+'</div>'+
+  '<button class="icon-btn close" data-act="closeWrap" aria-label="Close">'+I.x+'</button><div class="slide"><p class="wk">'+esc(x[0])+'</p>'+x[1]+'</div>'+
+  '<button class="tap" style="left:0" data-act="wrapNav" data-d="-1" aria-label="Previous"></button>'+(S.wrapIdx<sl.length-1?'<button class="tap" style="right:0" data-act="wrapNav" data-d="1" aria-label="Next"></button>':'')+'</div>';}
+var wrapT;function startWrapTimer(){clearTimeout(wrapT);wrapT=setTimeout(function(){if(S.screen!=='wrapped')return;if(S.wrapIdx<wrapSlides().length-1){S.wrapIdx++;render();}},5000);}
+function stopWrapTimer(){clearTimeout(wrapT);}
+
 /* ---------- saving ---------- */
 function scheduleSave(fn){clearTimeout(S.saveT);S.pendingSave=fn;S.saveT=setTimeout(flushSave,500);}
 function flushSave(){clearTimeout(S.saveT);var f=S.pendingSave;S.pendingSave=null;if(f)f();}
 function saveAnswer(n,text){
   var a=db.answers[n],now=Date.now();
   if(!text.trim())return;
+  if(S.again===n&&a){a.versions=(a.versions||[]).concat([{text:a.text,at:a.answeredAt,mood:a.mood||null}]);a.text=text;a.answeredAt=now;a.editedAt=null;delete a.mood;S.again=null;S.fresh['q'+n]=1;S.editing=true;saveDb();markPending();refreshPageBits(n);checkStickers();return;}
   if(!a){db.answers[n]={text:text,answeredAt:now,editedAt:null};S.fresh['q'+n]=1;delete db.skipped[n];if(S.screen==='page'&&S.params.n===n)S.editing=true;
-    saveDb();markPending();refreshPageBits(n);checkMilestone();return;}
+    saveDb();markPending();refreshPageBits(n);checkMilestone();checkStickers();return;}
   if(a.text===text)return;
   a.text=text;if(!S.fresh['q'+n])a.editedAt=now;
   saveDb();markPending();refreshPageBits(n);
@@ -719,6 +895,7 @@ function refreshPageBits(n){
   if((el=document.getElementById('dates')))el.innerHTML=datesHtml(a);
   if((el=document.getElementById('tools')))el.innerHTML=toolsHtml(n);
   if((el=document.getElementById('foot')))el.innerHTML=footBtns(n);
+  var st=document.getElementById('status');if(st)st.innerHTML=statusHtml();
 }
 function checkMilestone(){
   var n=count();
@@ -732,6 +909,33 @@ function saveFree(id,field,val){
 
 /* ---------- actions ---------- */
 var ACT={
+ goTo:function(el){closeSheet();go(el.dataset.to);},
+ roll:function(){var card=document.getElementById('dicecard'),d=document.getElementById('dice');if(!card||card.classList.contains('rolling'))return;card.classList.add('rolling');var t=0,iv=setInterval(function(){d.innerHTML=diceFace(1+Math.floor(Math.random()*6));if(++t>7)clearInterval(iv);},100);
+   setTimeout(function(){var c=[];for(var n=1;n<=TOTAL;n++)if(!db.answers[n]&&!db.skipped[n])c.push(n);if(!c.length)c=[1];go('page',{n:c[Math.floor(Math.random()*c.length)]});},1000);},
+ focus:function(){flushSave();var ag=S.again,ed=S.editing;S.screen='focus';app.className='';app.innerHTML=vFocus();S.again=ag;S.editing=ed;var ta=document.getElementById('ta');grow(ta);ta.focus();},
+ exitFocus:function(){flushSave();S.screen='page';var n=S.params.n;S.editing=false;S.again=null;render();if(db.answers[n]&&!db.answers[n].mood)askMood(n);},
+ mood:function(){askMood(S.params.n);},
+ setMood:function(el){var a=db.answers[S.params.n];if(!a)return;a.mood=el.dataset.m;saveDb();markPending();closeSheet();if(S.screen==='page')render();toast('Feeling saved '+moodOf(a.mood)[1]);checkStickers();},
+ capsule:function(){var a=db.answers[S.params.n];if(!a)return;var min=new Date(Date.now()+DAY).toISOString().slice(0,10),def=new Date(Date.now()+365*DAY).toISOString().slice(0,10);
+  sheet('<div style="text-align:center;font-size:54px" class="env">\u{1F48C}</div><h3 style="text-align:center">Seal it in a time capsule</h3><p class="muted" style="font-weight:600;text-align:center">You won\u2019t be able to read or edit this answer until the date you pick. Readers can\u2019t see it either.</p><form data-form="capsule" style="display:flex;flex-direction:column;gap:12px" novalidate><div class="field"><label for="cd">Open on</label><div class="inp"><input id="cd" type="date" min="'+min+'" value="'+def+'"></div></div><p class="err" id="err"></p><button class="btn btn-primary" type="submit">Seal it \u2728</button></form>');},
+ openEarly:function(){confirmBox('Open it early?','The surprise was set for later. Open it now anyway?','Open now',false).then(function(ok){if(!ok)return;var a=db.answers[S.params.n];delete a.lockUntil;saveDb();markPending();render();confetti();});},
+ capsules:function(){var L=Object.keys(db.answers).filter(function(k){return db.answers[k].lockUntil;}).map(Number);
+  sheet('<h3>Time capsules</h3>'+(L.length?L.map(function(n){var a=db.answers[n],lk=locked(a);return '<button class="row" data-act="openCap" data-n="'+n+'"><span class="row-n">'+(lk?'\u{1F48C}':'\u{1F4EC}')+'</span><span class="row-main"><span class="row-q">'+esc(QS[n-1][0])+'</span><span class="muted small" style="font-weight:700">'+(lk?'Opens '+fmtD(a.lockUntil):'Opened')+'</span></span></button>';}).join(''):'<p class="muted" style="font-weight:600">No time capsules yet. Seal one from any answered page with the \u23F3 button.</p>'));},
+ openCap:function(el){closeSheet();go('page',{n:+el.dataset.n});},
+ again:function(){var n=S.params.n;S.again=n;S.editing=true;render();var ta=document.getElementById('ta');if(ta)ta.focus();toast('Your old answer is saved as \u201cThen\u201d');},
+ thenNow:function(el){S.params.then=el.dataset.v==='1';render();},
+ shareCard:function(){var n=S.params.n,a=db.answers[n];if(!a)return;sheet('<h3>Share card</h3><p class="muted small" style="font-weight:600">Making your card\u2026</p>');
+  var draw=function(){var url=drawCard(QS[n-1][0],a.text);if(!db.shared){db.shared=true;saveDb();}
+   sheet('<h3>Share card \u{1F48C}</h3><img class="cardimg" alt="Share card for page '+n+'" src="'+url+'"><p class="muted small" style="font-weight:600;text-align:center">On your phone, long-press the image to save it.</p><a class="btn btn-primary" download="cassy-'+n+'.png" href="'+url+'">'+I.download+' Download image</a><button class="btn btn-ghost" data-act="closeSheet">Done</button>');checkStickers();};
+  try{Promise.all([document.fonts.load('500 54px Fredoka'),document.fonts.load('600 40px Nunito')]).then(draw,draw);}catch(e){draw();}},
+ react:function(el){var items=readerItems(),it=items[S.bookIdx];if(!it)return;db.reactions=db.reactions||{};var k=(db.reactions[it.key]=db.reactions[it.key]||{}),me=myId(),e=el.dataset.e;
+  if(k[me]&&k[me].e===e)delete k[me];else{k[me]={e:e,at:Date.now(),name:(dev.account&&dev.account.name||'Someone').split(' ')[0]};burst(el,e);}saveDb();var y=window.scrollY;render();window.scrollTo(0,y);var nb=document.querySelector('.rx[data-e="'+e+'"]');if(nb)nb.classList.add('pop');},
+ seeRx:function(){var rx=newRx();sheet('<h3>New reactions \u{1F48C}</h3>'+rx.map(function(r){var n=r.key.charAt(0)==='q'?+r.key.slice(1):null;return '<button class="row" data-act="rxOpen" data-n="'+(n||'')+'"><span class="row-n" style="font-size:24px">'+r.e+'</span><span class="row-main"><span class="row-q">'+esc(r.name)+'</span><span class="snip">'+(n?esc(QS[n-1][0]):'A free page')+'</span></span></button>';}).join('')+'<button class="btn btn-primary" data-act="rxDone">Mark all as seen</button>');},
+ rxOpen:function(el){var n=+el.dataset.n;closeSheet();db.seen=db.seen||{};db.seen.rx=Date.now();saveDb();if(n)go('page',{n:n});},
+ rxDone:function(){db.seen=db.seen||{};db.seen.rx=Date.now();saveDb();closeSheet();render();},
+ calNav:function(el){var m=S.calMonth[1]+ +el.dataset.d,y=S.calMonth[0];if(m<0){m=11;y--;}if(m>11){m=0;y++;}S.calMonth=[y,m];render();},
+ wrapNav:function(el){var n=wrapSlides().length,i=S.wrapIdx+ +el.dataset.d;if(i<0)i=0;if(i>=n){ACT.closeWrap();return;}S.wrapIdx=i;render();},
+ closeWrap:function(){stopWrapTimer();S.wrapIdx=0;back();},
  closeSheet:function(el,e){if(el.dataset.self&&e.target!==el)return;closeSheet();},
  cfYes:function(){closeSheet();if(S.cf)S.cf(true);S.cf=null;},
  cfNo:function(){closeSheet();if(S.cf)S.cf(false);S.cf=null;},
@@ -759,7 +963,7 @@ var ACT={
  back:function(){back();},
  open:function(el){S.editing=false;go('page',{n:+el.dataset.n});},
  randomQ:function(){var c=[];for(var n=1;n<=TOTAL;n++){if(!db.answers[n])c.push(n);}if(!c.length)c=[1];go('page',{n:c[Math.floor(Math.random()*c.length)]});},
- randomMemory:function(){var k=Object.keys(db.answers);if(!k.length)return;go('page',{n:+k[Math.floor(Math.random()*k.length)]});},
+ randomMemory:function(){var k=Object.keys(db.answers).filter(function(k){return !locked(db.answers[k]);});if(!k.length)return;go('page',{n:+k[Math.floor(Math.random()*k.length)]});},
  feel:function(el){S.filter=el.dataset.f;S.query='';tab('contents');},
  filter:function(el){S.filter=el.dataset.f;render();},
  prevQ:function(){var n=S.params.n;if(n>1)go('page',{n:n-1});},
@@ -768,7 +972,8 @@ var ACT={
  done:function(){
   var n=S.params.n,ta=document.getElementById('ta');
   if(ta&&!ta.value.trim()&&db.answers[n]){ACT.del();return;}
-  flushSave();S.editing=false;render();toast('Saved');
+  if(S.again===n&&ta&&!ta.value.trim()){S.again=null;S.editing=false;render();return;}
+  flushSave();var wasAgain=S.again===n;S.again=null;S.editing=false;render();if(db.answers[n]&&!wasAgain&&!db.answers[n].mood)askMood(n);else toast('Saved');
  },
  del:function(){var n=S.params.n;confirmBox('Delete this answer?','The question will be empty again. This can’t be undone.','Delete',true).then(function(ok){if(!ok)return;
    S.pendingSave=null;delete db.answers[n];delete S.fresh['q'+n];saveDb();markPending();S.editing=false;render();toast('Answer deleted');});},
@@ -834,6 +1039,7 @@ function buildPrint(){
 function val(id){var e=document.getElementById(id);return e?e.value:'';}
 function err(m){var e=document.getElementById('err');if(e){e.textContent=m;var f=e.closest('form');if(f){f.classList.remove('shake');void f.offsetWidth;f.classList.add('shake');}}}
 var FORM={
+ capsule:function(){var v=val('cd');if(!v)return err('Pick a date.');var p=v.split('-'),t=new Date(+p[0],+p[1]-1,+p[2]).getTime();if(t<=Date.now())return err('Pick a date in the future.');var a=db.answers[S.params.n];a.lockUntil=t;saveDb();markPending();closeSheet();S.editing=false;render();confetti();toast('Sealed until '+fmtD(t)+' \u{1F48C}');checkStickers();},
  setup:function(){
   var p1=val('p1'),p2=val('p2'),ron=document.getElementById('rsw').getAttribute('aria-checked')==='true',r1=val('r1'),r2=val('r2');
   if(p1.length<4)return err('Your password needs at least 4 characters.');
@@ -887,7 +1093,7 @@ document.addEventListener('keydown',function(e){
 window.addEventListener('resize',function(){var ta=document.getElementById('ta');if(ta)grow(ta);});
 document.addEventListener('visibilitychange',function(){if(document.hidden)flushSave();});
 
-function softRender(){if(layer.innerHTML)return;var a=document.activeElement;if(a&&(a.tagName==='TEXTAREA'||a.tagName==='INPUT')&&app.contains(a))return;if(S.screen==='page'&&S.editing)return;render();}
+function softRender(){if(layer.innerHTML||S.screen==='focus')return;var a=document.activeElement;if(a&&(a.tagName==='TEXTAREA'||a.tagName==='INPUT')&&app.contains(a))return;if(S.screen==='page'&&S.editing)return;render();}
 function statusRefresh(){var s=document.getElementById('status');if(s&&s.textContent.indexOf('Saving')<0&&(S.screen!=='page'||db.answers[S.params.n]))s.innerHTML=statusHtml();if(S.screen==='settings')softRender();}
 applyPrefs();
 if(LIVE){
@@ -895,7 +1101,7 @@ if(LIVE){
   window.addEventListener('online',statusRefresh);window.addEventListener('offline',statusRefresh);
   if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(function(){});
   go('loading',{},false);
-  var API={getDb:function(){return db;},setDb:function(v){db=v;},dev:dev,S:S,start:start,render:render,softRender:softRender,statusRefresh:statusRefresh,toast:toast,hash:hash,saveDev:saveDev,freshDb:freshDb};
+  var API={checkStickers:function(){checkStickers();},getDb:function(){return db;},setDb:function(v){db=v;},dev:dev,S:S,start:start,render:render,softRender:softRender,statusRefresh:statusRefresh,toast:toast,hash:hash,saveDev:saveDev,freshDb:freshDb};
   import('./live.js').then(function(m){LV=m;m.init(API);}).catch(function(){app.innerHTML='<main class="center"><p class="muted">Couldn\u2019t open the app. Check your internet, then close and reopen it.</p></main>';});
 }else start();
 })();
